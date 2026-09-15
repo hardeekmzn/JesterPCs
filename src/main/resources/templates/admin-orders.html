@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JesterPCs — Orders</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+<header class="jp_header jp_admin-header">
+
+    <a href="/admin" class="jp_logo">
+        <span class="jp_logo-jester">Jester</span><span class="jp_logo-pcs">PCs</span>
+    </a>
+
+    <nav class="jp_nav">
+
+        <div class="jp_nav-list">
+
+            <a href="/admin" class="jp_nav-link">
+                Dashboard
+            </a>
+
+            <a href="/admin/products" class="jp_nav-link">
+                Products
+            </a>
+
+            <a href="/admin/orders" class="jp_nav-link">
+                Orders
+            </a>
+
+            <a href="/admin/users" class="jp_nav-link">
+                Users
+            </a>
+
+            <a href="/admin/categories" class="jp_nav-link">
+                Categories
+            </a>
+
+        </div>
+
+        <div class="jp_nav-actions">
+
+            <a href="/" class="jp_nav-login">
+                Site
+            </a>
+
+            <a href="/logout" class="jp_nav-login">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main class="jp_admin-page">
+
+    <div class="jp_admin-heading">
+
+        <p class="jp_admin-label">
+            Admin
+        </p>
+
+        <h1>
+            Order Management
+        </h1>
+
+    </div>
+
+
+    <div class="jp_admin-table-card">
+
+        <div class="jp_admin-table-wrap">
+
+            <table class="jp_admin-table">
+
+                <thead>
+
+                <tr>
+                    <th>Order ID</th>
+                    <th>User ID</th>
+                    <th>Total</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                <tr th:each="order : ${orders}">
+
+                    <td th:text="'#' + ${order.orderId}">
+                        #1001
+                    </td>
+
+                    <td th:text="${order.userId}">
+                        1
+                    </td>
+
+                    <td th:text="'Rs. ' + ${#numbers.formatInteger(order.totalAmount, 1, 'COMMA')}">
+                        Rs. 0
+                    </td>
+
+                    <td th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}">
+                        2026-08-31 10:00
+                    </td>
+
+                    <td>
+
+                        <span class="jp_order-status"
+                              th:text="${order.status}"
+                              th:classappend="${order.status == 'Pending'} ? ' status-pending' :
+                                              (${order.status == 'Processing'} ? ' status-processing' :
+                                              (${order.status == 'Shipped'} ? ' status-shipped' :
+                                              (${order.status == 'Delivered'} ? ' status-delivered' :
+                                              ' status-cancelled')))">
+                            Pending
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="jp_order-actions">
+
+                            <a th:href="@{'/admin/orders/' + ${order.orderId}}"
+                               class="jp_view-btn">
+                                View Details
+                            </a>
+
+
+                            <form th:action="@{'/admin/orders/' + ${order.orderId} + '/status'}"
+                                  method="post"
+                                  class="jp_status-form">
+
+                                <select name="status"
+                                        class="jp_status-select">
+
+                                    <option value="Pending"
+                                            th:if="${order.status == 'Pending'}"
+                                            selected>
+                                        Pending
+                                    </option>
+
+                                    <option value="Processing"
+                                            th:if="${order.status == 'Pending' || order.status == 'Processing'}"
+                                            th:selected="${order.status == 'Processing'}">
+                                        Processing
+                                    </option>
+
+                                    <option value="Shipped"
+                                            th:if="${order.status == 'Processing' || order.status == 'Shipped'}"
+                                            th:selected="${order.status == 'Shipped'}">
+                                        Shipped
+                                    </option>
+
+                                    <option value="Delivered"
+                                            th:if="${order.status == 'Shipped' || order.status == 'Delivered'}"
+                                            th:selected="${order.status == 'Delivered'}">
+                                        Delivered
+                                    </option>
+
+                                    <option value="Cancelled"
+                                            th:if="${order.status == 'Pending' || order.status == 'Processing' || order.status == 'Cancelled'}"
+                                            th:selected="${order.status == 'Cancelled'}">
+                                        Cancelled
+                                    </option>
+
+                                </select>
+
+
+                                <button type="submit"
+                                        class="jp_update-btn">
+                                    Update
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+                <tr th:if="${#lists.isEmpty(orders)}">
+
+                    <td colspan="6"
+                        class="jp_no-orders">
+                        No orders found.
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer class="jp_footer jp_admin-footer">
+
+    <div class="jp_footer-bar">
+        JesterPCs Admin Panel
+    </div>
+
+</footer>
+
+</body>
+</html>

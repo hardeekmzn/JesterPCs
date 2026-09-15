@@ -1,0 +1,362 @@
+/* My Reviews */
+
+.jp_reviews-hero {
+    padding: 145px 7% 70px;
+    border-bottom: 1px solid #1b1b1b;
+    background: var(--clr-surface);
+}
+
+.jp_reviews-hero-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.jp_reviews-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+    color: #777;
+    font-size: 12px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.jp_reviews-back:hover {
+    color: var(--clr-accent);
+}
+
+.jp_reviews-eyebrow {
+    margin: 0 0 8px;
+    color: var(--clr-accent);
+    font-family: var(--ff-heading);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.jp_reviews-title {
+    margin: 0;
+    color: #fff;
+    font-family: var(--ff-heading);
+    font-size: 42px;
+    font-weight: 600;
+}
+
+.jp_reviews-subtitle {
+    max-width: 600px;
+    margin: 12px 0 0;
+    color: #777;
+    font-family: var(--ff-body);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* Main */
+
+.jp_reviews-page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 55px 7% 100px;
+}
+
+.jp_reviews-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.jp_reviews-heading {
+    margin: 0;
+    color: #fff;
+    font-family: var(--ff-heading);
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.jp_reviews-count {
+    margin: 5px 0 0;
+    color: #666;
+    font-family: var(--ff-body);
+    font-size: 12px;
+}
+
+
+/* Empty State */
+
+.jp_my-review-empty {
+    padding: 65px 30px;
+    border: 1px solid #1d1d1d;
+    background: #0d0d0d;
+    text-align: center;
+}
+
+.jp_my-review-empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 54px;
+    height: 54px;
+    margin: 0 auto 20px;
+    border: 1px solid #292929;
+    border-radius: 50%;
+    color: #555;
+    font-size: 18px;
+}
+
+.jp_my-review-empty h3 {
+    margin: 0;
+    color: #ddd;
+    font-family: var(--ff-heading);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.jp_my-review-empty p {
+    max-width: 480px;
+    margin: 10px auto 25px;
+    color: #666;
+    font-family: var(--ff-body);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* Review Cards */
+
+.jp_my-reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.jp_my-review-card {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    border: 1px solid #1d1d1d;
+    background: #0d0d0d;
+}
+
+.jp_my-review-product {
+    display: flex;
+    gap: 16px;
+    padding: 22px;
+    border-right: 1px solid #1d1d1d;
+}
+
+.jp_my-review-image {
+    flex: 0 0 76px;
+    width: 76px;
+    height: 76px;
+    overflow: hidden;
+    border: 1px solid #242424;
+    background: #111;
+}
+
+.jp_my-review-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.jp_my-review-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #444;
+    font-size: 20px;
+}
+
+.jp_my-review-product-info {
+    min-width: 0;
+}
+
+.jp_my-review-label {
+    display: block;
+    margin-bottom: 6px;
+    color: #555;
+    font-family: var(--ff-body);
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.jp_my-review-product-name {
+    margin: 0;
+    color: #eee;
+    font-family: var(--ff-heading);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.jp_my-review-brand {
+    margin: 5px 0 0;
+    color: #666;
+    font-family: var(--ff-body);
+    font-size: 11px;
+}
+
+.jp_my-review-content {
+    padding: 22px;
+}
+
+.jp_my-review-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.jp_my-review-stars {
+    display: flex;
+    gap: 3px;
+    font-size: 12px;
+}
+
+.jp_star-filled {
+    color: var(--clr-accent);
+}
+
+.jp_star-empty {
+    color: #333;
+}
+
+.jp_my-review-rating-number {
+    color: #aaa;
+    font-family: var(--ff-body);
+    font-size: 11px;
+}
+
+.jp_my-review-verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 9px;
+    color: var(--clr-green);
+    font-family: var(--ff-body);
+    font-size: 10px;
+}
+
+.jp_my-review-text {
+    margin: 15px 0 16px;
+    color: #aaa;
+    font-family: var(--ff-body);
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.jp_my-review-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: #555;
+    font-family: var(--ff-body);
+    font-size: 10px;
+}
+
+.jp_my-review-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.jp_my-review-actions {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 15px 22px;
+    border-top: 1px solid #1d1d1d;
+}
+
+.jp_my-review-view {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #666;
+    font-family: var(--ff-body);
+    font-size: 10px;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.jp_my-review-view:hover {
+    color: #aaa;
+}
+
+.jp_my-review-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.jp_my-review-buttons .jp_btn {
+    font-size: 10px;
+    text-decoration: none;
+}
+
+
+/* Keep Footer at Bottom */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+#jp_footer-mount {
+    margin-top: auto;
+}
+
+
+/* Mobile */
+
+@media (max-width: 760px) {
+
+    .jp_reviews-hero {
+        padding: 125px 6% 55px;
+    }
+
+    .jp_reviews-title {
+        font-size: 34px;
+    }
+
+    .jp_reviews-page {
+        padding: 40px 6% 75px;
+    }
+
+    .jp_my-review-card {
+        display: block;
+    }
+
+    .jp_my-review-product {
+        border-right: none;
+        border-bottom: 1px solid #1d1d1d;
+    }
+
+    .jp_my-review-actions {
+        display: flex;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .jp_my-review-view {
+        order: 2;
+    }
+
+    .jp_my-review-buttons {
+        width: 100%;
+    }
+
+    .jp_my-review-buttons .jp_btn {
+        flex: 1;
+        justify-content: center;
+    }
+}

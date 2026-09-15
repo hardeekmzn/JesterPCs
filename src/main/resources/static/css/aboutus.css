@@ -1,0 +1,1017 @@
+:root {
+  --clr-bg:        #0d0d0d;
+  --clr-surface:   #111111;
+  --clr-card:      #131315;
+  --clr-border:    #1e1e1e;
+  --clr-accent:    #c0392b;
+  --clr-accent-lt: #e74c3c;
+  --clr-text:      #e2e2e2;
+  --clr-muted:     #7a7a7a;
+  --clr-white:     #ffffff;
+
+  --ff-heading: 'DM Sans', sans-serif;
+  --ff-body:    'Inter', sans-serif;
+
+  --max-w: 1200px;
+}
+
+
+/* Reset */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--ff-body);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font: inherit;
+}
+
+
+/* Header */
+
+.jp_header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 44px;
+  background: rgba(11,11,11,0.97);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.jp_logo {
+  font-family: var(--ff-heading);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.jp_logo-jester {
+  color: var(--clr-white);
+}
+
+.jp_logo-pcs {
+  color: var(--clr-accent);
+}
+
+.jp_nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.jp_nav-list {
+  display: flex;
+  gap: 28px;
+}
+
+.jp_nav-link {
+  font-family: var(--ff-heading);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  position: relative;
+  transition: color 0.2s;
+}
+
+.jp_nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: var(--clr-accent);
+  transition: width 0.2s;
+}
+
+.jp_nav-link:hover {
+  color: var(--clr-white);
+}
+
+.jp_nav-link:hover::after {
+  width: 100%;
+}
+
+.jp_nav-active {
+  color: var(--clr-white);
+}
+
+.jp_nav-active::after {
+  width: 100%;
+}
+
+.jp_nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.jp_nav-login {
+  font-family: var(--ff-heading);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  transition: color 0.2s;
+}
+
+.jp_nav-login:hover {
+  color: var(--clr-white);
+}
+
+.jp_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  border: 2px solid transparent;
+}
+
+.jp_btn:hover {
+  transform: translateY(-1px);
+}
+
+.jp_btn-primary {
+  background: var(--clr-accent);
+  color: var(--clr-white);
+  border-color: var(--clr-accent);
+}
+
+.jp_btn-primary:hover {
+  background: var(--clr-accent-lt);
+  border-color: var(--clr-accent-lt);
+}
+
+.jp_btn-ghost {
+  background: transparent;
+  color: var(--clr-white);
+  border-color: rgba(255,255,255,0.22);
+}
+
+.jp_btn-ghost:hover {
+  border-color: rgba(255,255,255,0.55);
+}
+
+
+/* Hamburger */
+
+.jp_menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.jp_menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--clr-white);
+  transition: transform 0.24s, opacity 0.24s;
+}
+
+.jp_menu-open span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.jp_menu-open span:nth-child(2) {
+  opacity: 0;
+}
+
+.jp_menu-open span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* Shared page hero */
+
+.jp_page-hero {
+  background: var(--clr-surface);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.jp_page-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 56px 44px;
+}
+
+.jp_page-label {
+  font-family: var(--ff-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  margin-bottom: 12px;
+}
+
+.jp_page-title {
+  font-family: var(--ff-heading);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--clr-white);
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.jp_page-sub {
+  font-family: var(--ff-body);
+  font-size: 15px;
+  color: var(--clr-muted);
+  line-height: 1.7;
+}
+
+.jp_hero-link {
+  color: var(--clr-accent);
+  transition: color 0.2s;
+}
+
+.jp_hero-link:hover {
+  color: var(--clr-accent-lt);
+}
+
+
+/* Shared section typography */
+
+.jp_section-eyebrow {
+  font-family: var(--ff-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  margin-bottom: 10px;
+}
+
+.jp_section-heading {
+  font-family: var(--ff-heading);
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--clr-white);
+  letter-spacing: -0.4px;
+  margin-bottom: 20px;
+}
+
+.jp_section-body {
+  font-family: var(--ff-body);
+  font-size: 15px;
+  color: var(--clr-muted);
+  line-height: 1.8;
+  max-width: 560px;
+  margin-bottom: 16px;
+}
+
+.jp_section-body:last-child {
+  margin-bottom: 0;
+}
+
+
+/* ABOUT PAGE */
+
+.jp_about-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 44px 80px;
+}
+
+
+/* Hero — split layout with text left, image right */
+
+.jp_about-hero {
+  display: grid;
+  grid-template-columns: 1fr 480px;
+  gap: 0;
+  border-bottom: 1px solid var(--clr-border);
+  background: var(--clr-surface);
+  max-height: 480px;
+  overflow: hidden;
+}
+
+.jp_about-hero-inner {
+  padding: 64px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.jp_about-hero-img {
+  position: relative;
+  overflow: hidden;
+}
+
+.jp_hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.jp_hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, var(--clr-surface) 0%, transparent 40%);
+}
+
+
+/* Mission section — text left, image right */
+
+.jp_about-section {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 64px;
+  align-items: center;
+  padding: 72px 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.jp_about-img-wrap {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--clr-border);
+}
+
+.jp_about-img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+
+
+/* Values grid */
+
+.jp_values-section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.jp_values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.jp_value-card {
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: 6px;
+  padding: 28px 24px;
+  transition: border-color 0.2s, transform 0.18s;
+}
+
+.jp_value-card:hover {
+  border-color: rgba(192,57,43,0.35);
+  transform: translateY(-3px);
+}
+
+.jp_value-card h3 {
+  font-family: var(--ff-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--clr-white);
+  margin-bottom: 10px;
+  letter-spacing: 0.2px;
+}
+
+.jp_value-card p {
+  font-family: var(--ff-body);
+  font-size: 13px;
+  color: var(--clr-muted);
+  line-height: 1.7;
+}
+
+
+/* Stats strip */
+
+.jp_stats-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 56px 0;
+  border-bottom: 1px solid var(--clr-border);
+  border: 1px solid var(--clr-border);
+  border-radius: 6px;
+  margin: 56px 0;
+  background: var(--clr-card);
+  overflow: hidden;
+}
+
+.jp_stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 32px 16px;
+  text-align: center;
+}
+
+.jp_stat-num {
+  font-family: var(--ff-heading);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--clr-accent);
+  letter-spacing: -0.5px;
+}
+
+.jp_stat-label {
+  font-family: var(--ff-body);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  color: var(--clr-muted);
+  text-transform: uppercase;
+}
+
+.jp_stat-divider {
+  width: 1px;
+  height: 60px;
+  background: var(--clr-border);
+  flex-shrink: 0;
+}
+
+
+/* Story section */
+
+.jp_story-section {
+  padding: 72px 0;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.jp_story-inner {
+  max-width: 680px;
+}
+
+.jp_story-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.jp_story-body p {
+  font-family: var(--ff-body);
+  font-size: 15px;
+  color: var(--clr-muted);
+  line-height: 1.85;
+}
+
+
+/* About CTA */
+
+.jp_about-cta {
+  padding: 72px 0 0;
+  text-align: center;
+}
+
+.jp_cta-heading {
+  font-family: var(--ff-heading);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--clr-white);
+  letter-spacing: -0.5px;
+  margin-bottom: 12px;
+}
+
+.jp_cta-sub {
+  font-family: var(--ff-body);
+  font-size: 14px;
+  color: var(--clr-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.jp_cta-actions {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+
+/* FAQ PAGE */
+
+.jp_faq-page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 48px 44px 80px;
+}
+
+
+/* Search bar */
+
+.jp_faq-search-wrap {
+  position: relative;
+  margin-bottom: 48px;
+}
+
+.jp_faq-search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #383838;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.jp_faq-search {
+  width: 100%;
+  height: 48px;
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-radius: 4px;
+  color: var(--clr-text);
+  font-family: var(--ff-body);
+  font-size: 14px;
+  padding: 0 16px 0 42px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.jp_faq-search::placeholder {
+  color: #383838;
+}
+
+.jp_faq-search:focus {
+  border-color: rgba(192,57,43,0.5);
+}
+
+
+/* FAQ body */
+
+.jp_faq-body {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+
+/* FAQ group — one per category */
+
+.jp_faq-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.jp_faq-group-title {
+  font-family: var(--ff-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--clr-white);
+  letter-spacing: 0.3px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.jp_faq-group-title i {
+  font-size: 14px;
+  color: var(--clr-accent);
+}
+
+
+/* Single FAQ item */
+
+.jp_faq-item {
+  border: 1px solid var(--clr-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--clr-card);
+  margin-bottom: 6px;
+  transition: border-color 0.2s;
+}
+
+.jp_faq-item:last-child {
+  margin-bottom: 0;
+}
+
+.jp_faq-item.jp_faq-open {
+  border-color: rgba(192,57,43,0.3);
+}
+
+
+/* Question button */
+
+.jp_faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 20px;
+  text-align: left;
+  font-family: var(--ff-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--clr-text);
+  transition: color 0.2s, background 0.18s;
+  background: none;
+}
+
+.jp_faq-q:hover {
+  color: var(--clr-white);
+  background: rgba(255,255,255,0.02);
+}
+
+.jp_faq-open .jp_faq-q {
+  color: var(--clr-white);
+}
+
+
+/* Chevron rotates when open */
+
+.jp_faq-chevron {
+  font-size: 12px;
+  color: var(--clr-muted);
+  flex-shrink: 0;
+  transition: transform 0.25s;
+}
+
+.jp_faq-open .jp_faq-chevron {
+  transform: rotate(180deg);
+  color: var(--clr-accent);
+}
+
+
+/* Answer — hidden by default, revealed via CSS max-height transition */
+
+.jp_faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 20px;
+}
+
+.jp_faq-open .jp_faq-a {
+  max-height: 300px;
+  padding: 0 20px 20px;
+}
+
+.jp_faq-a p {
+  font-family: var(--ff-body);
+  font-size: 14px;
+  color: var(--clr-muted);
+  line-height: 1.78;
+}
+
+.jp_faq-a a {
+  color: var(--clr-accent);
+  transition: color 0.2s;
+}
+
+.jp_faq-a a:hover {
+  color: var(--clr-accent-lt);
+}
+
+
+/* Contact section */
+
+.jp_faq-contact {
+  margin-top: 64px;
+  padding: 48px;
+  background: var(--clr-card);
+  border: 1px solid var(--clr-border);
+  border-top: 3px solid var(--clr-accent);
+  border-radius: 6px;
+  text-align: center;
+}
+
+.jp_contact-heading {
+  font-family: var(--ff-heading);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--clr-white);
+  margin-bottom: 10px;
+}
+
+.jp_contact-sub {
+  font-family: var(--ff-body);
+  font-size: 14px;
+  color: var(--clr-muted);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.jp_contact-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.jp_contact-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 16px;
+  background: #0e0e10;
+  border: 1px solid var(--clr-border);
+  border-radius: 4px;
+  transition: border-color 0.2s, background 0.18s;
+}
+
+.jp_contact-card:hover {
+  border-color: rgba(192,57,43,0.35);
+  background: #111113;
+}
+
+.jp_contact-card i {
+  font-size: 20px;
+  color: var(--clr-accent);
+  margin-bottom: 4px;
+}
+
+.jp_contact-method-name {
+  font-family: var(--ff-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--clr-white);
+}
+
+.jp_contact-method-val {
+  font-family: var(--ff-body);
+  font-size: 12px;
+  color: var(--clr-muted);
+}
+
+
+/* Footer */
+
+.jp_footer {
+  border-top: 1px solid var(--clr-border);
+  background: #090909;
+}
+
+.jp_footer-main {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 52px 44px 40px;
+  display: grid;
+  grid-template-columns: 1.7fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+
+.jp_footer-brand .jp_logo {
+  font-size: 20px;
+  margin-bottom: 14px;
+  display: inline-block;
+}
+
+.jp_footer-tagline {
+  font-family: var(--ff-body);
+  font-size: 13px;
+  color: var(--clr-muted);
+  line-height: 1.75;
+  margin-bottom: 22px;
+}
+
+.jp_footer-socials {
+  display: flex;
+  gap: 10px;
+}
+
+.jp_footer-socials a {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--clr-muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.jp_footer-socials a:hover {
+  border-color: var(--clr-accent);
+  color: var(--clr-accent);
+}
+
+.jp_footer-col h4 {
+  font-family: var(--ff-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--clr-white);
+  margin-bottom: 18px;
+}
+
+.jp_footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.jp_footer-col a {
+  font-family: var(--ff-body);
+  font-size: 13px;
+  color: var(--clr-muted);
+  transition: color 0.2s;
+}
+
+.jp_footer-col a:hover {
+  color: var(--clr-white);
+}
+
+.jp_footer-bar {
+  border-top: 1px solid var(--clr-border);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 18px 44px;
+  font-family: var(--ff-body);
+  font-size: 12px;
+  color: #3e3e3e;
+}
+
+
+/* Responsive — Tablet */
+
+@media (max-width: 1024px) {
+
+  .jp_about-hero {
+    grid-template-columns: 1fr;
+    max-height: none;
+  }
+
+  .jp_about-hero-img {
+    display: none;
+  }
+
+  .jp_about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .jp_about-img-wrap {
+    display: none;
+  }
+
+  .jp_values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .jp_stats-section {
+    flex-wrap: wrap;
+  }
+
+  .jp_footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .jp_footer-brand {
+    grid-column: 1 / -1;
+  }
+}
+
+
+/* Responsive — Mobile */
+
+@media (max-width: 768px) {
+
+  .jp_header {
+    padding: 0 20px;
+  }
+
+  .jp_menu-toggle {
+    display: flex;
+  }
+
+  .jp_nav {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: rgba(11,11,11,0.98);
+    border-bottom: 1px solid var(--clr-border);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+    gap: 24px;
+    transform: translateY(-110%);
+    transition: transform 0.26s ease;
+    z-index: 899;
+  }
+
+  .jp_nav-open {
+    transform: translateY(0);
+  }
+
+  .jp_nav-list {
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .jp_nav-actions {
+    width: 100%;
+  }
+
+  .jp_page-hero-inner {
+    padding: 40px 20px;
+  }
+
+  .jp_page-title {
+    font-size: 28px;
+  }
+
+  .jp_about-page {
+    padding: 0 20px 60px;
+  }
+
+  .jp_faq-page {
+    padding: 36px 20px 60px;
+  }
+
+  .jp_about-hero-inner {
+    padding: 40px 20px;
+  }
+
+  .jp_values-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .jp_stats-section {
+    flex-direction: column;
+    border-radius: 6px;
+  }
+
+  .jp_stat-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  .jp_contact-methods {
+    grid-template-columns: 1fr;
+  }
+
+  .jp_cta-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .jp_cta-actions .jp_btn {
+    justify-content: center;
+  }
+
+  .jp_footer-main {
+    grid-template-columns: 1fr;
+    padding: 40px 20px 32px;
+    gap: 32px;
+  }
+
+  .jp_footer-bar {
+    padding: 16px 20px;
+  }
+}

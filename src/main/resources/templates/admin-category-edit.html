@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JesterPCs — Edit Category</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin-categories.css}">
+
+</head>
+
+<body>
+
+<header class="jp_header jp_admin-header">
+
+    <a href="/admin" class="jp_logo">
+        <span class="jp_logo-jester">Jester</span><span class="jp_logo-pcs">PCs</span>
+    </a>
+
+    <nav class="jp_nav">
+
+        <div class="jp_nav-list">
+
+            <a href="/admin" class="jp_nav-link">
+                Dashboard
+            </a>
+
+            <a href="/admin/products" class="jp_nav-link">
+                Products
+            </a>
+
+            <a href="/admin/orders" class="jp_nav-link">
+                Orders
+            </a>
+
+            <a href="/admin/users" class="jp_nav-link">
+                Users
+            </a>
+
+            <a href="/admin/categories" class="jp_nav-link">
+                Categories
+            </a>
+
+        </div>
+
+        <div class="jp_nav-actions">
+
+            <a href="/" class="jp_nav-login">
+                Site
+            </a>
+
+            <a href="/logout" class="jp_nav-login">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main class="jp_admin-categories-page">
+
+    <section class="jp_admin-categories-header">
+
+        <div>
+
+            <p class="jp_admin-categories-eyebrow">
+                JesterPCs Administration
+            </p>
+
+            <h1 class="jp_admin-categories-title">
+                Edit Category
+            </h1>
+
+            <p class="jp_admin-categories-sub">
+                Update the category name.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <section class="jp_admin-categories-grid">
+
+        <div class="jp_admin-category-form-panel">
+
+            <div class="jp_admin-category-panel-header">
+
+                <div class="jp_admin-category-icon">
+                    <i class="fa-solid fa-pen"></i>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Category
+                    </h2>
+
+                    <p>
+                        Change this category name.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <p class="jp_admin-category-error"
+               th:if="${error}"
+               th:text="${error}">
+            </p>
+
+            <form class="jp_admin-category-form"
+                  th:action="@{'/admin/categories/edit/' + ${category.categoryId}}"
+                  method="post">
+
+                <div class="jp_admin-category-field">
+
+                    <label for="categoryName">
+                        Category Name
+                    </label>
+
+                    <input type="text"
+                           id="categoryName"
+                           name="categoryName"
+                           th:value="${category.categoryName}"
+                           minlength="2"
+                           maxlength="50"
+                           required>
+
+                </div>
+
+                <button type="submit"
+                        class="jp_admin-category-add-btn">
+
+                    <i class="fa-solid fa-check"></i>
+
+                    Save Changes
+
+                </button>
+
+                <a href="/admin/categories"
+                   class="jp_admin-category-back-btn">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="jp_footer jp_admin-footer">
+
+    <div class="jp_footer-bar">
+        JesterPCs Admin Panel
+    </div>
+
+</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JesterPCs — Order Confirmed</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/order-success.css}">
+
+</head>
+
+<body>
+
+<div id="jp_header-mount"></div>
+
+
+<main class="jp_success-page">
+
+    <div class="jp_success-card">
+
+        <div class="jp_success-icon">
+            <i class="fa-solid fa-check"></i>
+        </div>
+
+        <p class="jp_success-label">
+            Order Confirmed
+        </p>
+
+        <h1>
+            Thank you for your order!
+        </h1>
+
+        <p class="jp_success-message">
+            Your order has been placed successfully.
+        </p>
+
+
+        <div class="jp_order-info">
+
+            <div>
+                <span>Order Number</span>
+
+                <strong th:text="'#' + ${order.orderId}">
+                    #1001
+                </strong>
+            </div>
+
+            <div>
+                <span>Status</span>
+
+                <strong th:text="${order.status}">
+                    Pending
+                </strong>
+            </div>
+
+            <div>
+                <span>Total</span>
+
+                <strong th:text="'Rs. ' + ${#numbers.formatInteger(order.totalAmount, 1, 'COMMA')}">
+                    Rs. 0
+                </strong>
+            </div>
+
+        </div>
+
+
+        <!-- Ordered products -->
+        <div class="jp_order-items">
+
+            <h2>Order Items</h2>
+
+            <div th:if="${orderItems == null or orderItems.isEmpty()}">
+                <p>No order items found.</p>
+            </div>
+
+            <div th:each="item : ${orderItems}">
+
+                <div class="jp_order-item">
+
+                    <span th:text="${item.productName}">
+                        Product Name
+                    </span>
+
+                    <span th:text="'Qty: ' + ${item.quantity}">
+                        Qty: 1
+                    </span>
+
+                    <span th:text="'Rs. ' + ${#numbers.formatInteger(item.price * item.quantity, 1, 'COMMA')}">
+                        Rs. 0
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="jp_delivery-info">
+
+            <span>Delivery Address</span>
+
+            <p th:text="${order.deliveryAddress}">
+                Delivery address
+            </p>
+
+            <span>Phone</span>
+
+            <p th:text="${order.phone}">
+                Phone number
+            </p>
+
+        </div>
+
+
+        <div class="jp_success-actions">
+
+            <a href="/marketplace"
+               class="jp_btn jp_btn-primary">
+
+                Continue Shopping
+
+            </a>
+
+            <a href="/account"
+               class="jp_btn jp_btn-ghost">
+
+                View Account
+
+            </a>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<div id="jp_footer-mount"></div>
+
+<script th:src="@{/js/components.js}"></script>
+
+</body>
+</html>

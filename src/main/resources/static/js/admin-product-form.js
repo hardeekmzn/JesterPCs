@@ -1,0 +1,2 @@
+initHeader(null);
+initFooter();

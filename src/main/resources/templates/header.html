@@ -1,0 +1,184 @@
+<header class="jp_header" id="jp_header">
+
+  <!-- Logo -->
+  <a href="/" class="jp_logo">
+    <span class="jp_logo-jester">JESTER</span><span class="jp_logo-pcs">PCs</span>
+  </a>
+
+
+  <!-- Mobile menu button -->
+  <button class="jp_menu-toggle"
+          id="jp_menu-toggle"
+          aria-label="Toggle menu">
+
+    <span></span>
+    <span></span>
+    <span></span>
+
+  </button>
+
+
+  <!-- Customer navigation -->
+  <nav class="jp_nav"
+       id="jp_nav"
+       th:if="${user == null || !'ADMIN'.equalsIgnoreCase(user.role)}">
+
+    <ul class="jp_nav-list">
+
+      <li>
+        <a class="jp_nav-link"
+           id="jp_nav-home"
+           href="/">
+          Home
+        </a>
+      </li>
+
+      <li>
+        <a class="jp_nav-link"
+           id="jp_nav-marketplace"
+           href="/marketplace">
+          Marketplace
+        </a>
+      </li>
+
+      <li>
+        <a class="jp_nav-link"
+           id="jp_nav-custom"
+           href="/custom">
+          Custom Builds
+        </a>
+      </li>
+
+      <li>
+        <a class="jp_nav-link"
+           id="jp_nav-builds"
+           href="/builds">
+          Pre-Built PCs
+        </a>
+      </li>
+
+      <li>
+        <a class="jp_nav-link"
+           id="jp_nav-about"
+           href="/about">
+          About Us
+        </a>
+      </li>
+
+    </ul>
+
+
+    <!-- Logged out -->
+    <div class="jp_nav-actions"
+         th:if="${user == null}">
+
+      <a href="/login"
+         class="jp_nav-login">
+        Log In
+      </a>
+
+      <a href="/signup"
+         class="jp_btn jp_btn-primary">
+        Sign Up
+      </a>
+
+    </div>
+
+
+    <!-- Customer logged in -->
+    <div class="jp_nav-actions"
+         th:if="${user != null}">
+
+      <a href="/wishlist"
+         class="jp_nav-cart-btn"
+         id="jp_wishlist-link"
+         aria-label="Wishlist">
+
+        <i class="fa-regular fa-heart"></i>
+
+      </a>
+
+
+      <a href="/cart"
+         class="jp_nav-cart-btn"
+         id="jp_cart-link"
+         aria-label="Cart">
+
+        <i class="fa-solid fa-cart-shopping"></i>
+
+        <span class="jp_cart-count"
+              id="jp_cart-count">
+          0
+        </span>
+
+      </a>
+
+
+      <a href="/account"
+         class="jp_nav-login"
+         id="jp_account-link">
+        Account
+      </a>
+
+
+      <a href="/logout"
+         class="jp_nav-login">
+        Logout
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- Admin navigation -->
+  <nav class="jp_nav"
+       id="jp_nav"
+       th:if="${user != null && 'ADMIN'.equalsIgnoreCase(user.role)}">
+
+    <ul class="jp_nav-list">
+
+      <li>
+        <a class="jp_nav-link"
+           id="jp_nav-home"
+           href="/">
+          Home
+        </a>
+      </li>
+
+      <li>
+        <a class="jp_nav-link"
+           id="jp_nav-marketplace"
+           href="/marketplace">
+          Marketplace
+        </a>
+      </li>
+
+      <li>
+        <a class="jp_nav-link"
+           id="jp_nav-builds"
+           href="/builds">
+          Pre-Built PCs
+        </a>
+      </li>
+
+    </ul>
+
+
+    <div class="jp_nav-actions">
+
+      <a href="/admin"
+         class="jp_nav-login">
+        Admin Panel
+      </a>
+
+      <a href="/logout"
+         class="jp_nav-login">
+        Logout
+      </a>
+
+    </div>
+
+  </nav>
+
+</header>

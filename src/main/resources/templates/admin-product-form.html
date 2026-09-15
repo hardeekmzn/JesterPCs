@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${product.productId == 0 ? 'JesterPCs — Add Product' : 'JesterPCs — Edit Product'}">
+        JesterPCs — Add Product
+    </title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin-product-form.css}">
+
+</head>
+
+<body>
+
+<header class="jp_header jp_admin-header">
+
+    <a href="/admin" class="jp_logo">
+        <span class="jp_logo-jester">Jester</span><span class="jp_logo-pcs">PCs</span>
+    </a>
+
+    <nav class="jp_nav">
+
+        <div class="jp_nav-list">
+
+            <a href="/admin" class="jp_nav-link">
+                Dashboard
+            </a>
+
+            <a href="/admin/products" class="jp_nav-link">
+                Products
+            </a>
+
+            <a href="/admin/orders" class="jp_nav-link">
+                Orders
+            </a>
+
+            <a href="/admin/users" class="jp_nav-link">
+                Users
+            </a>
+
+            <a href="/admin/categories" class="jp_nav-link">
+                Categories
+            </a>
+
+        </div>
+
+        <div class="jp_nav-actions">
+
+            <a href="/" class="jp_nav-login">
+                Site
+            </a>
+
+            <a href="/logout" class="jp_nav-login">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main class="jp_admin-form-page">
+
+    <section class="jp_admin-form-header">
+
+        <div>
+
+            <p class="jp_admin-form-eyebrow">
+                JesterPCs Administration
+            </p>
+
+            <h1 class="jp_admin-form-title"
+                th:text="${product.productId == 0 ? 'Add Product' : 'Edit Product'}">
+                Add Product
+            </h1>
+
+            <p class="jp_admin-form-sub"
+               th:text="${product.productId == 0
+                   ? 'Add a new product to the JesterPCs marketplace.'
+                   : 'Update the information for this marketplace product.'}">
+                Add a new product to the JesterPCs marketplace.
+            </p>
+
+        </div>
+
+        <a href="/admin/products"
+           class="jp_admin-back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Products
+
+        </a>
+
+    </section>
+
+
+    <p class="jp_admin-category-error"
+       th:if="${error}"
+       th:text="${error}">
+    </p>
+
+
+    <form class="jp_admin-product-form"
+          th:action="${product.productId == 0}
+              ? @{/admin/products/add}
+              : @{/admin/products/edit/{id}(id=${product.productId})}"
+          th:object="${product}"
+          method="post">
+
+        <!-- Basic information -->
+
+        <section class="jp_admin-form-section">
+
+            <div class="jp_admin-form-section-heading">
+
+                <span class="jp_admin-form-section-number">
+                    01
+                </span>
+
+                <div>
+
+                    <h2>
+                        Basic Information
+                    </h2>
+
+                    <p>
+                        General information shown on the marketplace.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="jp_form-grid">
+
+                <div class="jp_field jp_field-full">
+
+                    <label for="productName">
+                        Product Name
+                    </label>
+
+                    <input type="text"
+                           id="productName"
+                           th:field="*{productName}"
+                           placeholder="e.g. AMD Ryzen 5 7600X"
+                           minlength="2"
+                           maxlength="150"
+                           required>
+
+                </div>
+
+
+                <div class="jp_field">
+
+                    <label for="brand">
+                        Brand
+                    </label>
+
+                    <input type="text"
+                           id="brand"
+                           th:field="*{brand}"
+                           placeholder="e.g. AMD"
+                           minlength="2"
+                           maxlength="50"
+                           required>
+
+                </div>
+
+
+                <div class="jp_field">
+
+                    <label for="categoryId">
+                        Category
+                    </label>
+
+                    <select id="categoryId"
+                            name="categoryId"
+                            required>
+
+                        <option value=""
+                                disabled
+                                th:selected="${product.categoryId == 0}">
+                            Select a category
+                        </option>
+
+                        <option th:each="category : ${categories}"
+                                th:value="${category.categoryId}"
+                                th:text="${category.categoryName.toUpperCase()}"
+                                th:selected="${category.categoryId == product.categoryId}">
+                            CPU
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="jp_field">
+
+                    <label for="price">
+                        Price (NPR)
+                    </label>
+
+                    <input type="number"
+                           id="price"
+                           th:field="*{price}"
+                           min="0.01"
+                           step="0.01"
+                           placeholder="e.g. 28000"
+                           required>
+
+                </div>
+
+
+                <div class="jp_field">
+
+                    <label for="stockQuantity">
+                        Stock Quantity
+                    </label>
+
+                    <input type="number"
+                           id="stockQuantity"
+                           th:field="*{stockQuantity}"
+                           min="0"
+                           step="1"
+                           placeholder="e.g. 10"
+                           required>
+
+                </div>
+
+
+                <div class="jp_field jp_field-full">
+
+                    <label for="imageUrl">
+                        Image URL
+                    </label>
+
+                    <input type="url"
+                           id="imageUrl"
+                           th:field="*{imageUrl}"
+                           maxlength="500"
+                           placeholder="https://..."
+                           required>
+
+                    <span class="jp_field-help">
+                        Use an image URL for now.
+                    </span>
+
+                </div>
+
+
+                <div class="jp_field jp_field-full">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea id="description"
+                              th:field="*{description}"
+                              rows="5"
+                              maxlength="2000"
+                              placeholder="Describe the product..."></textarea>
+
+                </div>
+
+
+                <div class="jp_field jp_field-full">
+
+                    <label for="specifications">
+                        Specifications
+                    </label>
+
+                    <textarea id="specifications"
+                              th:field="*{specifications}"
+                              rows="5"
+                              maxlength="2000"
+                              placeholder="e.g. 6 Cores · 12 Threads · AM5 · Zen 4"></textarea>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Hardware specifications -->
+
+        <section class="jp_admin-form-section">
+
+            <div class="jp_admin-form-section-heading">
+
+                <span class="jp_admin-form-section-number">
+                    02
+                </span>
+
+                <div>
+
+                    <h2>
+                        Hardware Specifications
+                    </h2>
+
+                    <p>
+                        These values will support the compatibility checker later.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="jp_form-grid">
+
+                <div class="jp_field">
+
+                    <label for="socketType">
+                        Socket Type
+                    </label>
+
+                    <select id="socketType"
+                            th:field="*{socketType}">
+
+                        <option value="">
+                            Not Applicable
+                        </option>
+
+                        <option value="AM4">
+                            AM4
+                        </option>
+
+                        <option value="AM5">
+                            AM5
+                        </option>
+
+                        <option value="LGA1200">
+                            LGA1200
+                        </option>
+
+                        <option value="LGA1700">
+                            LGA1700
+                        </option>
+
+                        <option value="LGA1851">
+                            LGA1851
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="jp_field">
+
+                    <label for="ramType">
+                        RAM Type
+                    </label>
+
+                    <select id="ramType"
+                            th:field="*{ramType}">
+
+                        <option value="">
+                            Not Applicable
+                        </option>
+
+                        <option value="DDR4">
+                            DDR4
+                        </option>
+
+                        <option value="DDR5">
+                            DDR5
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="jp_field">
+
+                    <label for="ramSpeed">
+                        RAM Speed (MHz)
+                    </label>
+
+                    <input type="number"
+                           id="ramSpeed"
+                           th:field="*{ramSpeed}"
+                           min="0"
+                           step="1"
+                           placeholder="e.g. 5600">
+
+                </div>
+
+
+                <div class="jp_field">
+
+                    <label for="storageInterface">
+                        Storage Interface
+                    </label>
+
+                    <select id="storageInterface"
+                            th:field="*{storageInterface}">
+
+                        <option value="">
+                            Not Applicable
+                        </option>
+
+                        <option value="SATA">
+                            SATA
+                        </option>
+
+                        <option value="PCIe 3.0">
+                            PCIe 3.0
+                        </option>
+
+                        <option value="PCIe 4.0">
+                            PCIe 4.0
+                        </option>
+
+                        <option value="PCIe 5.0">
+                            PCIe 5.0
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="jp_field">
+
+                    <label for="wattage">
+                        Wattage (W)
+                    </label>
+
+                    <input type="number"
+                           id="wattage"
+                           th:field="*{wattage}"
+                           min="0"
+                           step="1"
+                           placeholder="e.g. 750">
+
+                </div>
+
+
+                <div class="jp_field">
+
+                    <label for="gpuLength">
+                        GPU Length (mm)
+                    </label>
+
+                    <input type="number"
+                           id="gpuLength"
+                           th:field="*{gpuLength}"
+                           min="0"
+                           step="0.01"
+                           placeholder="e.g. 320">
+
+                </div>
+
+
+                <div class="jp_field">
+
+                    <label for="coolerHeight">
+                        Cooler Height (mm)
+                    </label>
+
+                    <input type="number"
+                           id="coolerHeight"
+                           th:field="*{coolerHeight}"
+                           min="0"
+                           step="0.01"
+                           placeholder="e.g. 165">
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Form actions -->
+
+        <div class="jp_admin-form-actions">
+
+            <a href="/admin/products"
+               class="jp_btn jp_btn-ghost">
+                Cancel
+            </a>
+
+            <button type="submit"
+                    class="jp_btn jp_btn-primary">
+
+                <i class="fa-solid"
+                   th:classappend="${product.productId == 0 ? 'fa-plus' : 'fa-floppy-disk'}">
+                </i>
+
+                <span th:text="${product.productId == 0 ? 'Add Product' : 'Save Changes'}">
+                    Add Product
+                </span>
+
+            </button>
+
+        </div>
+
+    </form>
+
+</main>
+
+
+<footer class="jp_footer jp_admin-footer">
+
+    <div class="jp_footer-bar">
+        JesterPCs Admin Panel
+    </div>
+
+</footer>
+
+
+<script src="/js/admin-product-form.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,478 @@
+.jp_product-page {
+    min-height: 100vh;
+    padding: 35px 44px 45px;
+    background: #0d0d0d;
+}
+
+.jp_product-back {
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto 12px;
+}
+
+.jp_product-back a {
+    color: #777;
+    text-decoration: none;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    transition: color 0.2s;
+}
+
+.jp_product-back a:hover {
+    color: #fff;
+}
+
+.jp_product-back i {
+    margin-right: 7px;
+}
+
+
+/* Product */
+
+.jp_product-detail {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto 28px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    align-items: center;
+
+    gap: 55px;
+}
+
+
+/* Product image */
+
+.jp_product-image-wrap {
+    width: 62%;
+    aspect-ratio: 1;
+
+    margin: 0 auto;
+
+    background: #131315;
+
+    border: 1px solid #222;
+    border-radius: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.jp_product-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.jp_product-placeholder {
+    font-size: 50px;
+    color: #444;
+}
+
+
+/* Product information */
+
+.jp_product-info {
+    align-self: center;
+}
+
+.jp_product-category {
+    display: inline-block;
+
+    margin-bottom: 12px;
+    padding: 5px 9px;
+
+    background: rgba(192, 57, 43, 0.08);
+    border: 1px solid rgba(192, 57, 43, 0.3);
+    border-radius: 2px;
+
+    color: #c0392b;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.jp_product-brand {
+    margin-bottom: 7px;
+
+    color: #777;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+}
+
+.jp_product-title {
+    margin-bottom: 16px;
+
+    color: #fff;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 40px;
+    line-height: 1.1;
+}
+
+.jp_product-price {
+    margin-bottom: 13px;
+
+    color: #fff;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.jp_product-stock {
+    margin-bottom: 22px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+}
+
+.jp_product-stock i {
+    font-size: 7px;
+}
+
+.jp_in-stock {
+    color: #67b37a;
+}
+
+.jp_out-of-stock {
+    color: #c0392b;
+}
+
+.jp_product-description {
+    max-width: 580px;
+
+    margin-bottom: 22px;
+
+    color: #888;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+
+/* Product actions */
+
+.jp_product-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.jp_add-product-btn {
+    min-width: 190px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+}
+
+.jp_product-wish {
+    width: 46px;
+    height: 46px;
+
+    border: 1px solid #292929;
+    border-radius: 2px;
+
+    background: transparent;
+
+    color: #777;
+
+    cursor: pointer;
+
+    transition:
+            color 0.2s,
+            border-color 0.2s,
+            background 0.2s;
+}
+
+.jp_product-wish:hover {
+    color: #c0392b;
+
+    border-color: rgba(192, 57, 43, 0.5);
+
+    background: rgba(192, 57, 43, 0.04);
+}
+
+
+/* Product overview */
+
+.jp_product-overview {
+    margin-top: 22px;
+
+    padding: 16px 18px;
+
+    background: #131315;
+
+    border: 1px solid #222;
+    border-radius: 4px;
+}
+
+.jp_overview-heading {
+    margin-bottom: 14px;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+
+    color: #777;
+}
+
+.jp_overview-grid {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+.jp_overview-item {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+.jp_overview-item span {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    color: #555;
+}
+
+.jp_overview-item strong {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+
+    color: #ddd;
+}
+
+
+/* Detailed specifications */
+
+.jp_product-spec-section {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    padding-top: 25px;
+
+    border-top: 1px solid #222;
+}
+
+.jp_product-section-heading {
+    margin-bottom: 24px;
+}
+
+.jp_product-section-heading p {
+    margin-bottom: 5px;
+
+    color: #c0392b;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.jp_product-section-heading h2 {
+    color: #fff;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 25px;
+}
+
+.jp_product-spec-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    border: 1px solid #222;
+}
+
+.jp_spec-item {
+    padding: 18px;
+
+    background: #131315;
+
+    border-right: 1px solid #222;
+    border-bottom: 1px solid #222;
+}
+
+.jp_spec-item span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #666;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.jp_spec-item strong {
+    color: #ddd;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.jp_product-full-spec {
+    margin-top: 18px;
+
+    padding: 20px;
+
+    background: #131315;
+
+    border: 1px solid #222;
+}
+
+.jp_product-full-spec > span {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: #666;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.jp_product-full-spec p {
+    color: #aaa;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* Toast */
+
+.jp_toast {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 13px 18px;
+
+    background: #171719;
+
+    border: 1px solid #292929;
+
+    color: #ddd;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translateY(10px);
+
+    transition: 0.2s;
+}
+
+.jp_toast-show {
+    opacity: 1;
+
+    transform: translateY(0);
+}
+
+.jp_toast i {
+    color: #c0392b;
+}
+
+.jp_review-login-btn {
+    margin-left: auto;
+    padding: 8px 16px;
+    font-size: 10px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 768px) {
+
+    .jp_product-page {
+        padding: 90px 20px 60px;
+    }
+
+    .jp_product-detail {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+
+        align-items: start;
+    }
+
+    .jp_product-image-wrap {
+        width: 85%;
+    }
+
+    .jp_product-title {
+        font-size: 32px;
+    }
+
+    .jp_product-spec-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .jp_spec-item {
+        border-right: none;
+    }
+
+    .jp_overview-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}

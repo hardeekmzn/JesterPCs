@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JesterPCs — Build Beyond Limits</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/css/shared.css}">
+  <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+
+<!-- Header mount — transparent on hero, darkens on scroll via index.js -->
+<div id="jp_header-mount"></div>
+
+<!-- Dot Navigation -->
+<nav class="jp_dots" id="jp_dots" aria-label="Section navigation">
+  <button class="jp_dot jp_dot-active" data-index="0" aria-label="Hero"></button>
+  <button class="jp_dot" data-index="1" aria-label="Forge Your Destiny"></button>
+  <button class="jp_dot" data-index="2" aria-label="The Jester Standard"></button>
+  <button class="jp_dot" data-index="3" aria-label="Ready to be an Artisan"></button>
+  <button class="jp_dot" data-index="4" aria-label="Footer"></button>
+</nav>
+
+<!-- Scroll Container -->
+<main class="jp_scroll-container" id="jp_scroll-container">
+
+  <!-- Section 1 — Hero -->
+  <section class="jp_section jp_hero" id="jp_section-0">
+    <div class="jp_hero-bg">
+      <img
+              th:src="@{/images/pcsetup.jpg}"
+              alt="RGB gaming PC setup"
+              class="jp_hero-img"
+      />
+      <div class="jp_hero-overlay"></div>
+    </div>
+
+    <div class="jp_hero-content">
+
+      <p class="jp_hero-est"
+         th:text="${user != null ? 'Welcome Back' : 'Est. 2026'}">
+        Est. 2026
+      </p>
+
+      <h1 class="jp_hero-title">
+
+    <span th:if="${user == null}">
+      Build Beyond<br>Limits
+    </span>
+
+        <span th:if="${user != null}">
+      Welcome Back,<br>
+      <span th:text="${user.username}">User</span>
+    </span>
+
+      </h1>
+
+      <p class="jp_hero-sub"
+         th:text="${user != null
+       ? 'Ready to build something great? Explore the marketplace, create a custom build, or check out your account.'
+       : 'A modern PC marketplace built for Nepal — simplify your custom build, discover the right components, and own your setup.'}">
+        A modern PC marketplace built for Nepal — simplify your custom build, discover the right components, and own your setup.
+      </p>
+
+      <div class="jp_hero-actions">
+
+        <a th:if="${user == null}"
+           th:href="@{/signup}"
+           class="jp_btn jp_btn-primary">
+          Get Started
+        </a>
+
+        <a th:if="${user != null}"
+           th:href="@{/marketplace}"
+           class="jp_btn jp_btn-primary">
+          Marketplace
+        </a>
+
+        <a th:if="${user == null}"
+           th:href="@{/about}"
+           class="jp_btn jp_btn-ghost">
+          About Us
+        </a>
+
+        <a th:if="${user != null}"
+           th:href="@{/custom}"
+           class="jp_btn jp_btn-ghost">
+          Build a PC
+        </a>
+
+      </div>
+
+    </div>
+
+    <!-- Scroll Hint -->
+    <div class="jp_scroll-hint" id="jp_scroll-hint">
+      <span>Scroll</span>
+      <i class="fa-solid fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- Section 2 — Forge Your Destiny -->
+  <section class="jp_section jp_forge jp_wave-bg" id="jp_section-1">
+    <div class="jp_forge-inner">
+      <div class="jp_section-label">
+        <span class="jp_label-line"></span>
+        <h2 class="jp_section-heading">Forge Your Destiny</h2>
+      </div>
+
+      <div class="jp_forge-grid">
+
+        <div class="jp_forge-card">
+          <h3>Custom Builds</h3>
+          <p>Pick your parts, set your budget, get your build. Step-by-step guidance that makes PC building approachable for first-timers and veterans alike.</p>
+        </div>
+
+        <div class="jp_forge-card">
+          <h3>Marketplace</h3>
+          <p>Curated components, peripherals, and pre-builts — all in one place. No hunting across tabs, no guesswork on compatibility.</p>
+        </div>
+
+        <div class="jp_forge-card">
+          <h3>Benchmark</h3>
+          <p>Real performance data across gaming, creative work, and daily use. Know exactly what you are getting before you spend a single rupee.</p>
+        </div>
+
+        <div class="jp_forge-card">
+          <h3>Pre-Built PCs</h3>
+          <p>Ready-to-ship rigs built for every kind of user — from casual browsing to competitive gaming. Unbox, plug in, get going.</p>
+        </div>
+
+        <div class="jp_forge-card">
+          <h3>Component Guide</h3>
+          <p>A compatibility-first breakdown of every part category. CPUs, GPUs, RAM, storage — explained clearly so you never buy the wrong thing.</p>
+        </div>
+
+        <div class="jp_forge-card">
+          <h3>Community</h3>
+          <p>Builders helping builders. Share your setup, ask questions, and stay in the loop on the latest deals and hardware releases in Nepal.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 — The Jester Standard -->
+  <section class="jp_section jp_standard jp_wave-bg" id="jp_section-2">
+    <div class="jp_standard-inner">
+      <div class="jp_section-label">
+        <span class="jp_label-line"></span>
+        <h2 class="jp_section-heading">The Jester Standard</h2>
+      </div>
+
+      <div class="jp_standard-body">
+
+        <div class="jp_standard-left">
+
+          <div class="jp_standard-item">
+            <div class="jp_standard-check"><i class="fa-solid fa-circle-check"></i></div>
+            <div>
+              <h3>Built Different</h3>
+              <p>Not another generic tech store. JesterPCs is designed from the ground up for builders — with personality, purpose, and a modern platform to match.</p>
+            </div>
+          </div>
+
+          <div class="jp_standard-item">
+            <div class="jp_standard-check"><i class="fa-solid fa-circle-check"></i></div>
+            <div>
+              <h3>Style Meets Performance</h3>
+              <p>Clean UI, sharp visuals, zero clutter. Looking good and working well are not mutually exclusive — JesterPCs proves it on every screen.</p>
+            </div>
+          </div>
+
+          <div class="jp_standard-item">
+            <div class="jp_standard-check"><i class="fa-solid fa-circle-check"></i></div>
+            <div>
+              <h3>Power Without the Confusion</h3>
+              <p>Hardware can be intimidating. We strip away the noise and give you exactly what you need to make confident, informed decisions.</p>
+            </div>
+          </div>
+
+          <div class="jp_standard-item">
+            <div class="jp_standard-check"><i class="fa-solid fa-circle-check"></i></div>
+            <div>
+              <h3>Secure From the Ground Up</h3>
+              <p>Verified accounts, protected sessions, and authenticated checkouts — your data and your orders stay yours, always.</p>
+            </div>
+          </div>
+
+          <div class="jp_standard-item">
+            <div class="jp_standard-check"><i class="fa-solid fa-circle-check"></i></div>
+            <div>
+              <h3>Built for Nepal, Made for All</h3>
+              <p>A proper PC hardware platform for the Nepali market — finally. Organized, accessible, and built with local builders in mind.</p>
+            </div>
+          </div>
+
+          <!-- Trust Strip -->
+          <div class="jp_trust-strip">
+            <div class="jp_trust-item">
+              <span class="jp_trust-num">500+</span>
+              <span class="jp_trust-label">Components Listed</span>
+            </div>
+            <div class="jp_trust-divider"></div>
+            <div class="jp_trust-item">
+              <span class="jp_trust-num">100%</span>
+              <span class="jp_trust-label">Compatibility Checked</span>
+            </div>
+            <div class="jp_trust-divider"></div>
+            <div class="jp_trust-item">
+              <span class="jp_trust-num">24/7</span>
+              <span class="jp_trust-label">Build Support</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="jp_standard-right">
+          <div class="jp_standard-img-wrap">
+            <img
+                    th:src="@{/images/jpcStandards.jpg}"
+                    alt="Glowing PC internals"
+                    class="jp_standard-img"
+            />
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4 — CTA -->
+  <section class="jp_section jp_cta jp_wave-bg" id="jp_section-3">
+    <div class="jp_cta-inner">
+      <h2 class="jp_cta-heading">Ready to be an Artisan?</h2>
+      <p class="jp_cta-sub">
+        Stop browsing. Start building. Your perfect setup is closer than you think — configure it, order it, own it.
+      </p>
+
+      <!-- Logged out -->
+      <a th:if="${user == null}"
+         th:href="@{/signup}"
+         class="jp_btn jp_btn-primary">
+        Start Building
+      </a>
+
+      <!-- Logged in -->
+      <a th:if="${user != null}"
+         th:href="@{/custom}"
+         class="jp_btn jp_btn-primary">
+        Build a PC
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Section 5 — Footer -->
+  <section class="jp_section jp_footer-section" id="jp_section-4">
+    <footer class="jp_footer">
+      <div class="jp_footer-main">
+
+        <div class="jp_footer-brand">
+          <a th:href="@{/}" class="jp_logo">
+            <span class="jp_logo-jester">JESTER</span><span class="jp_logo-pcs">PCs</span>
+          </a>
+          <p class="jp_footer-tagline">Nepal's PC marketplace.<br>Built for builders, by builders.</p>
+          <div class="jp_footer-socials">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="jp_footer-col">
+          <h4>Platform</h4>
+          <ul>
+            <li><a th:href="@{/marketplace}">Marketplace</a></li>
+            <li><a th:href="@{/custom}">Custom Builds</a></li>
+            <li><a th:href="@{/builds}">Pre-Built PCs</a></li>
+          </ul>
+        </div>
+
+        <div class="jp_footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a th:href="@{/faq}">FAQ</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="jp_footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a th:href="@{/about}">About Us</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="jp_footer-bar">
+        <p>&copy; 2026 JesterPCs. All rights reserved. — Hardeek Maharjan</p>
+      </div>
+    </footer>
+  </section>
+
+</main>
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/index.js}"></script>
+<script>
+  initHeader("jp_nav-home");
+</script>
+</body>
+</html>

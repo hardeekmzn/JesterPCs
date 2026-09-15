@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JesterPCs — Email Verified</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" th:href="@{/css/shared.css}">
+    <link rel="stylesheet" th:href="@{/css/signup.css}">
+    <link rel="stylesheet" th:href="@{/css/waiting.css}">
+</head>
+
+<body>
+
+<!-- Header mount -->
+<div id="jp_header-mount"></div>
+
+<!-- Page -->
+<main class="jp_page">
+
+    <!-- Left image panel -->
+    <div class="jp_side">
+        <img th:src="@{/images/forsignup.jpg}" alt="Gaming PC Setup" class="jp_side-img">
+        <div class="jp_side-overlay"></div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="jp_form-panel">
+        <div class="jp_form-card">
+
+            <!-- Tabs -->
+            <div class="jp_tabs">
+                <a href="/login" class="jp_tab">Sign In</a>
+                <button class="jp_tab jp_tab-active" type="button">Sign Up</button>
+            </div>
+
+            <!-- Verified content -->
+            <div class="jp_waiting-content">
+
+                <div class="jp_waiting-icon jp_verified-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div class="jp_form-header">
+                    <h1 class="jp_form-title">Email Verified</h1>
+                    <p class="jp_form-sub">Your account is ready</p>
+                </div>
+
+                <p class="jp_waiting-text">
+                    Your email address has been successfully verified.
+                </p>
+
+                <p class="jp_waiting-text">
+                    Your JesterPCs account is now ready to use.
+                </p>
+
+                <div class="jp_waiting-actions">
+                    <a href="/login" class="jp_submit">
+                        Go to Login
+                    </a>
+                </div>
+
+                <p class="jp_verification-success-note">
+                    You can now sign in using the email and password you registered with.
+                </p>
+
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<!-- Footer mount -->
+<div id="jp_footer-mount"></div>
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/verification.js}"></script>
+
+</body>
+</html>

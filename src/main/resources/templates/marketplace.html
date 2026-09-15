@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>JesterPCs — Marketplace</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <link rel="stylesheet"
+        th:href="@{/css/shared.css}">
+
+  <link rel="stylesheet"
+        th:href="@{/css/marketplace.css}">
+</head>
+
+<body>
+
+<div id="jp_header-mount"></div>
+
+
+<main class="jp_market-page">
+
+  <aside class="jp_sidebar">
+
+    <div class="jp_search-wrap">
+
+      <i class="fa-solid fa-magnifying-glass jp_search-icon"></i>
+
+      <input type="text"
+             id="jp_search"
+             placeholder="Search products..."
+             class="jp_search" />
+
+    </div>
+
+
+    <div class="jp_filter-group">
+
+      <h4 class="jp_filter-heading">
+        Category
+      </h4>
+
+      <ul class="jp_filter-list"
+          id="jp_cat-list">
+
+        <li>
+          <button class="jp_filter-btn jp_filter-active"
+                  data-filter="all">
+            All Products
+          </button>
+        </li>
+
+        <li>
+          <button class="jp_filter-btn"
+                  data-filter="cpu">
+            CPU
+          </button>
+        </li>
+
+        <li>
+          <button class="jp_filter-btn"
+                  data-filter="gpu">
+            GPU
+          </button>
+        </li>
+
+        <li>
+          <button class="jp_filter-btn"
+                  data-filter="ram">
+            RAM
+          </button>
+        </li>
+
+        <li>
+          <button class="jp_filter-btn"
+                  data-filter="storage">
+            Storage
+          </button>
+        </li>
+
+        <li>
+          <button class="jp_filter-btn"
+                  data-filter="motherboard">
+            Motherboard
+          </button>
+        </li>
+
+        <li>
+          <button class="jp_filter-btn"
+                  data-filter="psu">
+            PSU
+          </button>
+        </li>
+
+        <li>
+          <button class="jp_filter-btn"
+                  data-filter="case">
+            Case
+          </button>
+        </li>
+
+        <li>
+          <button class="jp_filter-btn"
+                  data-filter="cooling">
+            Cooling
+          </button>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div class="jp_filter-group">
+
+      <h4 class="jp_filter-heading">
+        Brand
+      </h4>
+
+      <ul class="jp_brand-list">
+
+        <li>
+          <label class="jp_check-label">
+            <input type="checkbox"
+                   class="jp_brand-check"
+                   value="AMD"
+                   checked>
+            AMD
+          </label>
+        </li>
+
+        <li>
+          <label class="jp_check-label">
+            <input type="checkbox"
+                   class="jp_brand-check"
+                   value="Intel"
+                   checked>
+            Intel
+          </label>
+        </li>
+
+        <li>
+          <label class="jp_check-label">
+            <input type="checkbox"
+                   class="jp_brand-check"
+                   value="Nvidia"
+                   checked>
+            Nvidia
+          </label>
+        </li>
+
+        <li>
+          <label class="jp_check-label">
+            <input type="checkbox"
+                   class="jp_brand-check"
+                   value="Corsair"
+                   checked>
+            Corsair
+          </label>
+        </li>
+
+        <li>
+          <label class="jp_check-label">
+            <input type="checkbox"
+                   class="jp_brand-check"
+                   value="Samsung"
+                   checked>
+            Samsung
+          </label>
+        </li>
+
+        <li>
+          <label class="jp_check-label">
+            <input type="checkbox"
+                   class="jp_brand-check"
+                   value="ASUS"
+                   checked>
+            ASUS
+          </label>
+        </li>
+
+        <li>
+          <label class="jp_check-label">
+            <input type="checkbox"
+                   class="jp_brand-check"
+                   value="Seagate"
+                   checked>
+            Seagate
+          </label>
+        </li>
+
+        <li>
+          <label class="jp_check-label">
+            <input type="checkbox"
+                   class="jp_brand-check"
+                   value="Kingston"
+                   checked>
+            Kingston
+          </label>
+        </li>
+
+        <li>
+          <label class="jp_check-label">
+            <input type="checkbox"
+                   class="jp_brand-check"
+                   value="Deepcool"
+                   checked>
+            Deepcool
+          </label>
+        </li>
+
+        <li>
+          <label class="jp_check-label">
+            <input type="checkbox"
+                   class="jp_brand-check"
+                   value="Lian Li"
+                   checked>
+            Lian Li
+          </label>
+        </li>
+
+      </ul>
+
+    </div>
+
+
+    <div class="jp_filter-group">
+
+      <h4 class="jp_filter-heading">
+        Max Price
+      </h4>
+
+      <div class="jp_price-wrap">
+
+        <input type="range"
+               id="jp_price-range"
+               min="0"
+               max="400000"
+               value="400000"
+               step="5000"
+               class="jp_range" />
+
+        <div class="jp_price-display">
+          Up to
+          <span id="jp_price-val">
+            Rs. 4,00,000
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="jp_filter-group">
+
+      <h4 class="jp_filter-heading">
+        Availability
+      </h4>
+
+      <label class="jp_toggle-label">
+
+        <input type="checkbox"
+               id="jp_in-stock"
+               class="jp_toggle-input" />
+
+        <span class="jp_toggle-track">
+          <span class="jp_toggle-thumb"></span>
+        </span>
+
+        In Stock Only
+
+      </label>
+
+    </div>
+
+  </aside>
+
+
+  <div class="jp_market-main">
+
+    <div class="jp_toolbar">
+
+      <p class="jp_result-count">
+
+        <span id="jp_count"
+              th:text="${#lists.size(products)}">
+          0
+        </span>
+
+        products found
+
+      </p>
+
+
+      <div class="jp_sort-wrap">
+
+        <label for="jp_sort"
+               class="jp_sort-label">
+          Sort by
+        </label>
+
+        <select id="jp_sort"
+                class="jp_sort">
+
+          <option value="featured">
+            Featured
+          </option>
+
+          <option value="price-asc">
+            Price: Low to High
+          </option>
+
+          <option value="price-desc">
+            Price: High to Low
+          </option>
+
+          <option value="newest">
+            Newest
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <div class="jp_grid"
+         id="jp_grid">
+
+      <div class="jp_card"
+           th:each="product : ${products}"
+           th:data-category="${product.categoryName.toLowerCase()}"
+           th:data-brand="${product.brand}"
+           th:data-price="${product.price}"
+           th:data-stock="${product.stockQuantity > 0}"
+           th:data-date="${product.productId}">
+
+        <button class="jp_wish"
+                th:classappend="${wishlistProductIds.contains(product.productId) ? ' jp_wish-active' : ''}"
+                type="button"
+                th:data-product-id="${product.productId}"
+                aria-label="Wishlist">
+
+          <i th:class="${wishlistProductIds.contains(product.productId) ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}"></i>
+
+        </button>
+
+
+        <a th:href="@{'/product/' + ${product.productId}}"
+           class="jp_product-link">
+
+          <div class="jp_card-img-wrap">
+
+            <img th:if="${product.imageUrl != null and !product.imageUrl.isEmpty()}"
+                 th:src="${product.imageUrl}"
+                 th:alt="${product.productName}"
+                 class="jp_card-img" />
+
+            <div th:unless="${product.imageUrl != null and !product.imageUrl.isEmpty()}"
+                 class="jp_card-img-placeholder">
+
+              <i class="fa-solid fa-box"></i>
+
+            </div>
+
+          </div>
+
+
+          <span class="jp_card-tag"
+                th:text="${product.categoryName}">
+            GPU
+          </span>
+
+
+          <h3 class="jp_card-name"
+              th:text="${product.productName}">
+            Product Name
+          </h3>
+
+
+          <p class="jp_card-spec"
+             th:text="${product.specifications}">
+            Product specifications
+          </p>
+
+        </a>
+
+
+        <div class="jp_card-footer">
+
+          <span class="jp_card-price"
+                th:text="'Rs. ' + ${#numbers.formatInteger(product.price, 1, 'COMMA')}">
+            Rs. 0
+          </span>
+
+
+          <button class="jp_add-btn"
+                  type="button"
+                  th:data-product-id="${product.productId}"
+                  th:data-name="${product.productName}"
+                  th:disabled="${product.stockQuantity <= 0}">
+
+            <span th:text="${product.stockQuantity > 0 ? 'Add to Cart' : 'Out of Stock'}">
+              Add to Cart
+            </span>
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="jp_pagination"
+         id="jp_pagination">
+    </div>
+
+
+    <div class="jp_empty"
+         id="jp_empty">
+
+      <i class="fa-solid fa-box-open"></i>
+
+      <p>
+        No products match your filters.
+      </p>
+
+      <button class="jp_btn jp_btn-ghost"
+              id="jp_reset-btn"
+              type="button">
+
+        Clear Filters
+
+      </button>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<div class="jp_toast"
+     id="jp_toast">
+
+  <i class="fa-solid fa-circle-check"></i>
+
+  <span id="jp_toast-msg">
+    Added to cart
+  </span>
+
+</div>
+
+
+<div id="jp_footer-mount"></div>
+
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/marketplace.js}"></script>
+
+</body>
+</html>

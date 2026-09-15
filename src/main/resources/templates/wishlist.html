@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JesterPCs — Wishlist</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/wishlist.css}">
+</head>
+
+<body>
+
+<div id="jp_header-mount"></div>
+
+
+<main class="jp_wishlist-page">
+
+    <div class="jp_wishlist-heading">
+
+        <div>
+            <p class="jp_wishlist-label">
+                Saved Products
+            </p>
+
+            <h1 class="jp_wishlist-title">
+                Your Wishlist
+            </h1>
+
+            <p class="jp_wishlist-sub">
+                Products you've saved for later.
+            </p>
+        </div>
+
+        <span class="jp_wishlist-count"
+              th:text="${#lists.size(wishlist)} + ' items'">
+      0 items
+    </span>
+
+    </div>
+
+
+    <div class="jp_wishlist-grid"
+         th:if="${!wishlist.isEmpty()}">
+
+        <div class="jp_wish-card"
+             th:each="item : ${wishlist}"
+             th:if="${item.product != null}">
+
+            <button class="jp_wish-remove"
+                    type="button"
+                    th:data-product-id="${item.product.productId}"
+                    aria-label="Remove from wishlist">
+
+                <i class="fa-solid fa-heart"></i>
+
+            </button>
+
+
+            <a th:href="@{'/product/' + ${item.product.productId}}"
+               class="jp_wish-product-link">
+
+                <div class="jp_wish-img-wrap">
+
+                    <img th:if="${item.product.imageUrl != null and !item.product.imageUrl.isEmpty()}"
+                         th:src="${item.product.imageUrl}"
+                         th:alt="${item.product.productName}"
+                         class="jp_wish-img" />
+
+                    <div th:unless="${item.product.imageUrl != null and !item.product.imageUrl.isEmpty()}"
+                         class="jp_wish-img-placeholder">
+
+                        <i class="fa-solid fa-box"></i>
+
+                    </div>
+
+                </div>
+
+
+                <span class="jp_wish-tag"
+                      th:text="${item.product.categoryName}">
+          GPU
+        </span>
+
+
+                <h3 class="jp_wish-name"
+                    th:text="${item.product.productName}">
+                    Product Name
+                </h3>
+
+
+                <p class="jp_wish-spec"
+                   th:text="${item.product.specifications}">
+                    Product specifications
+                </p>
+
+            </a>
+
+
+            <div class="jp_wish-footer">
+
+        <span class="jp_wish-price"
+              th:text="'Rs. ' + ${#numbers.formatInteger(item.product.price, 1, 'COMMA')}">
+          Rs. 0
+        </span>
+
+
+                <button class="jp_wish-cart-btn"
+                        type="button"
+                        th:data-product-id="${item.product.productId}"
+                        th:data-name="${item.product.productName}"
+                        th:disabled="${item.product.stockQuantity <= 0}">
+
+          <span th:text="${item.product.stockQuantity > 0 ? 'Add to Cart' : 'Out of Stock'}">
+            Add to Cart
+          </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="jp_wishlist-empty"
+         th:if="${wishlist.isEmpty()}">
+
+        <i class="fa-regular fa-heart"></i>
+
+        <h2>
+            Your wishlist is empty
+        </h2>
+
+        <p>
+            Save products you like and come back to them later.
+        </p>
+
+        <a href="/marketplace"
+           class="jp_wishlist-shop-btn">
+            Browse Marketplace
+        </a>
+
+    </div>
+
+</main>
+
+
+<div class="jp_toast"
+     id="jp_toast">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span id="jp_toast-msg">
+    Saved
+  </span>
+
+</div>
+
+
+<div id="jp_footer-mount"></div>
+
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/wishlist.js}"></script>
+
+</body>
+</html>

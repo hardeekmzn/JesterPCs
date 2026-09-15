@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JesterPCs — About Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/css/aboutus.css}">
+</head>
+<body>
+
+<!-- Header -->
+<div id="jp_header-mount"></div>
+
+<!-- Hero -->
+<div class="jp_about-hero">
+  <div class="jp_about-hero-inner">
+    <p class="jp_page-label">About Us</p>
+    <h1 class="jp_page-title">Built for Builders.<br>Made in Nepal.</h1>
+    <p class="jp_page-sub">JesterPCs started with one question — why is it so hard to buy PC hardware in Nepal? We built the answer.</p>
+  </div>
+  <div class="jp_about-hero-img">
+    <img
+            th:src="@{/images/pcsetup.jpg}"
+            alt="RGB gaming PC setup"
+            class="jp_hero-img"
+    />
+    <div class="jp_hero-overlay"></div>
+  </div>
+</div>
+
+<main class="jp_about-page">
+
+  <!-- Mission -->
+  <section class="jp_about-section">
+    <div class="jp_about-text">
+      <p class="jp_section-eyebrow">Our Mission</p>
+      <h2 class="jp_section-heading">Simplify PC building for everyone in Nepal</h2>
+      <p class="jp_section-body">Nepal's tech market has grown fast but the tools to support PC builders haven't kept up. Finding compatible parts meant hopping between five different stores, WhatsApp groups, and Facebook posts from 2019. JesterPCs was built to fix that — a single platform where you can browse parts, check compatibility, compare builds, and order everything you need without the confusion.</p>
+      <p class="jp_section-body">Whether you're a first-time builder picking up a budget rig or a veteran chasing the best 4K performance money can buy, JesterPCs is built to meet you where you are.</p>
+    </div>
+    <div class="jp_about-img-wrap">
+      <img
+              src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80"
+              alt="PC motherboard"
+              class="jp_about-img"
+      />
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="jp_values-section">
+    <p class="jp_section-eyebrow">What We Stand For</p>
+    <h2 class="jp_section-heading">The Jester Standard</h2>
+    <div class="jp_values-grid">
+
+      <div class="jp_value-card">
+        <h3>Performance First</h3>
+        <p>Every product we list is chosen for real-world performance, not just spec sheets. We test, compare, and only stock what actually delivers.</p>
+      </div>
+
+      <div class="jp_value-card">
+        <h3>Transparency</h3>
+        <p>No hidden fees, no misleading specs, no stock photos that don't match what you receive. What you see is what you get.</p>
+      </div>
+
+      <div class="jp_value-card">
+        <h3>Community Driven</h3>
+        <p>Built with feedback from Nepal's growing PC builder community. Every feature on this platform exists because someone asked for it.</p>
+      </div>
+
+      <div class="jp_value-card">
+        <h3>Education Over Upselling</h3>
+        <p>We'd rather you buy the right Rs. 20,000 part than the wrong Rs. 80,000 one. Our guides and build tools are built to inform, not to push.</p>
+      </div>
+
+      <div class="jp_value-card">
+        <h3>Fast and Reliable</h3>
+        <p>Delivery across Kathmandu and beyond. Every order is tracked and every part is quality-checked before it ships from our warehouse.</p>
+      </div>
+
+      <div class="jp_value-card">
+        <h3>Builder Support</h3>
+        <p>Stuck mid-build? Our support team is made of actual PC builders. We answer questions, not tickets.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Stats strip -->
+  <section class="jp_stats-section">
+    <div class="jp_stat">
+      <span class="jp_stat-num">500+</span>
+      <span class="jp_stat-label">Components Listed</span>
+    </div>
+    <div class="jp_stat-divider"></div>
+    <div class="jp_stat">
+      <span class="jp_stat-num">3</span>
+      <span class="jp_stat-label">Curated Build Tiers</span>
+    </div>
+    <div class="jp_stat-divider"></div>
+    <div class="jp_stat">
+      <span class="jp_stat-num">100%</span>
+      <span class="jp_stat-label">Compatibility Checked</span>
+    </div>
+    <div class="jp_stat-divider"></div>
+    <div class="jp_stat">
+      <span class="jp_stat-num">24/7</span>
+      <span class="jp_stat-label">Builder Support</span>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="jp_story-section">
+    <div class="jp_story-inner">
+      <p class="jp_section-eyebrow">The Story</p>
+      <h2 class="jp_section-heading">Why JesterPCs exists</h2>
+      <div class="jp_story-body">
+        <p>It started with a frustrating afternoon trying to find a compatible GPU for an AM5 build in Kathmandu. The parts existed in Nepal — but finding them, verifying compatibility, and comparing prices meant hours of work across physical stores, DMs, and outdated Facebook groups.</p>
+        <p>JesterPCs was built as the platform that should have existed. A centralized, organized, and genuinely helpful place to buy PC hardware in Nepal — with real specs, real prices, and real support from people who actually build.</p>
+        <p>The name? PCs should be fun. Building a custom rig is one of the most satisfying things you can do as a tech enthusiast — and we want the experience of buying the parts to feel the same way.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="jp_about-cta">
+    <h2 class="jp_cta-heading">Ready to start your build?</h2>
+    <p class="jp_cta-sub">Browse the marketplace, pick a curated build, or contact us if you need help choosing parts.</p>
+    <div class="jp_cta-actions">
+      <a href="/marketplace" class="jp_btn jp_btn-primary">Browse Marketplace</a>
+      <a href="/builds" class="jp_btn jp_btn-ghost">View Pre-Built PCs</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- Footer -->
+<div id="jp_footer-mount"></div>
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/aboutus.js}"></script>
+</body>
+</html>

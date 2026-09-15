@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JesterPCs — Order Details</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}">
+
+</head>
+
+<body>
+
+<header class="jp_header jp_admin-header">
+
+    <a href="/admin" class="jp_logo">
+        <span class="jp_logo-jester">Jester</span><span class="jp_logo-pcs">PCs</span>
+    </a>
+
+    <nav class="jp_nav">
+
+        <div class="jp_nav-list">
+
+            <a href="/admin" class="jp_nav-link">
+                Dashboard
+            </a>
+
+            <a href="/admin/products" class="jp_nav-link">
+                Products
+            </a>
+
+            <a href="/admin/orders" class="jp_nav-link">
+                Orders
+            </a>
+
+            <a href="/admin/users" class="jp_nav-link">
+                Users
+            </a>
+
+            <a href="/admin/categories" class="jp_nav-link">
+                Categories
+            </a>
+
+        </div>
+
+        <div class="jp_nav-actions">
+
+            <a href="/" class="jp_nav-login">
+                Site
+            </a>
+
+            <a href="/logout" class="jp_nav-login">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main class="jp_admin-page">
+
+    <div class="jp_admin-heading">
+
+        <p class="jp_admin-label">
+            Order
+        </p>
+
+        <h1 th:text="'Order #' + ${order.orderId}">
+            Order #1001
+        </h1>
+
+    </div>
+
+
+    <div class="jp_order-details-grid">
+
+        <div class="jp_admin-card jp_detail-card">
+
+            <h2>Customer Information</h2>
+
+            <div class="jp_detail-row">
+
+                <span>User ID</span>
+
+                <strong th:text="${order.userId}">
+                    1
+                </strong>
+
+            </div>
+
+            <div class="jp_detail-row">
+
+                <span>Phone</span>
+
+                <strong th:text="${order.phone}">
+                    98XXXXXXXX
+                </strong>
+
+            </div>
+
+            <div class="jp_detail-row">
+
+                <span>Delivery Address</span>
+
+                <strong th:text="${order.deliveryAddress}">
+                    Kathmandu
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="jp_admin-card jp_detail-card">
+
+            <h2>Order Information</h2>
+
+            <div class="jp_detail-row">
+
+                <span>Status</span>
+
+                <strong th:text="${order.status}">
+                    Pending
+                </strong>
+
+            </div>
+
+            <div class="jp_detail-row">
+
+                <span>Total</span>
+
+                <strong th:text="'Rs. ' + ${#numbers.formatInteger(order.totalAmount, 1, 'COMMA')}">
+                    Rs. 0
+                </strong>
+
+            </div>
+
+            <div class="jp_detail-row">
+
+                <span>Date</span>
+
+                <strong th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}">
+                    2026-08-31
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="jp_admin-card jp_detail-card">
+
+        <h2>Ordered Products</h2>
+
+        <div class="jp_order-products">
+
+            <div class="jp_order-product"
+                 th:each="item : ${items}">
+
+                <div>
+
+                    <strong th:text="${item.productName}">
+                        Product Name
+                    </strong>
+
+                    <span th:text="'Product ID: ' + ${item.productId}">
+                        Product ID: 1
+                    </span>
+
+                </div>
+
+                <span th:text="'×' + ${item.quantity}">
+                    ×1
+                </span>
+
+                <span th:text="'Rs. ' + ${#numbers.formatInteger(item.price * item.quantity, 1, 'COMMA')}">
+                    Rs. 0
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="jp_order-detail-footer">
+
+        <a href="/admin/orders"
+           class="jp_btn jp_btn-ghost">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Orders
+
+        </a>
+
+    </div>
+
+</main>
+
+
+<footer class="jp_footer jp_admin-footer">
+
+    <div class="jp_footer-bar">
+        JesterPCs Admin Panel
+    </div>
+
+</footer>
+
+</body>
+</html>

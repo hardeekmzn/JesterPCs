@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JesterPCs — Admin Panel</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- Shared site styles -->
+    <link rel="stylesheet" th:href="@{/css/shared.css}">
+
+    <!-- Admin page styles -->
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+</head>
+
+<body>
+
+<!-- Header -->
+<div id="jp_header-mount"></div>
+
+<!-- Admin Page -->
+<main class="jp_admin-page">
+
+    <!-- Admin Hero -->
+    <section class="jp_admin-hero">
+        <p class="jp_admin-eyebrow">
+            JesterPCs Administration
+        </p>
+
+        <h1 class="jp_admin-title">
+            Admin Dashboard
+        </h1>
+
+        <p class="jp_admin-sub">
+            Welcome back,
+            <span th:text="${user.fullName}">Admin</span>.
+            Manage your store from one place.
+        </p>
+    </section>
+
+    <!-- Dashboard Cards -->
+    <section class="jp_admin-grid">
+
+        <!-- Products -->
+        <a href="/admin/products" class="jp_admin-card">
+
+            <div class="jp_admin-card-icon">
+                <i class="fa-solid fa-box"></i>
+            </div>
+
+            <div class="jp_admin-card-content">
+
+                <h2>
+                    Products
+                </h2>
+
+                <p>
+                    Add, edit, remove, and manage
+                    PC components and products.
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-right jp_admin-arrow"></i>
+
+        </a>
+
+
+        <!-- Categories -->
+        <a href="/admin/categories" class="jp_admin-card">
+
+            <div class="jp_admin-card-icon">
+                <i class="fa-solid fa-layer-group"></i>
+            </div>
+
+            <div class="jp_admin-card-content">
+
+                <h2>
+                    Categories
+                </h2>
+
+                <p>
+                    Manage CPU, GPU, RAM, storage,
+                    motherboard, PSU, and other categories.
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-right jp_admin-arrow"></i>
+
+        </a>
+
+
+        <!-- Pre-Built PCs -->
+        <a href="/admin/prebuilts" class="jp_admin-card">
+
+            <div class="jp_admin-card-icon">
+                <i class="fa-solid fa-desktop"></i>
+            </div>
+
+            <div class="jp_admin-card-content">
+
+                <h2>
+                    Pre-Built PCs
+                </h2>
+
+                <p>
+                    Create and manage ready-to-buy
+                    PC builds for the marketplace.
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-right jp_admin-arrow"></i>
+
+        </a>
+
+
+        <!-- Users -->
+        <a href="/admin/users" class="jp_admin-card">
+
+            <div class="jp_admin-card-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+
+            <div class="jp_admin-card-content">
+
+                <h2>
+                    Users
+                </h2>
+
+                <p>
+                    View and manage registered
+                    JesterPCs users.
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-right jp_admin-arrow"></i>
+
+        </a>
+
+
+        <!-- Orders -->
+        <a href="/admin/orders" class="jp_admin-card">
+
+            <div class="jp_admin-card-icon">
+                <i class="fa-solid fa-receipt"></i>
+            </div>
+
+            <div class="jp_admin-card-content">
+
+                <h2>
+                    Orders
+                </h2>
+
+                <p>
+                    Review customer orders and
+                    manage order status.
+                </p>
+
+            </div>
+
+            <i class="fa-solid fa-arrow-right jp_admin-arrow"></i>
+
+        </a>
+
+    </section>
+
+
+    <!-- Admin Information -->
+    <section class="jp_admin-info">
+
+        <div class="jp_admin-info-item">
+
+            <span class="jp_admin-info-label">
+                Logged in as
+            </span>
+
+            <span class="jp_admin-info-value"
+                  th:text="${user.username}">
+                admin
+            </span>
+
+        </div>
+
+
+        <div class="jp_admin-info-item">
+
+            <span class="jp_admin-info-label">
+                Role
+            </span>
+
+            <span class="jp_admin-role">
+                ADMIN
+            </span>
+
+        </div>
+
+
+        <div class="jp_admin-info-item">
+
+            <span class="jp_admin-info-label">
+                Email
+            </span>
+
+            <span class="jp_admin-info-value"
+                  th:text="${user.email}">
+                admin@example.com
+            </span>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- Footer -->
+<div id="jp_footer-mount"></div>
+
+<!-- JavaScript -->
+<script src="/js/components.js"></script>
+<script src="/js/admin.js"></script>
+
+</body>
+</html>

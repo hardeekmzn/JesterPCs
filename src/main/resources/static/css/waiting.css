@@ -1,0 +1,100 @@
+.jp_waiting-content {
+    width: 100%;
+    text-align: center;
+}
+
+.jp_waiting-icon {
+    width: 64px;
+    height: 64px;
+    margin: 4px auto 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(192, 57, 43, 0.25);
+    background: rgba(192, 57, 43, 0.08);
+    border-radius: 50%;
+
+    color: var(--clr-accent);
+    font-size: 26px;
+}
+
+.jp_waiting-text {
+    margin-top: 18px;
+    color: var(--clr-muted);
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.jp_waiting-text strong {
+    color: var(--clr-text);
+    font-weight: 600;
+}
+
+.jp_waiting-email {
+    margin-top: 8px;
+
+    color: var(--clr-text);
+    font-family: var(--ff-heading);
+    font-size: 15px;
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+.jp_waiting-note {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 8px;
+
+    margin-top: 24px;
+
+    color: var(--clr-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.jp_waiting-note i {
+    margin-top: 3px;
+    color: var(--clr-accent);
+}
+
+.jp_waiting-actions {
+    margin-top: 28px;
+}
+
+.jp_waiting-actions .jp_submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Verified state */
+
+.jp_verified-icon {
+    color: #4caf72;
+    background: rgba(76, 175, 114, 0.08);
+    border-color: rgba(76, 175, 114, 0.20);
+}
+
+.jp_verification-success-note {
+    margin-top: 24px;
+    color: var(--clr-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .jp_waiting-icon {
+        width: 58px;
+        height: 58px;
+        font-size: 23px;
+    }
+
+    .jp_waiting-text {
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JesterPCs — Sign In</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/css/shared.css}">
+  <link rel="stylesheet" th:href="@{/css/signup.css}">
+</head>
+<body>
+
+<!-- Header mount -->
+<div id="jp_header-mount"></div>
+
+<!-- Page -->
+<main class="jp_page">
+
+  <!-- Left image panel -->
+  <div class="jp_side">
+    <img th:src="@{/images/forsignup.jpg}" alt="Gaming PC Setup" class="jp_side-img">
+    <div class="jp_side-overlay"></div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="jp_form-panel">
+    <div class="jp_form-card">
+
+      <!-- Tabs -->
+      <div class="jp_tabs">
+        <button class="jp_tab jp_tab-active" type="button">Sign In</button>
+        <a href="/signup" class="jp_tab">Sign Up</a>
+      </div>
+
+      <div class="jp_form-header">
+        <h1 class="jp_form-title">Sign In</h1>
+        <p class="jp_form-sub">Verify your identity</p>
+      </div>
+
+      <!-- Error message from server -->
+      <p class="jp_form-error" id="jp_form-error"
+         th:if="${error}" th:text="${error}"></p>
+
+      <!-- Success message -->
+      <p class="jp_form-success"
+         th:if="${success}" th:text="${success}"></p>
+
+      <p class="jp_form-success"
+         th:if="${param.reset != null and param.reset[0] == 'success'}">
+        Password reset successful. You can now sign in with your new password.
+      </p>
+
+      <!-- Form posts to /login servlet -->
+      <form class="jp_form" id="jp_login-form" th:action="@{/login}" method="post">
+
+        <!-- Username -->
+        <div class="jp_field">
+          <label for="username">Username</label>
+          <div class="jp_input-wrap">
+            <input type="text" id="username" name="username"
+                   placeholder="Enter your username" autocomplete="username" required />
+            <i class="fa-regular fa-user jp_input-icon"></i>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="jp_field">
+          <label for="password">Password</label>
+          <div class="jp_input-wrap">
+            <input type="password" id="password" name="password"
+                   placeholder="Enter your password" autocomplete="current-password" required />
+            <button type="button" class="jp_toggle-pw" aria-label="Toggle password" tabindex="-1">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+          <a href="/forgot-password" class="jp_forgot">Forgot password?</a>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="jp_submit">Sign In</button>
+
+        <!-- Divider -->
+        <div class="jp_divider"><span>or continue with</span></div>
+
+        <!-- Social -->
+        <div class="jp_socials">
+          <button type="button" class="jp_social-btn">
+            <i class="fa-brands fa-github"></i> Github
+          </button>
+          <button type="button" class="jp_social-btn">
+            <i class="fa-brands fa-google"></i> Google
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer mount -->
+<div id="jp_footer-mount"></div>
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/login.js}"></script>
+</body>
+</html>

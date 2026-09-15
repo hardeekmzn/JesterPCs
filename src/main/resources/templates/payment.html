@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JesterPCs — Payment</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/payment.css}">
+
+</head>
+
+<body>
+
+<div id="jp_header-mount"></div>
+
+<main class="jp_payment-page">
+
+    <div class="jp_payment-left">
+
+        <div class="jp_payment-heading">
+
+            <p>Checkout</p>
+
+            <h1>Payment</h1>
+
+        </div>
+
+
+        <form th:action="@{/checkout/place-order}"
+              method="post"
+              class="jp_payment-form">
+
+            <div class="jp_payment-card">
+
+                <h2>Payment Method</h2>
+
+                <label class="jp_payment-option">
+
+                    <input type="radio"
+                           name="paymentMethod"
+                           value="Cash on Delivery"
+                           checked>
+
+                    <div class="jp_payment-option-content">
+
+                        <div>
+
+                            <strong>Cash on Delivery</strong>
+
+                            <span>Pay when your order is delivered</span>
+
+                        </div>
+
+                        <i class="fa-solid fa-money-bill-wave"></i>
+
+                    </div>
+
+                </label>
+
+
+                <label class="jp_payment-option">
+
+                    <input type="radio"
+                           name="paymentMethod"
+                           value="Online Payment">
+
+                    <div class="jp_payment-option-content">
+
+                        <div>
+
+                            <strong>Online Payment</strong>
+
+                            <span>Pay by card or e-sewa (Coming Soon) </span>
+
+                        </div>
+
+                        <i class="fa-solid fa-credit-card"></i>
+
+                    </div>
+
+                </label>
+
+            </div>
+
+
+            <div class="jp_payment-card">
+
+                <h2>Delivery Details</h2>
+
+                <div class="jp_payment-detail">
+
+                    <span>Address</span>
+
+                    <p th:text="${address}">
+                        Delivery address
+                    </p>
+
+                </div>
+
+                <div class="jp_payment-detail">
+
+                    <span>Phone</span>
+
+                    <p th:text="${phone}">
+                        Phone number
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button type="submit"
+                    class="jp_payment-btn">
+
+                Confirm Payment
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <aside class="jp_payment-right">
+
+        <div class="jp_order-summary">
+
+            <h2>Order Summary</h2>
+
+
+            <div class="jp_order-items">
+
+                <div th:each="item : ${cartItems}"
+                     class="jp_order-item">
+
+                    <div>
+
+                        <span class="jp_order-name"
+                              th:text="${item.product.productName}">
+                            Product
+                        </span>
+
+                        <span class="jp_order-qty"
+                              th:text="'×' + ${item.quantity}">
+                            ×1
+                        </span>
+
+                    </div>
+
+                    <span th:text="'Rs. ' + ${#numbers.formatInteger(item.product.price * item.quantity, 1, 'COMMA')}">
+                        Rs. 0
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="jp_order-divider"></div>
+
+
+            <div class="jp_order-line">
+
+                <span>Subtotal</span>
+
+                <span th:text="'Rs. ' + ${#numbers.formatInteger(subtotal, 1, 'COMMA')}">
+                    Rs. 0
+                </span>
+
+            </div>
+
+
+            <div class="jp_order-line">
+
+                <span>Delivery</span>
+
+                <span th:text="'Rs. ' + ${#numbers.formatInteger(delivery, 1, 'COMMA')}">
+                    Rs. 200
+                </span>
+
+            </div>
+
+
+            <div class="jp_order-divider"></div>
+
+
+            <div class="jp_order-total">
+
+                <span>Total</span>
+
+                <strong th:text="'Rs. ' + ${#numbers.formatInteger(total, 1, 'COMMA')}">
+                    Rs. 200
+                </strong>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+</main>
+
+
+<div id="jp_footer-mount"></div>
+
+<script th:src="@{/js/components.js}"></script>
+
+</body>
+</html>

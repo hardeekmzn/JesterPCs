@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JesterPCs — Cart</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/cart.css}">
+
+</head>
+
+<body>
+
+<div id="jp_header-mount"></div>
+
+
+<div class="jp_page-hero">
+
+    <div class="jp_page-hero-inner">
+
+        <p class="jp_page-label">
+            Checkout
+        </p>
+
+        <h1 class="jp_page-title">
+            Your Cart
+        </h1>
+
+    </div>
+
+</div>
+
+
+<main class="jp_cart-page"
+      id="jp_cart-page">
+
+
+    <div class="jp_cart-left">
+
+        <div class="jp_cart-header">
+
+            <span class="jp_cart-col-product">
+                Product
+            </span>
+
+            <span class="jp_cart-col-price">
+                Price
+            </span>
+
+            <span class="jp_cart-col-qty">
+                Qty
+            </span>
+
+            <span class="jp_cart-col-total">
+                Total
+            </span>
+
+            <span></span>
+
+        </div>
+
+
+        <div class="jp_cart-items"
+             id="jp_cart-items">
+
+            <div th:each="item : ${cartItems}"
+                 class="jp_cart-row">
+
+                <div class="jp_cart-product">
+
+                    <img th:if="${item.product.imageUrl != null and !item.product.imageUrl.isEmpty()}"
+                         th:src="${item.product.imageUrl}"
+                         th:alt="${item.product.productName}"
+                         class="jp_cart-img">
+
+                    <div class="jp_cart-info">
+
+                        <span class="jp_cart-category"
+                              th:text="${item.product.categoryName}">
+                            GPU
+                        </span>
+
+                        <span class="jp_cart-name"
+                              th:text="${item.product.productName}">
+                            Product Name
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="jp_cart-price"
+                     th:text="'Rs. ' + ${#numbers.formatInteger(item.product.price, 1, 'COMMA')}">
+                    Rs. 0
+                </div>
+
+
+                <div class="jp_cart-qty">
+
+                    <form th:action="@{/cart/update}"
+                          method="post"
+                          class="jp_cart-quantity-form">
+
+                        <input type="hidden"
+                               name="productId"
+                               th:value="${item.productId}">
+
+                        <button type="submit"
+                                name="quantity"
+                                th:value="${item.quantity - 1}"
+                                class="jp_qty-btn"
+                                th:disabled="${item.quantity <= 1}">
+                            −
+                        </button>
+
+                        <span class="jp_qty-val"
+                              th:text="${item.quantity}">
+                            1
+                        </span>
+
+                        <button type="submit"
+                                name="quantity"
+                                th:value="${item.quantity + 1}"
+                                class="jp_qty-btn"
+                                th:disabled="${item.quantity >= item.product.stockQuantity}">
+                            +
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="jp_cart-line-total"
+                     th:text="'Rs. ' + ${#numbers.formatInteger(item.product.price * item.quantity, 1, 'COMMA')}">
+                    Rs. 0
+                </div>
+
+
+                <form th:action="@{/cart/remove}"
+                      method="post">
+
+                    <input type="hidden"
+                           name="productId"
+                           th:value="${item.productId}">
+
+                    <button type="submit"
+                            class="jp_remove-btn"
+                            aria-label="Remove">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <div th:if="${#lists.isEmpty(cartItems)}"
+                 class="jp_cart-empty"
+                 id="jp_cart-empty">
+
+                <i class="fa-solid fa-cart-shopping"></i>
+
+                <p>
+                    Your cart is empty.
+                </p>
+
+                <a href="/marketplace"
+                   class="jp_btn jp_btn-primary">
+                    Browse Marketplace
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="jp_cart-footer"
+             th:unless="${#lists.isEmpty(cartItems)}"
+             id="jp_cart-footer">
+
+            <a href="/marketplace"
+               class="jp_btn jp_btn-ghost">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Continue Shopping
+
+            </a>
+
+
+            <form th:action="@{/cart/clear}"
+                  method="post">
+
+                <button type="submit"
+                        class="jp_clear-btn">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    Clear Cart
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <div class="jp_cart-right"
+         th:unless="${#lists.isEmpty(cartItems)}"
+         id="jp_cart-right">
+
+        <div class="jp_summary">
+
+            <h2 class="jp_summary-title">
+                Order Summary
+            </h2>
+
+
+            <div class="jp_summary-rows">
+
+                <div th:each="item : ${cartItems}"
+                     class="jp_summary-item">
+
+                    <span class="jp_summary-item-name">
+
+                        <span th:text="${item.product.productName}">
+                            Product
+                        </span>
+
+                        <span class="jp_summary-qty"
+                              th:text="'×' + ${item.quantity}">
+                            ×1
+                        </span>
+
+                    </span>
+
+                    <span th:text="'Rs. ' + ${#numbers.formatInteger(item.product.price * item.quantity, 1, 'COMMA')}">
+                        Rs. 0
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="jp_summary-divider"></div>
+
+
+            <div class="jp_promo">
+
+                <input type="text"
+                       id="jp_promo-input"
+                       class="jp_promo-input"
+                       placeholder="Promo code">
+
+                <button class="jp_promo-btn"
+                        id="jp_promo-btn">
+                    Apply
+                </button>
+
+            </div>
+
+
+            <p class="jp_promo-msg"
+               id="jp_promo-msg">
+            </p>
+
+
+            <div class="jp_summary-divider"></div>
+
+
+            <div class="jp_summary-line">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span id="jp_subtotal"
+                      th:text="'Rs. ' + ${#numbers.formatInteger(subtotal, 1, 'COMMA')}">
+                    Rs. 0
+                </span>
+
+            </div>
+
+
+            <div class="jp_summary-line">
+
+                <span>
+                    Delivery
+                </span>
+
+                <span id="jp_delivery">
+                    Rs. 500
+                </span>
+
+            </div>
+
+
+            <div class="jp_summary-line jp_summary-discount"
+                 id="jp_discount-line"
+                 style="display: none">
+
+                <span>
+                    Discount
+                </span>
+
+                <span id="jp_discount-val">
+                    — Rs. 0
+                </span>
+
+            </div>
+
+
+            <div class="jp_summary-divider"></div>
+
+
+            <div class="jp_summary-total">
+
+                <span>
+                    Total
+                </span>
+
+                <span id="jp_grand-total"
+                      th:text="'Rs. ' + ${#numbers.formatInteger(subtotal + 500, 1, 'COMMA')}">
+                    Rs. 500
+                </span>
+
+            </div>
+
+
+            <button class="jp_checkout-btn"
+                    id="jp_checkout-btn"
+                    type="button">
+
+                Proceed to Checkout
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+
+            <div class="jp_trust">
+
+                <div class="jp_trust-badge">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    Secure Checkout
+
+                </div>
+
+                <div class="jp_trust-badge">
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                    Easy Returns
+
+                </div>
+
+                <div class="jp_trust-badge">
+
+                    <i class="fa-solid fa-truck"></i>
+
+                    Fast Delivery
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<div id="jp_footer-mount"></div>
+
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/cart.js}"></script>
+
+</body>
+
+</html>

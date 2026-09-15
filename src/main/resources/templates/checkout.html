@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JesterPCs — Checkout</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/checkout.css}">
+
+</head>
+
+<body>
+
+<div id="jp_header-mount"></div>
+
+
+<main class="jp_checkout-page">
+
+    <div class="jp_checkout-left">
+
+        <div class="jp_checkout-heading">
+
+            <p>
+                Checkout
+            </p>
+
+            <h1>
+                Complete Your Order
+            </h1>
+
+        </div>
+
+
+        <form th:action="@{/checkout/payment}"
+              method="post"
+              class="jp_checkout-form">
+
+            <div class="jp_checkout-card">
+
+                <h2>
+                    Delivery Details
+                </h2>
+
+
+                <p class="jp_checkout-error"
+                   th:if="${error != null}"
+                   th:text="${error}">
+                    Please check your delivery details.
+                </p>
+
+
+                <div class="jp_form-group">
+
+                    <label for="address">
+                        Delivery Address
+                    </label>
+
+                    <textarea id="address"
+                              name="address"
+                              rows="4"
+                              minlength="5"
+                              maxlength="200"
+                              placeholder="Enter your full delivery address"
+                              autocomplete="street-address"
+                              required
+                              th:text="${address}">
+                    </textarea>
+
+                    <span class="jp_field-help">
+                        Enter at least 5 characters and no more than 200 characters.
+                    </span>
+
+                </div>
+
+
+                <div class="jp_form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input type="tel"
+                           id="phone"
+                           name="phone"
+                           placeholder="98XXXXXXXX"
+                           minlength="10"
+                           maxlength="17"
+                           pattern="(?:\+977[- ]?)?(?:98|97|96)[0-9]{8}"
+                           autocomplete="tel"
+                           th:value="${phone}"
+                           required>
+                </div>
+
+            </div>
+
+
+            <button type="submit"
+                    class="jp_place-order-btn">
+
+                Payment
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <aside class="jp_checkout-right">
+
+        <div class="jp_order-summary">
+
+            <h2>
+                Order Summary
+            </h2>
+
+
+            <div class="jp_order-items">
+
+                <div th:each="item : ${cartItems}"
+                     class="jp_order-item">
+
+                    <div>
+
+                        <span class="jp_order-name"
+                              th:text="${item.product.productName}">
+                            Product
+                        </span>
+
+                        <span class="jp_order-qty"
+                              th:text="'×' + ${item.quantity}">
+                            ×1
+                        </span>
+
+                    </div>
+
+
+                    <span th:text="'Rs. ' + ${#numbers.formatInteger(item.product.price * item.quantity, 1, 'COMMA')}">
+                        Rs. 0
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="jp_order-divider"></div>
+
+
+            <div class="jp_order-line">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <span th:text="'Rs. ' + ${#numbers.formatInteger(subtotal, 1, 'COMMA')}">
+                    Rs. 0
+                </span>
+
+            </div>
+
+
+            <div class="jp_order-line">
+
+                <span>
+                    Delivery
+                </span>
+
+                <span th:text="'Rs. ' + ${#numbers.formatInteger(delivery, 1, 'COMMA')}">
+                    Rs. 200
+                </span>
+
+            </div>
+
+
+            <div class="jp_order-divider"></div>
+
+
+            <div class="jp_order-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong th:text="'Rs. ' + ${#numbers.formatInteger(total, 1, 'COMMA')}">
+                    Rs. 200
+                </strong>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+</main>
+
+
+<div id="jp_footer-mount"></div>
+
+
+<script th:src="@{/js/components.js}"></script>
+
+</body>
+
+</html>

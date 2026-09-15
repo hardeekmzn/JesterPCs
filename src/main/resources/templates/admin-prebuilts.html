@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JesterPCs — Pre-Built PCs</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin-prebuilts.css}">
+</head>
+
+<body>
+
+<header class="jp_header jp_admin-header">
+
+    <a href="/admin" class="jp_logo">
+        <span class="jp_logo-jester">Jester</span><span class="jp_logo-pcs">PCs</span>
+    </a>
+
+    <nav class="jp_nav">
+
+        <div class="jp_nav-list">
+
+            <a href="/admin" class="jp_nav-link">
+                Dashboard
+            </a>
+
+            <a href="/admin/products" class="jp_nav-link">
+                Products
+            </a>
+
+            <a href="/admin/orders" class="jp_nav-link">
+                Orders
+            </a>
+
+            <a href="/admin/users" class="jp_nav-link">
+                Users
+            </a>
+
+            <a href="/admin/categories" class="jp_nav-link">
+                Categories
+            </a>
+
+        </div>
+
+        <div class="jp_nav-actions">
+
+            <a href="/" class="jp_nav-login">
+                Site
+            </a>
+
+            <a href="/logout" class="jp_nav-login">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main class="jp_admin-page">
+
+    <section class="jp_admin-products-header">
+
+        <div>
+
+            <p class="jp_admin-label">
+                ADMIN PANEL
+            </p>
+
+            <h1>
+                Pre-Built PCs
+            </h1>
+
+            <p>
+                Manage the ready-to-buy PC builds shown on the marketplace.
+            </p>
+
+        </div>
+
+        <a href="/admin/prebuilts/add"
+           class="jp_admin-add-btn">
+
+            <i class="fa-solid fa-plus"></i>
+            Add Pre-Built
+
+        </a>
+
+    </section>
+
+
+    <section class="jp_admin-products-panel">
+
+        <div th:if="${param.success != null}"
+             class="jp_admin-success">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Pre-built PC saved successfully.
+
+        </div>
+
+
+        <div th:if="${param.deleted != null}"
+             class="jp_admin-success">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Pre-built PC deleted successfully.
+
+        </div>
+
+
+        <div th:if="${#lists.isEmpty(prebuilts)}"
+             class="jp_admin-empty">
+
+            <i class="fa-solid fa-desktop"></i>
+
+            <h2>
+                No Pre-Built PCs Yet
+            </h2>
+
+            <p>
+                Create your first pre-built PC to display it on the marketplace.
+            </p>
+
+            <a href="/admin/prebuilts/add"
+               class="jp_admin-add-btn">
+
+                <i class="fa-solid fa-plus"></i>
+                Add Pre-Built
+
+            </a>
+
+        </div>
+
+
+        <div th:unless="${#lists.isEmpty(prebuilts)}"
+             class="jp_admin-table-wrapper">
+
+            <table class="jp_admin-table">
+
+                <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Build</th>
+                    <th>Key</th>
+                    <th>Performance</th>
+                    <th>Components</th>
+                    <th>Total</th>
+                    <th>Actions</th>
+                </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                <tr th:each="prebuilt : ${prebuilts}">
+
+                    <td th:text="${prebuilt.prebuiltId}">
+                        1
+                    </td>
+
+
+                    <td>
+
+                        <div class="jp_product-name">
+
+                            <strong th:text="${prebuilt.name}">
+                                Gaming Build
+                            </strong>
+
+                            <span th:text="${prebuilt.title}">
+                                1080p Gaming PC
+                            </span>
+
+                        </div>
+
+                    </td>
+
+
+                    <td th:text="${prebuilt.key}">
+                        gaming
+                    </td>
+
+
+                    <td th:text="${prebuilt.performance}">
+                        High Performance
+                    </td>
+
+
+                    <td th:text="${#lists.size(prebuilt.products)}">
+                        6
+                    </td>
+
+
+                    <td>
+
+                        Rs.
+
+                        <span th:text="${#numbers.formatDecimal(prebuilt.total, 0, 0)}">
+                            94,000
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        <div class="jp_admin-actions">
+
+                            <a th:href="@{'/admin/prebuilts/edit/' + ${prebuilt.prebuiltId}}"
+                               class="jp_admin-edit-btn">
+
+                                <i class="fa-solid fa-pen"></i>
+                                Edit
+
+                            </a>
+
+
+                            <a th:href="@{'/admin/prebuilts/delete/' + ${prebuilt.prebuiltId}}"
+                               class="jp_admin-delete-btn"
+                               onclick="return confirm('Delete this pre-built PC?')">
+
+                                <i class="fa-solid fa-trash"></i>
+                                Delete
+
+                            </a>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer class="jp_footer jp_admin-footer">
+
+    <div class="jp_footer-bar">
+        JesterPCs Admin Panel
+    </div>
+
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JesterPCs — Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/css/shared.css}">
+  <link rel="stylesheet" th:href="@{/css/signup.css}">
+</head>
+<body>
+
+<!-- Header mount -->
+<div id="jp_header-mount"></div>
+
+<!-- Page -->
+<main class="jp_page">
+
+  <!-- Left image panel -->
+  <div class="jp_side">
+    <img th:src="@{/images/forsignup.jpg}" alt="Gaming PC Setup" class="jp_side-img">
+    <div class="jp_side-overlay"></div>
+  </div>
+
+  <!-- Right form panel -->
+  <div class="jp_form-panel">
+    <div class="jp_form-card">
+
+      <!-- Tabs -->
+      <div class="jp_tabs">
+        <a href="/login" class="jp_tab">Sign In</a>
+        <button class="jp_tab jp_tab-active" type="button">Sign Up</button>
+      </div>
+
+      <div class="jp_form-header">
+        <h1 class="jp_form-title">Sign Up</h1>
+        <p class="jp_form-sub">Start your tech journey</p>
+      </div>
+
+      <!-- Error message from server -->
+      <p class="jp_form-error" id="jp_form-error"
+         th:if="${error}" th:text="${error}"></p>
+
+      <!-- Form posts to /signup servlet -->
+      <form class="jp_form" id="jp_signup-form" th:action="@{/signup}" method="post">
+
+        <!-- Full name -->
+        <div class="jp_field">
+          <label for="fullname">Full Name</label>
+          <div class="jp_input-wrap">
+            <input type="text" id="fullname" name="fullname"
+                   placeholder="Enter your name" autocomplete="name" required />
+            <i class="fa-regular fa-user jp_input-icon"></i>
+          </div>
+        </div>
+
+        <!-- Username -->
+        <div class="jp_field">
+          <label for="username">Username</label>
+          <div class="jp_input-wrap">
+            <input type="text" id="username" name="username"
+                   placeholder="Choose a username" autocomplete="username" required />
+            <i class="fa-regular fa-at jp_input-icon"></i>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="jp_field">
+          <label for="email">Email Address</label>
+          <div class="jp_input-wrap">
+            <input type="email" id="email" name="email"
+                   placeholder="hello@example.com" autocomplete="email" required />
+            <i class="fa-regular fa-envelope jp_input-icon"></i>
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="jp_field">
+          <label for="password">Password
+            <span class="jp_field-hint">— min. 8 characters</span>
+          </label>
+          <div class="jp_input-wrap">
+            <input type="password" id="password" name="password"
+                   placeholder="Enter your password" autocomplete="new-password" required />
+            <button type="button" class="jp_toggle-pw" aria-label="Toggle password" tabindex="-1">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Confirm password -->
+        <div class="jp_field">
+          <label for="confirm">Confirm Password</label>
+          <div class="jp_input-wrap">
+            <input type="password" id="confirm" name="confirm"
+                   placeholder="Re-enter your password" autocomplete="new-password" required />
+            <button type="button" class="jp_toggle-pw" aria-label="Toggle confirm" tabindex="-1">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Terms -->
+        <div class="jp_terms">
+          <input type="checkbox" id="terms" name="terms" />
+          <label for="terms">I agree to the
+            <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+          </label>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" class="jp_submit">Create Account</button>
+
+        <!-- Divider -->
+        <div class="jp_divider"><span>or continue with</span></div>
+
+        <!-- Social -->
+        <div class="jp_socials">
+          <button type="button" class="jp_social-btn">
+            <i class="fa-brands fa-github"></i> Github
+          </button>
+          <button type="button" class="jp_social-btn">
+            <i class="fa-brands fa-google"></i> Google
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer mount -->
+<div id="jp_footer-mount"></div>
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/signup.js}"></script>
+</body>
+</html>

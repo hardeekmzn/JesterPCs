@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JesterPCs — FAQ</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/css/aboutus.css}">
+</head>
+<body>
+
+<!-- Header -->
+<div id="jp_header-mount"></div>
+
+<!-- Hero -->
+<div class="jp_page-hero">
+  <div class="jp_page-hero-inner">
+    <p class="jp_page-label">Support</p>
+    <h1 class="jp_page-title">Frequently Asked Questions</h1>
+    <p class="jp_page-sub">Can't find what you're looking for? Reach us at <a href="mailto:jesterpcs@gmail.com" class="jp_hero-link">jesterpcs@gmail.com</a></p>
+  </div>
+</div>
+
+<main class="jp_faq-page">
+
+  <!-- FAQ search -->
+  <div class="jp_faq-search-wrap">
+    <i class="fa-solid fa-magnifying-glass jp_faq-search-icon"></i>
+    <input type="text" id="jp_faq-search" class="jp_faq-search" placeholder="Search questions..." />
+  </div>
+
+  <!-- FAQ categories + items -->
+  <div class="jp_faq-body">
+
+    <!-- Orders & Delivery -->
+    <div class="jp_faq-group" data-group="orders">
+      <h2 class="jp_faq-group-title">
+        <i class="fa-solid fa-truck"></i> Orders &amp; Delivery
+      </h2>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          How long does delivery take?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Delivery within Kathmandu Valley typically takes 1–2 business days. Orders outside the valley are delivered within 3–5 business days depending on your district. Express delivery options are available at checkout for Kathmandu Valley orders.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          Can I track my order?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Yes. Once your order is dispatched you'll receive a tracking number via email. You can view your order status at any time from your <a href="/account">Account</a> page under Order History.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          Do you deliver outside Kathmandu?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Yes, we deliver across Nepal. Delivery times and fees vary by location. Charges are calculated at checkout based on your delivery address. Remote areas may have extended delivery windows.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          What payment methods are accepted?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>We accept eSewa, Khalti, bank transfer, and cash on delivery for eligible orders. Card payments are supported for online checkout. All payment details are shown at checkout.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Products & Compatibility -->
+    <div class="jp_faq-group" data-group="products">
+      <h2 class="jp_faq-group-title">
+        <i class="fa-solid fa-microchip"></i> Products &amp; Compatibility
+      </h2>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          Are all products genuine and new?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Yes. All products listed on JesterPCs are brand new and sourced from authorized distributors. We do not sell refurbished or second-hand parts unless explicitly labeled as such.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          How do I know if parts are compatible with my build?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Each product page lists compatibility information including socket type, supported RAM generation, and form factor. Our Pre-Built PC section features fully pre-vetted combinations. If you're unsure, contact us and our team will help you verify compatibility before you order.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          Do products come with a warranty?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Yes. Most products come with a manufacturer warranty ranging from 1 to 3 years. Warranty details are listed on each product page. In case of a defective unit, contact us within 7 days of receiving your order and we'll arrange a replacement or refund.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          Can I return a product if I change my mind?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Returns are accepted within 7 days of delivery for unopened products in original packaging. Opened products can only be returned if they are defective. Custom-built PCs are non-returnable unless faulty. See our Returns Policy for full details.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Account & Orders -->
+    <div class="jp_faq-group" data-group="account">
+      <h2 class="jp_faq-group-title">
+        <i class="fa-regular fa-user"></i> Account &amp; Orders
+      </h2>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          Do I need an account to place an order?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>You can browse the marketplace without an account. However, creating a free account lets you track orders, save wishlists, access your order history, and get faster checkout on future orders.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          How do I reset my password?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>On the <a href="/login">Sign In</a> page, click "Forgot password?" and enter your registered email address. You'll receive a reset link within a few minutes. Check your spam folder if it doesn't appear in your inbox.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          Can I cancel an order after placing it?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Orders can be cancelled within 2 hours of placement if they haven't been dispatched yet. Go to your Account page, find the order, and click Cancel. After 2 hours, contact our support team and we'll do our best to help.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          How do promo codes work?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Enter your promo code in the designated field on the Cart page and click Apply. The discount will be applied to your subtotal before checkout. Promo codes cannot be combined and each code can only be used once per account.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Pre-Built PCs -->
+    <div class="jp_faq-group" data-group="prebuilt">
+      <h2 class="jp_faq-group-title">
+        <i class="fa-solid fa-desktop"></i> Pre-Built PCs
+      </h2>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          Are pre-built PCs assembled before shipping?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Yes. Pre-Built PCs are fully assembled, tested, and stress-checked before shipping. They arrive ready to use — connect your monitor, keyboard, and mouse and you're good to go. OS installation is the buyer's responsibility unless stated otherwise.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          Can I request a custom configuration for a pre-built?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>Yes. Contact us with your preferred configuration and budget. Our team will put together a custom quote for you within 24 hours. The Custom Builds feature on our platform also lets you mix and match parts from our product catalogue.</p>
+        </div>
+      </div>
+
+      <div class="jp_faq-item">
+        <button class="jp_faq-q">
+          What games can the Budget Build run?
+          <i class="fa-solid fa-chevron-down jp_faq-chevron"></i>
+        </button>
+        <div class="jp_faq-a">
+          <p>The Budget Build with the GTX 1660 Super handles most popular titles at 1080p on medium-high settings — including Valorant, CS2, GTA V, FIFA, Minecraft, and similar games. Newer AAA titles like Cyberpunk 2077 will run on lower settings. It's a solid entry point for 1080p gaming.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Still need help -->
+  <div class="jp_faq-contact">
+    <h2 class="jp_contact-heading">Still have questions?</h2>
+    <p class="jp_contact-sub">Our team is made of actual PC builders. We'll give you a straight answer, not a support ticket.</p>
+    <div class="jp_contact-methods">
+      <a href="mailto:jesterpcs@gmail.com" class="jp_contact-card">
+        <i class="fa-regular fa-envelope"></i>
+        <span class="jp_contact-method-name">Email Us</span>
+        <span class="jp_contact-method-val">jesterpcs@gmail.com</span>
+      </a>
+      <a href="#" class="jp_contact-card">
+        <i class="fa-brands fa-instagram"></i>
+        <span class="jp_contact-method-name">Instagram</span>
+        <span class="jp_contact-method-val">@JesterPCs</span>
+      </a>
+      <a href="#" class="jp_contact-card">
+        <i class="fa-brands fa-facebook-f"></i>
+        <span class="jp_contact-method-name">Facebook</span>
+        <span class="jp_contact-method-val">JesterPCs Nepal</span>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<!-- Footer -->
+<div id="jp_footer-mount"></div>
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/faq.js}"></script>
+</body>
+</html>

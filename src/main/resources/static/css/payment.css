@@ -1,0 +1,297 @@
+.jp_payment-page {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    padding: 45px 44px 70px;
+
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 32px;
+
+    align-items: start;
+}
+
+.jp_payment-heading {
+    margin-bottom: 28px;
+}
+
+.jp_payment-heading p {
+    margin-bottom: 6px;
+
+    color: var(--clr-accent);
+
+    font-family: var(--ff-heading);
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.jp_payment-heading h1 {
+    color: var(--clr-white);
+
+    font-family: var(--ff-heading);
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.jp_payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.jp_payment-card,
+.jp_order-summary {
+    background: var(--clr-card);
+
+    border: 1px solid var(--clr-border);
+    border-radius: 5px;
+}
+
+.jp_payment-card {
+    padding: 24px;
+}
+
+.jp_payment-card h2,
+.jp_order-summary h2 {
+    margin-bottom: 22px;
+
+    color: var(--clr-white);
+
+    font-family: var(--ff-heading);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.jp_payment-option {
+    display: block;
+
+    margin-bottom: 12px;
+
+    padding: 16px;
+
+    background: #0e0e10;
+
+    border: 1px solid var(--clr-border);
+    border-radius: 4px;
+
+    cursor: pointer;
+}
+
+.jp_payment-option:last-child {
+    margin-bottom: 0;
+}
+
+.jp_payment-option:has(input:checked) {
+    border-color: var(--clr-accent);
+}
+
+.jp_payment-option input {
+    display: none;
+}
+
+.jp_payment-option-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 16px;
+}
+
+.jp_payment-option-content div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.jp_payment-option-content strong {
+    color: var(--clr-white);
+
+    font-family: var(--ff-heading);
+    font-size: 13px;
+}
+
+.jp_payment-option-content span {
+    color: var(--clr-muted);
+
+    font-size: 11px;
+}
+
+.jp_payment-option-content i {
+    color: var(--clr-accent);
+
+    font-size: 18px;
+}
+
+.jp_payment-detail {
+    margin-bottom: 16px;
+}
+
+.jp_payment-detail:last-child {
+    margin-bottom: 0;
+}
+
+.jp_payment-detail span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: var(--clr-muted);
+
+    font-family: var(--ff-heading);
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.jp_payment-detail p {
+    color: var(--clr-text);
+
+    font-size: 13px;
+}
+
+.jp_payment-btn {
+    width: 100%;
+
+    padding: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    border: none;
+    border-radius: 3px;
+
+    background: var(--clr-accent);
+    color: var(--clr-white);
+
+    font-family: var(--ff-heading);
+    font-size: 11px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.jp_payment-btn:hover {
+    background: var(--clr-accent-lt);
+}
+
+.jp_payment-right {
+    position: sticky;
+    top: 96px;
+}
+
+.jp_order-summary {
+    overflow: hidden;
+}
+
+.jp_order-summary h2 {
+    margin: 0;
+
+    padding: 20px;
+
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.jp_order-items {
+    padding: 16px 20px 0;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.jp_order-item,
+.jp_order-line,
+.jp_order-total {
+    display: flex;
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+.jp_order-item {
+    color: var(--clr-muted);
+
+    font-size: 11px;
+}
+
+.jp_order-name {
+    color: var(--clr-text);
+}
+
+.jp_order-qty {
+    margin-left: 4px;
+
+    color: var(--clr-accent);
+}
+
+.jp_order-divider {
+    height: 1px;
+
+    margin: 16px 20px;
+
+    background: var(--clr-border);
+}
+
+.jp_order-line {
+    margin-bottom: 10px;
+
+    padding: 0 20px;
+
+    color: var(--clr-muted);
+
+    font-size: 12px;
+}
+
+.jp_order-line span:last-child {
+    color: var(--clr-text);
+}
+
+.jp_order-total {
+    align-items: center;
+
+    padding: 0 20px 20px;
+
+    color: var(--clr-white);
+
+    font-family: var(--ff-heading);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.jp_order-total strong {
+    font-size: 20px;
+}
+
+@media (max-width: 900px) {
+
+    .jp_payment-page {
+        grid-template-columns: 1fr;
+    }
+
+    .jp_payment-right {
+        position: static;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .jp_payment-page {
+        padding: 28px 20px 55px;
+    }
+
+    .jp_payment-heading h1 {
+        font-size: 27px;
+    }
+
+}

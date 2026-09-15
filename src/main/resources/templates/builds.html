@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JesterPCs — Pre-Built PCs</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/css/builds.css}">
+</head>
+
+<body>
+
+<div id="jp_header-mount"></div>
+
+<div class="jp_page-hero">
+  <div class="jp_page-hero-inner">
+    <p class="jp_page-label">Pre-Built PCs</p>
+
+    <h1 class="jp_page-title">
+      Curated Builds.<br>Ready to Ship.
+    </h1>
+
+    <p class="jp_page-sub">
+      Pre-built systems assembled from our marketplace components.
+      Choose a build and get started.
+    </p>
+  </div>
+</div>
+
+
+<div class="jp_tabs-bar"
+     th:if="${!#lists.isEmpty(prebuilts)}">
+
+  <div class="jp_tabs-inner">
+
+    <button th:each="prebuilt, iter : ${prebuilts}"
+            class="jp_tab"
+            th:classappend="${iter.first} ? ' jp_tab-active' : ''"
+            th:attr="data-build=${prebuilt.key}">
+
+      <span class="jp_tab-name"
+            th:text="${prebuilt.name}">
+        Budget
+      </span>
+
+      <span class="jp_tab-sub">
+        Rs.
+        <span th:text="${#numbers.formatDecimal(prebuilt.total, 0, 0)}">
+          94,000
+        </span>
+      </span>
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<main class="jp_prebuilt-page">
+
+  <!-- Database Pre-Built PCs -->
+
+  <div th:each="prebuilt, iter : ${prebuilts}"
+       class="jp_panel"
+       th:classappend="${iter.first} ? ' jp_panel-active' : ''"
+       th:id="'jp_panel-' + ${prebuilt.key}">
+
+    <div class="jp_panel-layout">
+
+      <div class="jp_panel-left">
+
+        <div class="jp_build-identity">
+
+          <div class="jp_build-badge"
+               th:text="${prebuilt.name}">
+            Budget Build
+          </div>
+
+          <h2 class="jp_build-title"
+              th:text="${prebuilt.title}">
+            The Entry Point
+          </h2>
+
+          <p class="jp_build-desc"
+             th:text="${prebuilt.description}">
+            A balanced entry-level gaming PC.
+          </p>
+
+
+          <div class="jp_build-meta">
+
+            <div class="jp_meta-item">
+
+              <span class="jp_meta-label">
+                Target Resolution
+              </span>
+
+              <span class="jp_meta-val"
+                    th:text="${prebuilt.targetResolution}">
+                1080p
+              </span>
+
+            </div>
+
+
+            <div class="jp_meta-item">
+
+              <span class="jp_meta-label">
+                Performance
+              </span>
+
+              <span class="jp_meta-val"
+                    th:text="${prebuilt.performance}">
+                Entry Level
+              </span>
+
+            </div>
+
+
+            <div class="jp_meta-item">
+
+              <span class="jp_meta-label">
+                Best For
+              </span>
+
+              <span class="jp_meta-val"
+                    th:text="${prebuilt.bestFor}">
+                Casual Gaming
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="jp_components">
+
+          <h3 class="jp_components-heading">
+            What's Inside
+          </h3>
+
+
+          <div class="jp_component"
+               th:each="product : ${prebuilt.products}">
+
+            <img th:src="${product.imageUrl}"
+                 th:alt="${product.categoryName}"
+                 class="jp_component-img" />
+
+
+            <div class="jp_component-info">
+
+              <span class="jp_component-slot"
+                    th:text="${product.categoryName}">
+                CPU
+              </span>
+
+              <span class="jp_component-name"
+                    th:text="${product.productName}">
+                AMD Ryzen 5 5600
+              </span>
+
+              <span class="jp_component-spec"
+                    th:text="${product.specifications}">
+                Specifications
+              </span>
+
+            </div>
+
+
+            <span class="jp_component-price">
+
+              <span>
+                Rs.
+                <span th:text="${#numbers.formatDecimal(product.price, 0, 0)}">
+                  18,500
+                </span>
+              </span>
+
+            </span>
+
+          </div>
+
+
+          <div class="jp_total-row">
+
+            <span class="jp_total-label">
+              Build Total
+            </span>
+
+            <span class="jp_total-val">
+
+              Rs.
+              <span th:text="${#numbers.formatDecimal(prebuilt.total, 0, 0)}">
+                94,000
+              </span>
+
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="jp_panel-actions">
+
+          <form th:action="@{/cart/add-build}"
+                method="post">
+
+            <input th:each="product : ${prebuilt.products}"
+                   type="hidden"
+                   name="productIds"
+                   th:value="${product.productId}" />
+
+            <button type="submit"
+                    class="jp_btn jp_btn-primary jp_order-btn">
+
+              <i class="fa-solid fa-cart-shopping"></i>
+
+              Add to Cart — Rs.
+
+              <span th:text="${#numbers.formatDecimal(prebuilt.total, 0, 0)}">
+                94,000
+              </span>
+
+            </button>
+
+          </form>
+
+
+          <a href="/marketplace"
+             class="jp_btn jp_btn-ghost">
+
+            Browse Individual Parts
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="jp_panel-right">
+
+        <div class="jp_preview-wrap">
+
+          <img th:if="${prebuilt.imageUrl != null and !prebuilt.imageUrl.isEmpty()}"
+               th:src="${prebuilt.imageUrl}"
+               th:alt="${prebuilt.name}"
+               class="jp_preview-img" />
+
+          <div class="jp_preview-overlay"></div>
+
+
+          <div class="jp_preview-label">
+
+            <span class="jp_preview-tag"
+                  th:text="${prebuilt.name}">
+              Budget Build
+            </span>
+
+            <span class="jp_preview-tagline"
+                  th:text="${prebuilt.title}">
+              Clean. Simple. Ready.
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- No Builds -->
+
+  <div th:if="${#lists.isEmpty(prebuilts)}"
+       class="jp_panel jp_panel-active">
+
+    <div class="jp_build-identity">
+
+      <div class="jp_build-badge">
+        Pre-Built PCs
+      </div>
+
+      <h2 class="jp_build-title">
+        No Builds Available
+      </h2>
+
+      <p class="jp_build-desc">
+        There are currently no pre-built PCs available.
+      </p>
+
+      <a href="/marketplace"
+         class="jp_btn jp_btn-ghost">
+        Browse Individual Parts
+      </a>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<div class="jp_toast" id="jp_toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="jp_toast-msg">Added to cart</span>
+</div>
+
+
+<div id="jp_footer-mount"></div>
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/builds.js}"></script>
+
+</body>
+</html>

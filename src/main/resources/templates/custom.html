@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JesterPCs — Custom Builds</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" th:href="@{/css/shared.css}">
+  <link rel="stylesheet" th:href="@{/css/custom.css}">
+</head>
+<body>
+
+<!-- Header -->
+<div id="jp_header-mount"></div>
+
+<!-- Page hero -->
+<div class="jp_page-hero">
+  <div class="jp_page-hero-inner">
+    <p class="jp_page-label">Part Picker</p>
+    <h1 class="jp_page-title">Build Your Own PC</h1>
+    <p class="jp_page-sub">Pick your parts one slot at a time. The build score updates live and warns you about compatibility issues, bottlenecks, and power problems as you go.</p>
+  </div>
+</div>
+
+<!-- Main layout -->
+<main class="jp_custom-page">
+
+  <!-- Left — part slots -->
+  <div class="jp_slots-panel">
+
+    <div class="jp_slots-header">
+      <h2 class="jp_slots-title">Your Parts</h2>
+      <button class="jp_reset-btn" id="jp_reset-btn">
+        <i class="fa-solid fa-rotate-left"></i> Reset Build
+      </button>
+    </div>
+
+    <!-- Part slots — one per category -->
+    <div class="jp_slots">
+
+      <div class="jp_slot" data-slot="cpu">
+        <div class="jp_slot-left">
+          <div class="jp_slot-icon"><i class="fa-solid fa-microchip"></i></div>
+          <div class="jp_slot-info">
+            <span class="jp_slot-label">CPU</span>
+            <span class="jp_slot-name" id="jp_slot-name-cpu">No CPU selected</span>
+            <span class="jp_slot-spec" id="jp_slot-spec-cpu"></span>
+          </div>
+        </div>
+        <div class="jp_slot-right">
+          <span class="jp_slot-price" id="jp_slot-price-cpu"></span>
+          <button class="jp_choose-btn" data-slot="cpu">Choose <i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="jp_slot" data-slot="gpu">
+        <div class="jp_slot-left">
+          <div class="jp_slot-icon"><i class="fa-solid fa-display"></i></div>
+          <div class="jp_slot-info">
+            <span class="jp_slot-label">GPU</span>
+            <span class="jp_slot-name" id="jp_slot-name-gpu">No GPU selected</span>
+            <span class="jp_slot-spec" id="jp_slot-spec-gpu"></span>
+          </div>
+        </div>
+        <div class="jp_slot-right">
+          <span class="jp_slot-price" id="jp_slot-price-gpu"></span>
+          <button class="jp_choose-btn" data-slot="gpu">Choose <i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="jp_slot" data-slot="ram">
+        <div class="jp_slot-left">
+          <div class="jp_slot-icon"><i class="fa-solid fa-memory"></i></div>
+          <div class="jp_slot-info">
+            <span class="jp_slot-label">RAM</span>
+            <span class="jp_slot-name" id="jp_slot-name-ram">No RAM selected</span>
+            <span class="jp_slot-spec" id="jp_slot-spec-ram"></span>
+          </div>
+        </div>
+        <div class="jp_slot-right">
+          <span class="jp_slot-price" id="jp_slot-price-ram"></span>
+          <button class="jp_choose-btn" data-slot="ram">Choose <i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="jp_slot" data-slot="storage">
+        <div class="jp_slot-left">
+          <div class="jp_slot-icon"><i class="fa-solid fa-hard-drive"></i></div>
+          <div class="jp_slot-info">
+            <span class="jp_slot-label">Storage</span>
+            <span class="jp_slot-name" id="jp_slot-name-storage">No Storage selected</span>
+            <span class="jp_slot-spec" id="jp_slot-spec-storage"></span>
+          </div>
+        </div>
+        <div class="jp_slot-right">
+          <span class="jp_slot-price" id="jp_slot-price-storage"></span>
+          <button class="jp_choose-btn" data-slot="storage">Choose <i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="jp_slot" data-slot="motherboard">
+        <div class="jp_slot-left">
+          <div class="jp_slot-icon"><i class="fa-solid fa-server"></i></div>
+          <div class="jp_slot-info">
+            <span class="jp_slot-label">Motherboard</span>
+            <span class="jp_slot-name" id="jp_slot-name-motherboard">No Motherboard selected</span>
+            <span class="jp_slot-spec" id="jp_slot-spec-motherboard"></span>
+          </div>
+        </div>
+        <div class="jp_slot-right">
+          <span class="jp_slot-price" id="jp_slot-price-motherboard"></span>
+          <button class="jp_choose-btn" data-slot="motherboard">Choose <i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="jp_slot" data-slot="psu">
+        <div class="jp_slot-left">
+          <div class="jp_slot-icon"><i class="fa-solid fa-plug"></i></div>
+          <div class="jp_slot-info">
+            <span class="jp_slot-label">PSU</span>
+            <span class="jp_slot-name" id="jp_slot-name-psu">No PSU selected</span>
+            <span class="jp_slot-spec" id="jp_slot-spec-psu"></span>
+          </div>
+        </div>
+        <div class="jp_slot-right">
+          <span class="jp_slot-price" id="jp_slot-price-psu"></span>
+          <button class="jp_choose-btn" data-slot="psu">Choose <i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="jp_slot" data-slot="case">
+        <div class="jp_slot-left">
+          <div class="jp_slot-icon"><i class="fa-solid fa-box"></i></div>
+          <div class="jp_slot-info">
+            <span class="jp_slot-label">Case</span>
+            <span class="jp_slot-name" id="jp_slot-name-case">No Case selected</span>
+            <span class="jp_slot-spec" id="jp_slot-spec-case"></span>
+          </div>
+        </div>
+        <div class="jp_slot-right">
+          <span class="jp_slot-price" id="jp_slot-price-case"></span>
+          <button class="jp_choose-btn" data-slot="case">Choose <i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+      <div class="jp_slot" data-slot="cooling">
+        <div class="jp_slot-left">
+          <div class="jp_slot-icon"><i class="fa-solid fa-wind"></i></div>
+          <div class="jp_slot-info">
+            <span class="jp_slot-label">Cooling</span>
+            <span class="jp_slot-name" id="jp_slot-name-cooling">No Cooling selected</span>
+            <span class="jp_slot-spec" id="jp_slot-spec-cooling"></span>
+          </div>
+        </div>
+        <div class="jp_slot-right">
+          <span class="jp_slot-price" id="jp_slot-price-cooling"></span>
+          <button class="jp_choose-btn" data-slot="cooling">Choose <i class="fa-solid fa-plus"></i></button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Add to cart -->
+    <div class="jp_slots-footer">
+      <div class="jp_slots-total">
+        <span class="jp_slots-total-label">Build Total</span>
+        <span class="jp_slots-total-val" id="jp_build-total">Rs. 0</span>
+      </div>
+      <button class="jp_btn jp_btn-primary jp_add-build-btn" id="jp_add-build-btn">
+        <i class="fa-solid fa-cart-shopping"></i> Add Build to Cart
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Right — build score + warnings -->
+  <div class="jp_analysis-panel">
+
+    <!-- Build score -->
+    <div class="jp_score-card">
+      <div class="jp_score-header">
+        <span class="jp_score-label">Build Score</span>
+        <span class="jp_score-num" id="jp_score-num">—</span>
+      </div>
+      <!-- Score bar -->
+      <div class="jp_score-bar-wrap">
+        <div class="jp_score-bar" id="jp_score-bar"></div>
+      </div>
+      <p class="jp_score-desc" id="jp_score-desc">Select parts to see your build score.</p>
+    </div>
+
+    <!-- Quick stats -->
+    <div class="jp_quick-stats" id="jp_quick-stats">
+      <div class="jp_quick-stat">
+        <span class="jp_qs-label">Est. Power Draw</span>
+        <span class="jp_qs-val" id="jp_power-draw">—</span>
+      </div>
+      <div class="jp_qs-divider"></div>
+      <div class="jp_quick-stat">
+        <span class="jp_qs-label">PSU Headroom</span>
+        <span class="jp_qs-val" id="jp_psu-headroom">—</span>
+      </div>
+      <div class="jp_qs-divider"></div>
+      <div class="jp_quick-stat">
+        <span class="jp_qs-label">Parts Selected</span>
+        <span class="jp_qs-val" id="jp_parts-count">0 / 8</span>
+      </div>
+    </div>
+
+    <!-- Warnings and tips -->
+    <div class="jp_warnings-card">
+      <h3 class="jp_warnings-title">Analysis</h3>
+      <div class="jp_warnings-list" id="jp_warnings-list">
+        <div class="jp_warning jp_warn-info">
+          <i class="fa-solid fa-circle-info"></i>
+          <span>Start selecting parts to see compatibility analysis and build tips.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load preset buttons -->
+    <div class="jp_presets">
+      <p class="jp_presets-label">Load a preset build</p>
+      <div class="jp_preset-btns">
+        <button class="jp_preset-btn" data-preset="budget">
+          <span>Budget</span>
+          <span class="jp_preset-price">Rs. 71,500</span>
+        </button>
+        <button class="jp_preset-btn" data-preset="mid">
+          <span>Mid Range</span>
+          <span class="jp_preset-price">Rs. 1,55,000</span>
+        </button>
+        <button class="jp_preset-btn" data-preset="max">
+          <span>Maxed Out</span>
+          <span class="jp_preset-price">Rs. 7,18,000</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- Part picker modal -->
+<div class="jp_modal-overlay" id="jp_modal-overlay">
+  <div class="jp_modal">
+    <div class="jp_modal-header">
+      <div>
+        <h3 class="jp_modal-title" id="jp_modal-title">Choose a Part</h3>
+        <p class="jp_modal-sub" id="jp_modal-sub"></p>
+      </div>
+      <button class="jp_modal-close" id="jp_modal-close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="jp_modal-list" id="jp_modal-list"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="jp_toast" id="jp_toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="jp_toast-msg"></span>
+</div>
+
+<!-- Footer -->
+<div id="jp_footer-mount"></div>
+
+<script th:src="@{/js/components.js}"></script>
+<script th:inline="javascript">
+  const DB_PRODUCTS = /*[[${products}]]*/ [];
+</script>
+<script th:src="@{/js/custom.js}"></script>
+
+</body>
+</html>

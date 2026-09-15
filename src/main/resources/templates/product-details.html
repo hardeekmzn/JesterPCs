@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JesterPCs — Product Details</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/product-details.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/product-reviews.css}">
+
+</head>
+
+<body>
+
+<div id="jp_header-mount"></div>
+
+
+<main class="jp_product-page">
+
+    <div class="jp_product-back">
+
+        <a href="/marketplace">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Marketplace
+
+        </a>
+
+    </div>
+
+
+    <section class="jp_product-detail">
+
+        <div class="jp_product-image-section">
+
+            <div class="jp_product-image-wrap">
+
+                <img th:if="${product.imageUrl != null and !product.imageUrl.isEmpty()}"
+                     th:src="${product.imageUrl}"
+                     th:alt="${product.productName}"
+                     class="jp_product-image">
+
+                <div th:unless="${product.imageUrl != null and !product.imageUrl.isEmpty()}"
+                     class="jp_product-placeholder">
+
+                    <i class="fa-solid fa-box"></i>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="jp_product-info">
+
+            <span class="jp_product-category"
+                  th:text="${product.categoryName}">
+                CPU
+            </span>
+
+            <p class="jp_product-brand"
+               th:text="${product.brand}">
+                AMD
+            </p>
+
+            <h1 class="jp_product-title"
+                th:text="${product.productName}">
+                AMD Ryzen 5 7600X
+            </h1>
+
+            <p class="jp_product-price"
+               th:text="'Rs. ' + ${#numbers.formatInteger(product.price, 1, 'COMMA')}">
+                Rs. 28,000
+            </p>
+
+
+            <div class="jp_product-stock"
+                 th:classappend="${product.stockQuantity > 0 ? 'jp_in-stock' : 'jp_out-of-stock'}">
+
+                <i class="fa-solid fa-circle"></i>
+
+                <span th:text="${product.stockQuantity > 0
+                    ? product.stockQuantity + ' in stock'
+                    : 'Out of stock'}">
+                    10 in stock
+                </span>
+
+            </div>
+
+
+            <p class="jp_product-description"
+               th:text="${product.description}">
+                Product description.
+            </p>
+
+
+            <div class="jp_product-actions">
+
+                <button class="jp_btn jp_btn-primary jp_add-product-btn"
+                        type="button"
+                        th:disabled="${product.stockQuantity <= 0}"
+                        th:data-product-id="${product.productId}">
+
+                    <i class="fa-solid fa-cart-plus"></i>
+
+                    <span>
+                        Add to Cart
+                    </span>
+
+                </button>
+
+                <button class="jp_product-wish"
+                        type="button">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+            </div>
+
+
+            <div class="jp_product-overview">
+
+                <div class="jp_overview-heading">
+                    Product Overview
+                </div>
+
+                <div class="jp_overview-grid">
+
+                    <div class="jp_overview-item">
+
+                        <span>
+                            Category
+                        </span>
+
+                        <strong th:text="${product.categoryName}">
+                            GPU
+                        </strong>
+
+                    </div>
+
+                    <div class="jp_overview-item">
+
+                        <span>
+                            Brand
+                        </span>
+
+                        <strong th:text="${product.brand}">
+                            NVIDIA
+                        </strong>
+
+                    </div>
+
+                    <div class="jp_overview-item">
+
+                        <span>
+                            Stock
+                        </span>
+
+                        <strong th:text="${product.stockQuantity > 0
+                            ? product.stockQuantity + ' units'
+                            : 'Out of stock'}">
+                            10 units
+                        </strong>
+
+                    </div>
+
+                    <div class="jp_overview-item">
+
+                        <span>
+                            Product ID
+                        </span>
+
+                        <strong th:text="'#' + ${product.productId}">
+                            #30001
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="jp_product-spec-section">
+
+        <div class="jp_product-section-heading">
+
+            <p>
+                Product Information
+            </p>
+
+            <h2>
+                Specifications
+            </h2>
+
+        </div>
+
+
+        <div class="jp_product-spec-grid">
+
+            <div class="jp_spec-item">
+
+                <span>
+                    Brand
+                </span>
+
+                <strong th:text="${product.brand}">
+                    AMD
+                </strong>
+
+            </div>
+
+
+            <div class="jp_spec-item">
+
+                <span>
+                    Category
+                </span>
+
+                <strong th:text="${product.categoryName}">
+                    CPU
+                </strong>
+
+            </div>
+
+
+            <div class="jp_spec-item"
+                 th:if="${product.socketType != null and !product.socketType.isEmpty()}">
+
+                <span>
+                    Socket
+                </span>
+
+                <strong th:text="${product.socketType}">
+                    AM5
+                </strong>
+
+            </div>
+
+
+            <div class="jp_spec-item"
+                 th:if="${product.ramType != null and !product.ramType.isEmpty()}">
+
+                <span>
+                    RAM Type
+                </span>
+
+                <strong th:text="${product.ramType}">
+                    DDR5
+                </strong>
+
+            </div>
+
+
+            <div class="jp_spec-item"
+                 th:if="${product.ramSpeed != null and product.ramSpeed > 0}">
+
+                <span>
+                    RAM Speed
+                </span>
+
+                <strong th:text="${product.ramSpeed + ' MHz'}">
+                    5600 MHz
+                </strong>
+
+            </div>
+
+
+            <div class="jp_spec-item"
+                 th:if="${product.storageInterface != null and !product.storageInterface.isEmpty()}">
+
+                <span>
+                    Storage Interface
+                </span>
+
+                <strong th:text="${product.storageInterface}">
+                    PCIe 4.0
+                </strong>
+
+            </div>
+
+
+            <div class="jp_spec-item"
+                 th:if="${product.wattage != null and product.wattage > 0}">
+
+                <span>
+                    Wattage
+                </span>
+
+                <strong th:text="${product.wattage + ' W'}">
+                    750 W
+                </strong>
+
+            </div>
+
+
+            <div class="jp_spec-item"
+                 th:if="${product.gpuLength != null and product.gpuLength > 0}">
+
+                <span>
+                    GPU Length
+                </span>
+
+                <strong th:text="${product.gpuLength + ' mm'}">
+                    320 mm
+                </strong>
+
+            </div>
+
+
+            <div class="jp_spec-item"
+                 th:if="${product.coolerHeight != null and product.coolerHeight > 0}">
+
+                <span>
+                    Cooler Height
+                </span>
+
+                <strong th:text="${product.coolerHeight + ' mm'}">
+                    165 mm
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="jp_product-full-spec">
+
+            <span>
+                Specifications
+            </span>
+
+            <p th:text="${product.specifications}">
+                Product specifications
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Reviews -->
+
+    <section class="jp_product-review-section"
+             id="reviews">
+
+        <div class="jp_product-section-heading">
+
+            <p>
+                Customer Feedback
+            </p>
+
+            <h2>
+                Reviews
+            </h2>
+
+        </div>
+
+
+        <!-- Review summary -->
+
+        <div class="jp_review-summary">
+
+            <div class="jp_review-average">
+
+                <strong th:text="${reviews.isEmpty()
+                    ? '0.0'
+                    : #numbers.formatDecimal(averageRating, 1, 1)}">
+                    0.0
+                </strong>
+
+                <div class="jp_review-stars">
+
+                    <i th:each="star : ${#numbers.sequence(1, 5)}"
+                       class="fa-solid fa-star"
+                       th:classappend="${star <= averageRating
+                           ? 'jp_star-filled'
+                           : ''}">
+                    </i>
+
+                </div>
+
+                <span th:text="${reviews.size()
+                    + ' review'
+                    + (reviews.size() == 1 ? '' : 's')}">
+                    0 reviews
+                </span>
+
+            </div>
+
+
+            <div class="jp_review-breakdown">
+
+                <div class="jp_rating-row"
+                     th:each="rating : ${#numbers.sequence(5, 1, -1)}">
+
+                    <span th:text="${rating + ' star'}">
+                        5 star
+                    </span>
+
+                    <div class="jp_rating-bar">
+
+                        <div class="jp_rating-fill"
+                             th:style="'width: ' + (${reviews.isEmpty()
+                                 ? 0
+                                 : (ratingBreakdown[rating] * 100.0 / reviews.size())}) + '%'">
+                        </div>
+
+                    </div>
+
+                    <strong th:text="${ratingBreakdown[rating]}">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Review messages -->
+
+        <div class="jp_review-message"
+             th:if="${reviewSuccess != null}"
+             th:text="${reviewSuccess}">
+            Your review has been posted.
+        </div>
+
+
+        <div class="jp_review-message jp_review-message-error"
+             th:if="${reviewError != null}"
+             th:text="${reviewError}">
+            Something went wrong.
+        </div>
+
+
+        <!-- Write review -->
+
+        <div class="jp_write-review"
+             th:if="${canReview and !alreadyReviewed}">
+
+            <div class="jp_review-form-heading">
+
+                <span>
+                    Verified Purchase
+                </span>
+
+                <h3>
+                    Write a Review
+                </h3>
+
+            </div>
+
+
+            <form method="post"
+                  th:action="@{'/product/' + ${product.productId} + '/review'}">
+
+                <div class="jp_review-rating-input">
+
+                    <span>
+                        Rating
+                    </span>
+
+
+                    <div class="jp_rating-select">
+
+                        <div class="jp_rating-option">
+
+                            <input type="radio"
+                                   id="rating-5"
+                                   name="rating"
+                                   value="5"
+                                   required>
+
+                            <label for="rating-5">
+                                <i class="fa-solid fa-star"></i>
+                            </label>
+
+                        </div>
+
+
+                        <div class="jp_rating-option">
+
+                            <input type="radio"
+                                   id="rating-4"
+                                   name="rating"
+                                   value="4">
+
+                            <label for="rating-4">
+                                <i class="fa-solid fa-star"></i>
+                            </label>
+
+                        </div>
+
+
+                        <div class="jp_rating-option">
+
+                            <input type="radio"
+                                   id="rating-3"
+                                   name="rating"
+                                   value="3">
+
+                            <label for="rating-3">
+                                <i class="fa-solid fa-star"></i>
+                            </label>
+
+                        </div>
+
+
+                        <div class="jp_rating-option">
+
+                            <input type="radio"
+                                   id="rating-2"
+                                   name="rating"
+                                   value="2">
+
+                            <label for="rating-2">
+                                <i class="fa-solid fa-star"></i>
+                            </label>
+
+                        </div>
+
+
+                        <div class="jp_rating-option">
+
+                            <input type="radio"
+                                   id="rating-1"
+                                   name="rating"
+                                   value="1">
+
+                            <label for="rating-1">
+                                <i class="fa-solid fa-star"></i>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="jp_review-textarea">
+
+                    <label for="reviewText">
+                        Your Review
+                    </label>
+
+                    <textarea id="reviewText"
+                              name="reviewText"
+                              rows="5"
+                              maxlength="2000"
+                              placeholder="Share your experience with this product..."
+                              required></textarea>
+
+                </div>
+
+
+                <button class="jp_btn jp_btn-primary"
+                        type="submit">
+
+                    <i class="fa-solid fa-paper-plane"></i>
+
+                    Submit Review
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div class="jp_review-info"
+             th:if="${user == null}">
+
+            <i class="fa-solid fa-lock"></i>
+
+            <span>
+                Please log in to write a review, comment, or upvote a review.
+            </span>
+
+            <a href="/login"
+               class="jp_btn jp_btn-primary jp_review-login-btn">
+                Log In
+            </a>
+
+        </div>
+
+
+        <div class="jp_review-info"
+             th:if="${user != null and !canReview and !alreadyReviewed}">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+            <span>
+                Only customers who have purchased and received this product can write a review.
+            </span>
+
+        </div>
+
+
+        <div class="jp_review-info"
+             th:if="${user != null and alreadyReviewed}">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <span>
+                You have already reviewed this product.
+            </span>
+
+        </div>
+
+
+        <!-- Review list -->
+
+        <div class="jp_review-list">
+
+            <div class="jp_no-reviews"
+                 th:if="${reviews.isEmpty()}">
+
+                <i class="fa-regular fa-comment-dots"></i>
+
+                <p>
+                    No reviews yet.
+                </p>
+
+                <span>
+                    Be the first customer to share your experience.
+                </span>
+
+            </div>
+
+
+            <article class="jp_review-card"
+                     th:each="review : ${reviews}">
+
+                <div class="jp_review-card-top">
+
+                    <div class="jp_review-user">
+
+                        <div class="jp_review-avatar"
+                             th:text="${#strings.substring(review.username, 0, 1).toUpperCase()}">
+                            J
+                        </div>
+
+                        <div>
+
+                            <strong th:text="${review.username}">
+                                username
+                            </strong>
+
+                            <span th:text="${#temporals.format(review.createdAt, 'dd MMM yyyy')}">
+                                14 Sep 2026
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="jp_review-rating">
+
+                        <i th:each="star : ${#numbers.sequence(1, 5)}"
+                           class="fa-solid fa-star"
+                           th:classappend="${star <= review.rating
+                               ? 'jp_star-filled'
+                               : ''}">
+                        </i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="jp_review-content">
+
+                    <p th:text="${review.reviewText}">
+                        Review text.
+                    </p>
+
+                </div>
+
+
+                <div class="jp_review-owner-actions"
+                     th:if="${user != null and user.userId == review.userId}">
+
+                    <details>
+
+                        <summary>
+                            Edit
+                        </summary>
+
+                        <form method="post"
+                              th:action="@{'/review/' + ${review.reviewId} + '/edit'}">
+
+                            <input type="hidden"
+                                   name="productId"
+                                   th:value="${product.productId}">
+
+                            <div class="jp_edit-rating">
+
+                                <span>
+                                    Rating
+                                </span>
+
+                                <select name="rating"
+                                        required>
+
+                                    <option value="1"
+                                            th:selected="${review.rating == 1}">
+                                        1 Star
+                                    </option>
+
+                                    <option value="2"
+                                            th:selected="${review.rating == 2}">
+                                        2 Stars
+                                    </option>
+
+                                    <option value="3"
+                                            th:selected="${review.rating == 3}">
+                                        3 Stars
+                                    </option>
+
+                                    <option value="4"
+                                            th:selected="${review.rating == 4}">
+                                        4 Stars
+                                    </option>
+
+                                    <option value="5"
+                                            th:selected="${review.rating == 5}">
+                                        5 Stars
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+                            <textarea name="reviewText"
+                                      maxlength="2000"
+                                      required
+                                      th:text="${review.reviewText}"></textarea>
+
+                            <button type="submit"
+                                    class="jp_btn jp_btn-primary">
+                                Save Changes
+                            </button>
+
+                        </form>
+
+                    </details>
+
+
+                    <form method="post"
+                          th:action="@{'/review/' + ${review.reviewId} + '/delete'}"
+                          onsubmit="return confirm('Are you sure you want to delete this review?');">
+
+                        <input type="hidden"
+                               name="productId"
+                               th:value="${product.productId}">
+
+                        <button type="submit"
+                                class="jp_review-delete">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="jp_review-actions">
+
+                    <form method="post"
+                          th:action="@{'/review/' + ${review.reviewId} + '/upvote'}">
+
+                        <input type="hidden"
+                               name="productId"
+                               th:value="${product.productId}">
+
+                        <button type="submit"
+                                class="jp_review-upvote"
+                                th:classappend="${review.userUpvoted
+                                    ? 'jp_review-upvoted'
+                                    : ''}">
+
+                            <i class="fa-solid fa-arrow-up"></i>
+
+                            <span>
+                                Helpful
+                            </span>
+
+                            <strong th:text="${review.upvoteCount}">
+                                0
+                            </strong>
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <!-- Review comments -->
+
+                <div class="jp_review-comments">
+
+                    <div class="jp_review-comments-heading">
+
+                        <i class="fa-regular fa-comments"></i>
+
+                        <span>
+                            Comments
+                        </span>
+
+                    </div>
+
+
+                    <div class="jp_review-comment-list">
+
+                        <div class="jp_review-comment"
+                             th:each="comment : ${reviewCommentsByReview[review.reviewId]}">
+
+                            <div class="jp_review-comment-user">
+
+                                <strong th:text="${comment.username}">
+                                    username
+                                </strong>
+
+                                <span th:text="${#temporals.format(comment.createdAt, 'dd MMM yyyy')}">
+                                    14 Sep 2026
+                                </span>
+
+                            </div>
+
+                            <p th:text="${comment.commentText}">
+                                Comment text.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="jp_comment-message"
+                         th:if="${commentSuccess != null and reviewStat.first}"
+                         th:text="${commentSuccess}">
+                        Your comment has been posted.
+                    </div>
+
+
+                    <form class="jp_comment-form"
+                          method="post"
+                          th:action="@{'/review/' + ${review.reviewId} + '/comment'}">
+
+                        <input type="hidden"
+                               name="productId"
+                               th:value="${product.productId}">
+
+                        <input type="text"
+                               name="commentText"
+                               maxlength="1000"
+                               placeholder="Write a comment..."
+                               required>
+
+                        <button type="submit"
+                                class="jp_review-comment-btn">
+
+                            <i class="fa-solid fa-paper-plane"></i>
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<div class="jp_toast"
+     id="jp_toast">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span id="jp_toast-msg">
+        Added to cart
+    </span>
+
+</div>
+
+
+<div id="jp_footer-mount"></div>
+
+
+<script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/product-details.js}"></script>
+
+</body>
+</html>

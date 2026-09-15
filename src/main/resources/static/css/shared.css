@@ -1,0 +1,361 @@
+:root {
+  --clr-bg:        #0d0d0d;
+  --clr-surface:   #111111;
+  --clr-card:      #131315;
+  --clr-border:    #1e1e1e;
+  --clr-accent:    #c0392b;
+  --clr-accent-lt: #e74c3c;
+  --clr-text:      #e2e2e2;
+  --clr-muted:     #7a7a7a;
+  --clr-white:     #ffffff;
+  --clr-green:     #4caf72;
+  --clr-amber:     #c8a84b;
+
+  --ff-heading: 'DM Sans', sans-serif;
+  --ff-body:    'Inter', sans-serif;
+
+  --header-h: 72px;
+  --max-w:    1200px;
+}
+
+
+/* Reset */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: var(--clr-bg);
+  color: var(--clr-text);
+  font-family: var(--ff-body);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a      { color: inherit; text-decoration: none; }
+ul     { list-style: none; }
+img    { display: block; max-width: 100%; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+
+
+/* Shared Buttons*/
+
+.jp_btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 12px 24px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  border: 2px solid transparent;
+}
+.jp_btn:hover { transform: translateY(-1px); }
+
+.jp_btn-primary {
+  background: var(--clr-accent);
+  color: var(--clr-white);
+  border-color: var(--clr-accent);
+}
+.jp_btn-primary:hover { background: var(--clr-accent-lt); border-color: var(--clr-accent-lt); }
+
+.jp_btn-ghost {
+  background: transparent;
+  color: var(--clr-white);
+  border-color: rgba(255,255,255,0.35);
+}
+.jp_btn-ghost:hover { border-color: rgba(255,255,255,0.7); }
+
+.jp_btn-danger {
+  background: transparent;
+  color: var(--clr-accent);
+  border-color: rgba(192,57,43,0.35);
+}
+.jp_btn-danger:hover { background: rgba(192,57,43,0.08); border-color: var(--clr-accent); }
+
+
+/* Toast — shared across all pages*/
+
+.jp_toast {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #1a1a1c;
+  border: 1px solid var(--clr-border);
+  border-left: 3px solid var(--clr-accent);
+  border-radius: 4px;
+  padding: 14px 20px;
+  font-family: var(--ff-body);
+  font-size: 13px;
+  color: var(--clr-text);
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+}
+.jp_toast i    { color: var(--clr-accent); font-size: 15px; }
+.jp_toast-show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+
+/* Header*/
+
+.jp_header {
+  position: sticky;
+  top: 0;
+  z-index: 900;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 44px;
+  background: rgba(11,11,11,0.97);
+  border-bottom: 1px solid var(--clr-border);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+/* Transparent variant used only on index.html hero */
+.jp_header-transparent {
+  background: transparent;
+  border-bottom-color: transparent;
+}
+
+/* JS adds this class on scroll (index.html only) */
+.jp_header-scrolled {
+  background: rgba(11,11,11,0.97) !important;
+  border-bottom-color: var(--clr-border) !important;
+}
+
+.jp_logo {
+  font-family: var(--ff-heading);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.jp_logo-jester { color: var(--clr-white); }
+.jp_logo-pcs    { color: var(--clr-accent); }
+
+.jp_nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.jp_nav-list {
+  display: flex;
+  gap: 28px;
+}
+
+.jp_nav-link {
+  font-family: var(--ff-heading);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  position: relative;
+  transition: color 0.2s;
+}
+
+.jp_nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: var(--clr-accent);
+  transition: width 0.2s;
+}
+.jp_nav-link:hover        { color: var(--clr-white); }
+.jp_nav-link:hover::after { width: 100%; }
+.jp_nav-active            { color: var(--clr-white); }
+.jp_nav-active::after     { width: 100%; }
+
+.jp_nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.jp_nav-cart-btn {
+  position: relative;
+  color: var(--clr-muted);
+  font-size: 17px;
+  padding: 4px;
+  transition: color 0.2s;
+}
+.jp_nav-cart-btn:hover { color: var(--clr-white); }
+
+.jp_cart-count {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--clr-accent);
+  color: var(--clr-white);
+  font-family: var(--ff-heading);
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.jp_nav-login {
+  font-family: var(--ff-heading);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--clr-muted);
+  transition: color 0.2s;
+}
+.jp_nav-login:hover { color: var(--clr-white); }
+
+/* Hamburger — hidden desktop, shown mobile */
+.jp_menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.jp_menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--clr-white);
+  transition: transform 0.24s, opacity 0.24s;
+}
+.jp_menu-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.jp_menu-open span:nth-child(2) { opacity: 0; }
+.jp_menu-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+/* Footer */
+
+.jp_footer {
+  border-top: 1px solid var(--clr-border);
+  background: #090909;
+}
+
+.jp_footer-main {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 52px 44px 40px;
+  display: grid;
+  grid-template-columns: 1.7fr 1fr 1fr 1fr;
+  gap: 48px;
+}
+
+.jp_footer-brand .jp_logo {
+  font-size: 20px;
+  margin-bottom: 14px;
+  display: inline-block;
+}
+
+.jp_footer-tagline {
+  font-family: var(--ff-body);
+  font-size: 13px;
+  color: var(--clr-muted);
+  line-height: 1.75;
+  margin-bottom: 22px;
+}
+
+.jp_footer-socials { display: flex; gap: 10px; }
+
+.jp_footer-socials a {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--clr-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--clr-muted);
+  transition: border-color 0.2s, color 0.2s;
+}
+.jp_footer-socials a:hover { border-color: var(--clr-accent); color: var(--clr-accent); }
+
+.jp_footer-col h4 {
+  font-family: var(--ff-heading);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--clr-white);
+  margin-bottom: 18px;
+}
+
+.jp_footer-col ul { display: flex; flex-direction: column; gap: 11px; }
+
+.jp_footer-col a {
+  font-family: var(--ff-body);
+  font-size: 13px;
+  color: var(--clr-muted);
+  transition: color 0.2s;
+}
+.jp_footer-col a:hover { color: var(--clr-white); }
+
+.jp_footer-bar {
+  border-top: 1px solid var(--clr-border);
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 18px 44px;
+  font-family: var(--ff-body);
+  font-size: 12px;
+  color: #3e3e3e;
+}
+
+
+/* Responsive — Header + Footer mobile*/
+
+@media (max-width: 768px) {
+  .jp_header      { padding: 0 20px; }
+  .jp_menu-toggle { display: flex; }
+
+  /* Mobile nav slides down from header */
+  .jp_nav {
+    position: fixed;
+    top: 72px;
+    left: 0;
+    right: 0;
+    background: rgba(11,11,11,0.98);
+    border-bottom: 1px solid var(--clr-border);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 20px;
+    gap: 24px;
+    transform: translateY(-110%);
+    transition: transform 0.26s ease;
+    z-index: 899;
+  }
+  .jp_nav-open    { transform: translateY(0); }
+  .jp_nav-list    { flex-direction: column; gap: 16px; width: 100%; }
+  .jp_nav-actions { width: 100%; }
+
+  .jp_footer-main { grid-template-columns: 1fr; padding: 40px 20px 32px; gap: 32px; }
+  .jp_footer-bar  { padding: 16px 20px; }
+
+  .jp_toast { right: 16px; bottom: 16px; left: 16px; }
+}
+
+@media (max-width: 1024px) {
+  .jp_footer-main    { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .jp_footer-brand   { grid-column: 1 / -1; }
+}

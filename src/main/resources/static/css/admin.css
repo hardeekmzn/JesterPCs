@@ -1,0 +1,847 @@
+:root {
+    --clr-bg: #0d0d0d;
+    --clr-card: #131315;
+    --clr-border: #222222;
+    --clr-accent: #c0392b;
+    --clr-accent-lt: #e74c3c;
+    --clr-text: #e2e2e2;
+    --clr-muted: #7a7a7a;
+    --clr-white: #ffffff;
+
+    --ff-heading: 'DM Sans', sans-serif;
+    --ff-body: 'Inter', sans-serif;
+}
+
+
+/* Admin header */
+
+.jp_admin-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 900;
+}
+
+.jp_admin-header .jp_nav {
+    flex: 1;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 24px;
+}
+
+.jp_admin-header .jp_nav-list {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.jp_admin-header .jp_nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+
+/* Admin page */
+
+.jp_admin-page {
+    min-height: 100vh;
+
+    padding: 120px 44px 80px;
+
+    background: var(--clr-bg);
+}
+
+.jp_admin-page a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* Admin hero */
+
+.jp_admin-hero {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto 48px;
+
+    padding-bottom: 30px;
+
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.jp_admin-eyebrow {
+    margin-bottom: 10px;
+
+    font-family: var(--ff-heading);
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    color: var(--clr-accent);
+}
+
+.jp_admin-title {
+    margin-bottom: 10px;
+
+    font-family: var(--ff-heading);
+    font-size: 42px;
+    font-weight: 700;
+
+    letter-spacing: -1px;
+
+    color: var(--clr-white);
+}
+
+.jp_admin-sub {
+    max-width: 650px;
+
+    font-family: var(--ff-body);
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    color: var(--clr-muted);
+}
+
+
+/* Admin page heading */
+
+.jp_admin-heading {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto 30px;
+}
+
+.jp_admin-label {
+    margin-bottom: 8px;
+
+    font-family: var(--ff-heading);
+    font-size: 10px;
+    font-weight: 600;
+
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    color: var(--clr-accent);
+}
+
+.jp_admin-heading h1 {
+    font-family: var(--ff-heading);
+    font-size: 36px;
+    font-weight: 700;
+
+    color: var(--clr-white);
+}
+
+
+/* Dashboard */
+
+.jp_admin-grid {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+}
+
+.jp_admin-card {
+    min-height: 180px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+
+    position: relative;
+
+    padding: 30px;
+
+    background: var(--clr-card);
+
+    border: 1px solid var(--clr-border);
+    border-radius: 4px;
+
+    color: var(--clr-text);
+
+    text-decoration: none;
+
+    transition:
+            border-color 0.2s,
+            transform 0.2s,
+            box-shadow 0.2s;
+}
+
+.jp_admin-card:hover {
+    border-color: rgba(192, 57, 43, 0.65);
+
+    box-shadow:
+            0 0 24px rgba(192, 57, 43, 0.08);
+
+    transform: translateY(-3px);
+
+    color: var(--clr-text);
+}
+
+.jp_admin-card:visited,
+.jp_admin-card:active {
+    color: var(--clr-text);
+    text-decoration: none;
+}
+
+.jp_admin-card-icon {
+    width: 54px;
+    height: 54px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--clr-accent);
+
+    background: rgba(192, 57, 43, 0.08);
+
+    border: 1px solid rgba(192, 57, 43, 0.2);
+
+    border-radius: 4px;
+
+    font-size: 20px;
+}
+
+.jp_admin-card-content {
+    flex: 1;
+}
+
+.jp_admin-card-content h2 {
+    margin-bottom: 8px;
+
+    font-family: var(--ff-heading);
+    font-size: 17px;
+    font-weight: 700;
+
+    color: var(--clr-white);
+}
+
+.jp_admin-card-content p {
+    max-width: 430px;
+
+    font-family: var(--ff-body);
+    font-size: 13px;
+
+    line-height: 1.7;
+
+    color: var(--clr-muted);
+}
+
+.jp_admin-arrow {
+    color: #444;
+
+    transition:
+            color 0.2s,
+            transform 0.2s;
+}
+
+.jp_admin-card:hover .jp_admin-arrow {
+    color: var(--clr-accent);
+    transform: translateX(4px);
+}
+
+
+/* Admin information */
+
+.jp_admin-info {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 32px auto 0;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    background: var(--clr-card);
+
+    border: 1px solid var(--clr-border);
+
+    border-radius: 4px;
+}
+
+.jp_admin-info-item {
+    padding: 20px 24px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.jp_admin-info-item + .jp_admin-info-item {
+    border-left: 1px solid var(--clr-border);
+}
+
+.jp_admin-info-label {
+    font-family: var(--ff-heading);
+    font-size: 9px;
+    font-weight: 600;
+
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    color: var(--clr-muted);
+}
+
+.jp_admin-info-value {
+    font-family: var(--ff-body);
+    font-size: 13px;
+
+    color: var(--clr-text);
+
+    word-break: break-word;
+}
+
+.jp_admin-role {
+    width: fit-content;
+
+    padding: 4px 9px;
+
+    font-family: var(--ff-heading);
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    color: var(--clr-accent);
+
+    border: 1px solid rgba(192, 57, 43, 0.3);
+
+    background: rgba(192, 57, 43, 0.08);
+
+    border-radius: 2px;
+}
+
+
+/* Admin table */
+
+.jp_admin-table-card {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+    background: var(--clr-card);
+
+    border: 1px solid var(--clr-border);
+
+    border-radius: 4px;
+
+    overflow: hidden;
+}
+
+.jp_admin-table-wrap {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.jp_admin-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    font-family: var(--ff-body);
+    font-size: 12px;
+}
+
+.jp_admin-table th {
+    padding: 14px 16px;
+
+    background: #0e0e10;
+
+    border-bottom: 1px solid var(--clr-border);
+
+    color: var(--clr-muted);
+
+    font-family: var(--ff-heading);
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+    text-align: left;
+    text-transform: uppercase;
+
+    white-space: nowrap;
+}
+
+.jp_admin-table td {
+    padding: 14px 16px;
+
+    border-bottom: 1px solid var(--clr-border);
+
+    color: var(--clr-text);
+
+    vertical-align: middle;
+}
+
+.jp_admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.jp_admin-table tbody tr:hover {
+    background: #161618;
+}
+
+
+/* User status */
+
+.jp_user-verified,
+.jp_user-role {
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    border-radius: 3px;
+
+    font-family: var(--ff-heading);
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+
+    text-transform: uppercase;
+}
+
+.jp_user-verified.verified {
+    background: rgba(76, 175, 80, 0.12);
+    color: #4caf72;
+}
+
+.jp_user-verified.unverified {
+    background: rgba(255, 193, 7, 0.12);
+    color: #d9a900;
+}
+
+.jp_user-role.admin {
+    background: rgba(192, 57, 43, 0.12);
+    color: var(--clr-accent);
+}
+
+.jp_user-role.user {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--clr-muted);
+}
+
+
+/* Order status */
+
+.jp_order-status {
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    border-radius: 3px;
+
+    font-family: var(--ff-heading);
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+
+    text-transform: uppercase;
+}
+
+.status-pending {
+    background: rgba(255, 193, 7, 0.12);
+    color: #d9a900;
+}
+
+.status-processing {
+    background: rgba(33, 150, 243, 0.12);
+    color: #4da3e8;
+}
+
+.status-shipped {
+    background: rgba(156, 39, 176, 0.12);
+    color: #c36ad1;
+}
+
+.status-delivered {
+    background: rgba(76, 175, 80, 0.12);
+    color: #4caf72;
+}
+
+.status-cancelled {
+    background: rgba(192, 57, 43, 0.12);
+    color: var(--clr-accent);
+}
+
+
+/* Order actions */
+
+.jp_order-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+.jp_status-form {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.jp_status-select {
+    height: 32px;
+
+    padding: 0 8px;
+
+    background: #0e0e10;
+
+    border: 1px solid var(--clr-border);
+    border-radius: 3px;
+
+    outline: none;
+
+    color: var(--clr-text);
+
+    font-family: var(--ff-body);
+    font-size: 11px;
+}
+
+.jp_status-select:focus {
+    border-color: rgba(192, 57, 43, 0.5);
+}
+
+.jp_view-btn,
+.jp_update-btn {
+    height: 32px;
+
+    padding: 0 10px;
+
+    border-radius: 3px;
+
+    font-family: var(--ff-heading);
+    font-size: 9px;
+    font-weight: 700;
+
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+}
+
+.jp_view-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+
+    color: var(--clr-text);
+
+    border: 1px solid var(--clr-border);
+}
+
+.jp_view-btn:hover {
+    color: var(--clr-white);
+
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.jp_update-btn {
+    background: var(--clr-accent);
+
+    color: var(--clr-white);
+
+    border: none;
+}
+
+.jp_update-btn:hover {
+    background: var(--clr-accent-lt);
+}
+
+.jp_no-orders {
+    padding: 40px !important;
+
+    color: var(--clr-muted) !important;
+
+    text-align: center;
+}
+
+
+/* Order details */
+
+.jp_order-details-grid {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto 20px;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 16px;
+}
+
+.jp_detail-card {
+    min-height: 0;
+
+    padding: 24px;
+
+    display: block;
+}
+
+.jp_detail-card h2 {
+    margin-bottom: 14px;
+
+    color: var(--clr-white);
+
+    font-family: var(--ff-heading);
+    font-size: 15px;
+}
+
+.jp_detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    gap: 20px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid var(--clr-border);
+
+    font-size: 12px;
+}
+
+.jp_detail-row:last-child {
+    border-bottom: none;
+}
+
+.jp_detail-row span {
+    color: var(--clr-muted);
+}
+
+.jp_detail-row strong {
+    color: var(--clr-text);
+
+    text-align: right;
+}
+
+.jp_order-products {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 0 auto;
+}
+
+.jp_order-product {
+    display: grid;
+
+    grid-template-columns: 1fr 70px 120px;
+
+    gap: 15px;
+
+    align-items: center;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.jp_order-product:last-child {
+    border-bottom: none;
+}
+
+.jp_order-product div {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+.jp_order-product strong {
+    color: var(--clr-white);
+
+    font-family: var(--ff-heading);
+    font-size: 12px;
+}
+
+.jp_order-product span {
+    color: var(--clr-muted);
+
+    font-size: 11px;
+}
+
+.jp_order-product > span {
+    color: var(--clr-text);
+
+    text-align: right;
+}
+
+.jp_order-detail-footer {
+    width: 100%;
+    max-width: 1180px;
+
+    margin: 20px auto 0;
+}
+
+
+/* Admin footer */
+
+.jp_admin-footer {
+    margin-top: 0;
+}
+
+
+/* Mobile */
+
+@media (max-width: 1024px) {
+
+    .jp_admin-header .jp_nav-list {
+        gap: 12px;
+    }
+
+}
+
+@media (max-width: 900px) {
+
+    .jp_admin-header {
+        padding: 0 20px;
+    }
+
+    .jp_admin-header .jp_nav-list {
+        gap: 8px;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .jp_admin-page {
+        padding: 100px 20px 60px;
+    }
+
+    .jp_admin-title {
+        font-size: 32px;
+    }
+
+    .jp_admin-heading h1 {
+        font-size: 30px;
+    }
+
+    .jp_admin-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .jp_admin-card {
+        min-height: 150px;
+        padding: 24px;
+    }
+
+    .jp_admin-info {
+        grid-template-columns: 1fr;
+    }
+
+    .jp_admin-info-item + .jp_admin-info-item {
+        border-left: none;
+        border-top: 1px solid var(--clr-border);
+    }
+
+    .jp_order-details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .jp_order-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .jp_status-form {
+        width: 100%;
+    }
+
+    .jp_status-select {
+        flex: 1;
+    }
+
+    .jp_order-product {
+        grid-template-columns: 1fr 50px;
+    }
+
+    .jp_order-product > span:last-child {
+        grid-column: 1 / -1;
+        text-align: left;
+    }
+
+}
+
+@media (max-width: 650px) {
+
+    .jp_admin-header .jp_nav-link {
+        font-size: 0;
+    }
+
+    .jp_admin-header .jp_nav-link::before {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 13px;
+    }
+
+    .jp_admin-header .jp_nav-link[href="/admin"]::before {
+        content: "\f015";
+    }
+
+    .jp_admin-header .jp_nav-link[href="/admin/products"]::before {
+        content: "\f466";
+    }
+
+    .jp_admin-header .jp_nav-link[href="/admin/orders"]::before {
+        content: "\f07a";
+    }
+
+    .jp_admin-header .jp_nav-link[href="/admin/users"]::before {
+        content: "\f0c0";
+    }
+
+    .jp_admin-header .jp_nav-link[href="/admin/categories"]::before {
+        content: "\f5fd";
+    }
+
+    .jp_admin-header .jp_nav-actions {
+        gap: 8px;
+    }
+
+    .jp_admin-header .jp_nav-login {
+        font-size: 0;
+    }
+
+    .jp_admin-header .jp_nav-login::before {
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        font-size: 13px;
+    }
+
+    .jp_admin-header .jp_nav-login[href="/"]::before {
+        content: "\f35d";
+    }
+
+    .jp_admin-header .jp_nav-login[href="/logout"]::before {
+        content: "\f2f5";
+    }
+
+}

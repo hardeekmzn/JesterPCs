@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title th:text="${prebuilt.prebuiltId == 0 ? 'Add Pre-Built PC' : 'Edit Pre-Built PC'}">
+        Add Pre-Built PC
+    </title>
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/admin-prebuilt-form.css}">
+
+</head>
+
+<body>
+
+<header class="jp_header jp_admin-header">
+
+    <a th:href="@{/admin}" class="jp_logo">
+        <span class="jp_logo-jester">JESTER</span><span class="jp_logo-pcs">PCs</span>
+    </a>
+
+    <nav class="jp_nav">
+
+        <div class="jp_nav-list">
+
+            <a th:href="@{/admin}" class="jp_nav-link">
+                Dashboard
+            </a>
+
+            <a th:href="@{/admin/products}" class="jp_nav-link">
+                Products
+            </a>
+
+            <a th:href="@{/admin/orders}" class="jp_nav-link">
+                Orders
+            </a>
+
+            <a th:href="@{/admin/users}" class="jp_nav-link">
+                Users
+            </a>
+
+            <a th:href="@{/admin/categories}" class="jp_nav-link">
+                Categories
+            </a>
+
+        </div>
+
+        <div class="jp_nav-actions">
+
+            <a th:href="@{/}" class="jp_nav-login">
+                Site
+            </a>
+
+            <a th:href="@{/logout}" class="jp_nav-login">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<main class="jp_admin-page">
+
+    <section class="jp_admin-products-header">
+
+        <div>
+
+            <p class="jp_admin-label">
+                ADMIN PANEL
+            </p>
+
+            <h1 th:text="${prebuilt.prebuiltId == 0 ? 'Add Pre-Built PC' : 'Edit Pre-Built PC'}">
+                Add Pre-Built PC
+            </h1>
+
+            <p>
+                Create a ready-to-buy PC using products from your marketplace.
+            </p>
+
+        </div>
+
+        <a th:href="@{/admin/prebuilts}"
+           class="jp_admin-add-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Pre-Built PCs
+
+        </a>
+
+    </section>
+
+
+    <section class="jp_admin-products-panel">
+
+        <p class="jp_admin-category-error"
+           th:if="${error}"
+           th:text="${error}">
+        </p>
+
+
+        <form th:action="${prebuilt.prebuiltId == 0
+                ? '/admin/prebuilts/add'
+                : '/admin/prebuilts/edit/' + prebuilt.prebuiltId}"
+              method="post">
+
+
+            <div class="jp_admin-form-grid">
+
+
+                <div class="jp_admin-form-group">
+
+                    <label for="name">
+                        Build Name
+                    </label>
+
+                    <input type="text"
+                           id="name"
+                           name="name"
+                           th:value="${prebuilt.name}"
+                           placeholder="e.g. Jester Starter"
+                           minlength="2"
+                           maxlength="100"
+                           required>
+
+                    <span class="jp_field-help">
+                        This is the name customers will see.
+                    </span>
+
+                </div>
+
+
+                <div class="jp_admin-form-group">
+
+                    <label for="key">
+                        Build Identifier
+                    </label>
+
+                    <input type="text"
+                           id="key"
+                           name="key"
+                           th:value="${prebuilt.key}"
+                           placeholder="e.g. starter1080"
+                           minlength="3"
+                           maxlength="50"
+                           pattern="[A-Za-z0-9_-]{3,50}"
+                           required>
+
+                    <span class="jp_field-help">
+                        Internal identifier used by the system. Use simple letters and numbers.
+                    </span>
+
+                </div>
+
+
+                <div class="jp_admin-form-group">
+
+                    <label for="title">
+                        Build Title
+                    </label>
+
+                    <input type="text"
+                           id="title"
+                           name="title"
+                           th:value="${prebuilt.title}"
+                           maxlength="150"
+                           placeholder="e.g. Affordable 1080p Gaming PC">
+
+                    <span class="jp_field-help">
+                        A short line describing the build.
+                    </span>
+
+                </div>
+
+
+                <div class="jp_admin-form-group">
+
+                    <label for="targetResolution">
+                        Target Resolution
+                    </label>
+
+                    <input type="text"
+                           id="targetResolution"
+                           name="targetResolution"
+                           th:value="${prebuilt.targetResolution}"
+                           maxlength="50"
+                           placeholder="e.g. 1080p">
+
+                    <span class="jp_field-help">
+                        What resolution this PC is designed for.
+                    </span>
+
+                </div>
+
+
+                <div class="jp_admin-form-group">
+
+                    <label for="performance">
+                        Performance Level
+                    </label>
+
+                    <input type="text"
+                           id="performance"
+                           name="performance"
+                           maxlength="50"
+                           th:value="${prebuilt.performance}"
+                           placeholder="e.g. Entry Level, Mid Range, High End">
+
+                </div>
+
+
+                <div class="jp_admin-form-group">
+
+                    <label for="bestFor">
+                        Best For
+                    </label>
+
+                    <input type="text"
+                           id="bestFor"
+                           name="bestFor"
+                           maxlength="100"
+                           th:value="${prebuilt.bestFor}"
+                           placeholder="e.g. 1080p Gaming and Everyday Use">
+
+                </div>
+
+
+                <div class="jp_admin-form-group jp_admin-form-full">
+
+                    <label for="imageUrl">
+                        PC Image URL
+                    </label>
+
+                    <input type="url"
+                           id="imageUrl"
+                           name="imageUrl"
+                           maxlength="500"
+                           th:value="${prebuilt.imageUrl}"
+                           placeholder="https://example.com/gaming-pc.jpg">
+
+                    <span class="jp_field-help">
+                        Add the image URL that should be shown for this PC.
+                    </span>
+
+                </div>
+
+
+                <div class="jp_admin-form-group jp_admin-form-full">
+
+                    <label for="description">
+                        Build Description
+                    </label>
+
+                    <textarea id="description"
+                              name="description"
+                              rows="5"
+                              maxlength="3000"
+                              placeholder="Explain what this build is good for..."
+                              th:text="${prebuilt.description}"></textarea>
+
+                </div>
+
+            </div>
+
+
+            <div class="jp_admin-form-section">
+
+                <div class="jp_admin-form-section-header">
+
+                    <div>
+
+                        <h2>
+                            Select Components
+                        </h2>
+
+                        <p>
+                            Choose the products that are included in this pre-built PC.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="jp_admin-product-tools">
+
+                    <input type="search"
+                           id="productSearch"
+                           class="jp_admin-search"
+                           placeholder="Search components...">
+
+                    <select id="categoryFilter"
+                            class="jp_admin-category-filter">
+
+                        <option value="all">
+                            All Categories
+                        </option>
+
+                        <option th:each="category : ${categories}"
+                                th:value="${category.categoryId}"
+                                th:text="${category.categoryName}">
+                            CPU
+                        </option>
+
+                    </select>
+
+                    <div class="jp_admin-selected-count">
+                        0 components selected
+                    </div>
+
+                </div>
+
+
+                <div class="jp_admin-product-select">
+
+                    <label th:each="product : ${products}"
+                           class="jp_admin-product-option"
+                           th:attr="data-category=${product.categoryId}">
+
+                        <input type="checkbox"
+                               name="productIds"
+                               th:value="${product.productId}"
+                               th:checked="${selectedProductIds != null
+                                    and selectedProductIds.contains(product.productId)}">
+
+                        <div class="jp_admin-product-option-info">
+
+                            <strong th:text="${product.productName}">
+                                AMD Ryzen 5 5600
+                            </strong>
+
+                            <span>
+
+                                <span th:text="${product.categoryName}">
+                                    CPU
+                                </span>
+
+                                · Rs.
+
+                                <span th:text="${#numbers.formatDecimal(product.price, 0, 0)}">
+                                    18,500
+                                </span>
+
+                            </span>
+
+                        </div>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <div class="jp_admin-form-actions">
+
+                <a th:href="@{/admin/prebuilts}"
+                   class="jp_admin-cancel-btn">
+
+                    Cancel
+
+                </a>
+
+
+                <button type="submit"
+                        class="jp_admin-add-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    <span th:text="${prebuilt.prebuiltId == 0
+                            ? 'Create Pre-Built'
+                            : 'Save Changes'}">
+                        Create Pre-Built
+                    </span>
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </section>
+
+</main>
+
+
+<footer class="jp_footer jp_admin-footer">
+
+    <div class="jp_footer-bar">
+        JesterPCs Admin Panel
+    </div>
+
+</footer>
+
+
+<script th:src="@{/js/admin-prebuilt-form.js}"></script>
+
+</body>
+
+</html>

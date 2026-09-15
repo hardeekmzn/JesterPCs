@@ -1,0 +1,379 @@
+.jp_admin-page {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 55px 32px 80px;
+}
+
+.jp_admin-products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    gap: 30px;
+    padding-bottom: 32px;
+    margin-bottom: 34px;
+
+    border-bottom: 1px solid var(--clr-border);
+}
+
+.jp_admin-label {
+    margin: 0 0 10px;
+
+    font-family: var(--ff-heading);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+
+    color: var(--clr-accent);
+}
+
+.jp_admin-products-header h1 {
+    margin: 0 0 8px;
+
+    font-family: var(--ff-heading);
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+
+    color: var(--clr-text);
+}
+
+.jp_admin-products-header > div > p:last-child {
+    margin: 0;
+
+    font-family: var(--ff-body);
+    font-size: 13px;
+    line-height: 1.6;
+
+    color: var(--clr-muted);
+}
+
+.jp_admin-add-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-height: 46px;
+    padding: 0 20px;
+
+    background: var(--clr-accent);
+    border: 1px solid var(--clr-accent);
+    border-radius: 3px;
+
+    font-family: var(--ff-heading);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    color: #fff;
+    text-decoration: none;
+
+    transition:
+            background 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+}
+
+.jp_admin-add-btn:hover {
+    background: #a93226;
+    border-color: #a93226;
+    transform: translateY(-1px);
+}
+
+.jp_admin-products-panel {
+    width: 100%;
+
+    background: var(--clr-card);
+    border: 1px solid var(--clr-border);
+    border-radius: 5px;
+
+    overflow: hidden;
+}
+
+.jp_admin-empty {
+    min-height: 330px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    padding: 50px 30px;
+
+    text-align: center;
+}
+
+.jp_admin-empty > i {
+    margin-bottom: 20px;
+
+    font-size: 34px;
+    color: #444;
+}
+
+.jp_admin-empty h2 {
+    margin: 0 0 9px;
+
+    font-family: var(--ff-heading);
+    font-size: 21px;
+    font-weight: 700;
+
+    color: var(--clr-text);
+}
+
+.jp_admin-empty p {
+    margin: 0 0 24px;
+
+    font-family: var(--ff-body);
+    font-size: 12px;
+
+    color: var(--clr-muted);
+}
+
+.jp_admin-empty .jp_admin-add-btn {
+    min-width: 150px;
+}
+
+.jp_admin-success {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin: 20px 24px;
+    padding: 13px 15px;
+
+    background: rgba(46, 125, 50, 0.08);
+    border: 1px solid rgba(46, 125, 50, 0.22);
+    border-radius: 3px;
+
+    font-family: var(--ff-body);
+    font-size: 12px;
+
+    color: #8bc48e;
+}
+
+.jp_admin-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.jp_admin-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    font-family: var(--ff-body);
+    font-size: 12px;
+}
+
+.jp_admin-table th {
+    padding: 16px 18px;
+
+    background: #101012;
+    border-bottom: 1px solid var(--clr-border);
+
+    font-family: var(--ff-heading);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    text-align: left;
+    text-transform: uppercase;
+
+    color: var(--clr-muted);
+
+    white-space: nowrap;
+}
+
+.jp_admin-table td {
+    padding: 18px;
+
+    border-bottom: 1px solid var(--clr-border);
+
+    color: var(--clr-text);
+
+    vertical-align: middle;
+}
+
+.jp_admin-table tbody tr {
+    transition: background 0.15s ease;
+}
+
+.jp_admin-table tbody tr:hover {
+    background: #151517;
+}
+
+.jp_admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.jp_product-name {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    min-width: 180px;
+}
+
+.jp_product-name strong {
+    font-family: var(--ff-heading);
+    font-size: 13px;
+    font-weight: 700;
+
+    color: var(--clr-text);
+}
+
+.jp_product-name span {
+    font-family: var(--ff-body);
+    font-size: 11px;
+
+    color: var(--clr-muted);
+}
+
+.jp_admin-table td:nth-child(1) {
+    width: 55px;
+
+    font-family: var(--ff-heading);
+    font-size: 10px;
+    font-weight: 700;
+
+    color: #666;
+}
+
+.jp_admin-table td:nth-child(3) {
+    font-family: monospace;
+    font-size: 11px;
+
+    color: #888;
+}
+
+.jp_admin-table td:nth-child(4) {
+    color: #bbb;
+}
+
+.jp_admin-table td:nth-child(5) {
+    font-family: var(--ff-heading);
+    font-weight: 600;
+}
+
+.jp_admin-table td:nth-child(6) {
+    font-family: var(--ff-heading);
+    font-size: 12px;
+    font-weight: 700;
+
+    color: var(--clr-text);
+
+    white-space: nowrap;
+}
+
+.jp_admin-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.jp_admin-edit-btn,
+.jp_admin-delete-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    min-height: 34px;
+    padding: 0 11px;
+
+    border-radius: 3px;
+
+    font-family: var(--ff-heading);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+
+    text-decoration: none;
+
+    transition:
+            background 0.2s ease,
+            border-color 0.2s ease,
+            color 0.2s ease;
+}
+
+.jp_admin-edit-btn {
+    background: #18181a;
+    border: 1px solid #333;
+
+    color: #bbb;
+}
+
+.jp_admin-edit-btn:hover {
+    background: #202022;
+    border-color: #555;
+
+    color: #fff;
+}
+
+.jp_admin-delete-btn {
+    background: transparent;
+    border: 1px solid rgba(192, 57, 43, 0.3);
+
+    color: #c75a4e;
+}
+
+.jp_admin-delete-btn:hover {
+    background: rgba(192, 57, 43, 0.08);
+    border-color: rgba(192, 57, 43, 0.55);
+
+    color: #df7165;
+}
+
+@media (max-width: 900px) {
+
+    .jp_admin-page {
+        padding: 40px 22px 60px;
+    }
+
+    .jp_admin-products-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .jp_admin-products-header h1 {
+        font-size: 30px;
+    }
+
+    .jp_admin-products-header .jp_admin-add-btn {
+        width: auto;
+    }
+
+    .jp_admin-table {
+        min-width: 900px;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .jp_admin-page {
+        padding: 30px 15px 50px;
+    }
+
+    .jp_admin-products-header {
+        padding-bottom: 25px;
+        margin-bottom: 25px;
+    }
+
+    .jp_admin-products-header h1 {
+        font-size: 27px;
+    }
+
+    .jp_admin-products-header .jp_admin-add-btn {
+        width: 100%;
+    }
+
+    .jp_admin-empty {
+        min-height: 280px;
+        padding: 40px 20px;
+    }
+
+}

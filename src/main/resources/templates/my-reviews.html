@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>JesterPCs — My Reviews</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          th:href="@{/css/shared.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/my-reviews.css}">
+
+</head>
+
+<body>
+
+<!-- Header -->
+
+<div id="jp_header-mount"></div>
+
+
+<!-- Page hero -->
+
+<div class="jp_reviews-hero">
+
+    <div class="jp_reviews-hero-inner">
+
+        <a class="jp_reviews-back"
+           th:href="@{/account}">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            My Account
+
+        </a>
+
+
+        <p class="jp_reviews-eyebrow">
+            Account
+        </p>
+
+
+        <h1 class="jp_reviews-title">
+            My Reviews
+        </h1>
+
+
+        <p class="jp_reviews-subtitle">
+            Reviews you have posted for JesterPCs products.
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- Main content -->
+
+<main class="jp_reviews-page">
+
+
+    <!-- Review count -->
+
+    <div class="jp_reviews-top">
+
+        <div>
+
+            <h2 class="jp_reviews-heading">
+                Your Reviews
+            </h2>
+
+
+            <p class="jp_reviews-count"
+               th:text="${reviews.size() == 1
+                        ? '1 review'
+                        : reviews.size() + ' reviews'}">
+                0 reviews
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- No reviews -->
+
+    <div class="jp_my-review-empty"
+         th:if="${reviews.isEmpty()}">
+
+        <div class="jp_my-review-empty-icon">
+
+            <i class="fa-regular fa-star"></i>
+
+        </div>
+
+
+        <h3>
+            You haven't written any reviews yet.
+        </h3>
+
+
+        <p>
+            Once you purchase and receive a product, you can leave a review from its product page.
+        </p>
+
+
+        <a class="jp_btn jp_btn-primary"
+           th:href="@{/marketplace}">
+
+            <i class="fa-solid fa-store"></i>
+
+            Browse Marketplace
+
+        </a>
+
+    </div>
+
+
+    <!-- Reviews -->
+
+    <div class="jp_my-reviews-list"
+         th:if="${!reviews.isEmpty()}">
+
+        <article class="jp_my-review-card"
+                 th:each="review : ${reviews}">
+
+
+            <!-- Product -->
+
+            <div class="jp_my-review-product">
+
+                <div class="jp_my-review-image">
+
+                    <img th:if="${productsByReview[review.reviewId] != null
+                                and productsByReview[review.reviewId].imageUrl != null
+                                and !productsByReview[review.reviewId].imageUrl.isEmpty()}"
+                         th:src="${productsByReview[review.reviewId].imageUrl}"
+                         th:alt="${productsByReview[review.reviewId].productName}">
+
+
+                    <div class="jp_my-review-image-placeholder"
+                         th:if="${productsByReview[review.reviewId] == null
+                                or productsByReview[review.reviewId].imageUrl == null
+                                or productsByReview[review.reviewId].imageUrl.isEmpty()}">
+
+                        <i class="fa-solid fa-microchip"></i>
+
+                    </div>
+
+                </div>
+
+
+                <div class="jp_my-review-product-info">
+
+                    <span class="jp_my-review-label">
+                        Product
+                    </span>
+
+
+                    <h3 class="jp_my-review-product-name"
+                        th:text="${productsByReview[review.reviewId] != null
+                                  ? productsByReview[review.reviewId].productName
+                                  : 'Product unavailable'}">
+                        Product Name
+                    </h3>
+
+
+                    <p class="jp_my-review-brand"
+                       th:if="${productsByReview[review.reviewId] != null
+                               and productsByReview[review.reviewId].brand != null
+                               and !productsByReview[review.reviewId].brand.isEmpty()}"
+                       th:text="${productsByReview[review.reviewId].brand}">
+                        Brand
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Review content -->
+
+            <div class="jp_my-review-content">
+
+
+                <!-- Rating -->
+
+                <div class="jp_my-review-rating">
+
+                    <div class="jp_my-review-stars">
+
+                        <i th:each="star : ${#numbers.sequence(1, 5)}"
+                           class="fa-solid fa-star"
+                           th:classappend="${star <= review.rating
+                                            ? ' jp_star-filled'
+                                            : ' jp_star-empty'}">
+                        </i>
+
+                    </div>
+
+
+                    <span class="jp_my-review-rating-number"
+                          th:text="${review.rating} + '/5'">
+                        5/5
+                    </span>
+
+                </div>
+
+
+                <!-- Verified purchase -->
+
+                <div class="jp_my-review-verified">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    Verified Purchase
+
+                </div>
+
+
+                <!-- Review text -->
+
+                <p class="jp_my-review-text"
+                   th:text="${review.reviewText}">
+                    This is the review text.
+                </p>
+
+
+                <!-- Review meta -->
+
+                <div class="jp_my-review-meta">
+
+                    <span>
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        <span th:text="${review.createdAt != null
+                                        ? #temporals.format(review.createdAt, 'dd MMM yyyy')
+                                        : 'Date unavailable'}">
+                            12 Sep 2026
+                        </span>
+
+                    </span>
+
+
+                    <span>
+
+                        <i class="fa-solid fa-arrow-up"></i>
+
+                        <span th:text="${review.upvoteCount}">
+                            0
+                        </span>
+
+                        <span>
+                            upvotes
+                        </span>
+
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Actions -->
+
+            <div class="jp_my-review-actions">
+
+
+                <a class="jp_my-review-view"
+                   th:if="${productsByReview[review.reviewId] != null}"
+                   th:href="@{/product/{id}(id=${review.productId})}">
+
+                    <i class="fa-regular fa-eye"></i>
+
+                    View Product
+
+                </a>
+
+
+                <div class="jp_my-review-buttons">
+
+
+                    <a class="jp_btn jp_btn-ghost"
+                       th:href="@{/product/{id}(id=${review.productId})#reviews}">
+
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                        View Review
+
+                    </a>
+
+
+                    <a class="jp_btn jp_btn-primary"
+                       th:href="@{/product/{id}(id=${review.productId})#reviews}">
+
+                        <i class="fa-solid fa-pen"></i>
+
+                        Manage Review
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    </div>
+
+</main>
+
+
+<!-- Footer -->
+
+<div id="jp_footer-mount"></div>
+
+
+<!-- Shared components -->
+
+<script th:src="@{/js/components.js}"></script>
+
+<script>
+
+    initHeader();
+    initFooter();
+
+</script>
+
+
+</body>
+</html>
