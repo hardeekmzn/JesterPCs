@@ -22,6 +22,9 @@
     <link rel="stylesheet"
           th:href="@{/css/admin.css}">
 
+    <link rel="stylesheet"
+          th:href="@{/css/admin-users.css}">
+
 </head>
 
 <body>
@@ -90,11 +93,78 @@
     </div>
 
 
+    <div class="jp_user-stats">
+
+        <div class="jp_user-stat">
+
+            <span class="jp_user-stat-label">
+                Total Users
+            </span>
+
+            <span class="jp_user-stat-value"
+                  th:text="${totalUsers}">
+                0
+            </span>
+
+        </div>
+
+
+        <div class="jp_user-stat">
+
+            <span class="jp_user-stat-label">
+                Verified
+            </span>
+
+            <span class="jp_user-stat-value"
+                  th:text="${verifiedUsers}">
+                0
+            </span>
+
+        </div>
+
+
+        <div class="jp_user-stat">
+
+            <span class="jp_user-stat-label">
+                Not Verified
+            </span>
+
+            <span class="jp_user-stat-value"
+                  th:text="${unverifiedUsers}">
+                0
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div class="jp_user-toolbar">
+
+        <div class="jp_user-search-wrap">
+
+            <i class="fa-solid fa-magnifying-glass jp_user-search-icon"></i>
+
+            <input type="text"
+                   id="jp_user-search"
+                   class="jp_user-search"
+                   placeholder="Search by name, username or email">
+
+        </div>
+
+        <span id="jp_user-results"
+              class="jp_user-results">
+            Showing all users
+        </span>
+
+    </div>
+
+
     <div class="jp_admin-table-card">
 
-        <div class="jp_admin-table-wrap">
+        <div class="jp_admin-table-wrap jp_user-table-wrap">
 
-            <table class="jp_admin-table">
+            <table class="jp_admin-table jp_user-table">
 
                 <thead>
 
@@ -103,16 +173,20 @@
                     <th>Full Name</th>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Joined</th>
                     <th>Email Status</th>
                     <th>Role</th>
+                    <th>Action</th>
                 </tr>
 
                 </thead>
 
 
-                <tbody>
+                <tbody id="jp_user-tbody">
 
-                <tr th:each="u : ${users}">
+                <tr th:each="u : ${users}"
+                    class="jp_user-row"
+                    th:data-search="${u.fullName + ' ' + u.username + ' ' + u.email}">
 
                     <td th:text="${u.userId}">
                         1
@@ -128,6 +202,11 @@
 
                     <td th:text="${u.email}">
                         email@example.com
+                    </td>
+
+                    <td class="jp_user-created"
+                        th:text="${u.createdAt != null ? #temporals.format(u.createdAt, 'dd MMM yyyy') : '-'}">
+                        14 Sep 2026
                     </td>
 
                     <td>
@@ -150,12 +229,47 @@
 
                     </td>
 
+                    <td>
+
+                        <a th:if="${u.role != null and !u.role.equalsIgnoreCase('ADMIN')}"
+                           th:href="@{'/admin/users/delete/' + ${u.userId}}"
+                           class="jp_user-delete"
+                           th:attr="data-username=${u.username}"
+                           onclick="return confirmDelete(this);">
+
+                            <i class="fa-solid fa-trash"></i>
+
+                            Delete
+
+                        </a>
+
+
+                        <span th:if="${u.role != null and u.role.equalsIgnoreCase('ADMIN')}"
+                              class="jp_user-admin-label">
+                            Protected
+                        </span>
+
+                    </td>
+
+                </tr>
+
+
+                <tr id="jp_user-no-results"
+                    style="display: none;">
+
+                    <td colspan="8"
+                        class="jp_no-orders">
+
+                        No users match your search.
+
+                    </td>
+
                 </tr>
 
 
                 <tr th:if="${#lists.isEmpty(users)}">
 
-                    <td colspan="6"
+                    <td colspan="8"
                         class="jp_no-orders">
 
                         No users found.
@@ -182,6 +296,99 @@
     </div>
 
 </footer>
+
+
+<script>
+
+    const searchInput =
+        document.getElementById("jp_user-search");
+
+    const rows =
+        Array.from(
+            document.querySelectorAll(".jp_user-row")
+        );
+
+    const resultText =
+        document.getElementById("jp_user-results");
+
+    const noResults =
+        document.getElementById("jp_user-no-results");
+
+
+    searchInput.addEventListener(
+        "input",
+        function () {
+
+            const query =
+                this.value
+                    .trim()
+                    .toLowerCase();
+
+            let visibleCount = 0;
+
+
+            rows.forEach(row => {
+
+                const text =
+                    row.dataset.search
+                        .toLowerCase();
+
+                const matches =
+                    !query ||
+                    text.includes(query);
+
+
+                row.style.display =
+                    matches
+                        ? ""
+                        : "none";
+
+
+                if (matches) {
+                    visibleCount++;
+                }
+
+            });
+
+
+            if (query && visibleCount === 0) {
+                noResults.style.display = "";
+            } else {
+                noResults.style.display = "none";
+            }
+
+
+            if (!query) {
+
+                resultText.textContent =
+                    "Showing all users";
+
+            } else {
+
+                resultText.textContent =
+                    visibleCount +
+                    (visibleCount === 1
+                        ? " user found"
+                        : " users found");
+            }
+
+        }
+    );
+
+
+    function confirmDelete(link) {
+
+        const username =
+            link.dataset.username || "this user";
+
+        return confirm(
+            "Are you sure you want to delete " +
+            username +
+            "?\n\nThis action cannot be undone."
+        );
+    }
+
+</script>
 
 </body>
 </html>
