@@ -1,7 +1,6 @@
 initHeader(null, true);
 initFooter();
 
-/* Profile edit toggle */
 
 const profileView =
     document.getElementById("jp_profile-view");
@@ -32,8 +31,6 @@ document
 
     });
 
-
-/* Save profile */
 
 document
     .getElementById("jp_save-profile-btn")
@@ -85,66 +82,87 @@ document
 
 
         if (!fullName) {
+
             showToast("Full name is required.");
             nameInput.focus();
+
             return;
         }
 
-        if (fullName.length < 2
-            || fullName.length > 50
-            || !namePattern.test(fullName)) {
+
+        if (
+            fullName.length < 2 ||
+            fullName.length > 50 ||
+            !namePattern.test(fullName)
+        ) {
 
             showToast("Please enter a valid full name.");
             nameInput.focus();
+
             return;
         }
 
 
         if (!username) {
+
             showToast("Username is required.");
             usernameInput.focus();
+
             return;
         }
 
-        if (username.length < 3
-            || username.length > 30
-            || !usernamePattern.test(username)) {
+
+        if (
+            username.length < 3 ||
+            username.length > 30 ||
+            !usernamePattern.test(username)
+        ) {
 
             showToast(
                 "Username must be 3-30 characters and use only letters, numbers, dots, or underscores."
             );
 
             usernameInput.focus();
+
             return;
         }
 
 
         if (!email) {
+
             showToast("Email address is required.");
             emailInput.focus();
+
             return;
         }
 
-        if (email.length > 254
-            || !emailPattern.test(email)) {
+
+        if (
+            email.length > 254 ||
+            !emailPattern.test(email)
+        ) {
 
             showToast(
                 "Please enter a valid email address."
             );
 
             emailInput.focus();
+
             return;
         }
 
 
-        if (phone
-            && !phonePattern.test(phone)) {
+        if (
+            phone &&
+            !phonePattern.test(phone)
+        ) {
 
             showToast(
                 "Please enter a valid Nepal mobile number."
             );
 
             phoneInput.focus();
+
             return;
         }
 
@@ -156,6 +174,7 @@ document
             );
 
             addressInput.focus();
+
             return;
         }
 
@@ -189,6 +208,7 @@ document
             if (!result.success) {
 
                 showToast(result.message);
+
                 return;
             }
 
@@ -250,8 +270,6 @@ document
     });
 
 
-/* Password change */
-
 document
     .getElementById("jp_save-pw-btn")
     .addEventListener("click", async () => {
@@ -284,9 +302,11 @@ document
             "jp_settings-msg";
 
 
-        if (!currentPassword
-            || !newPassword
-            || !confirmPassword) {
+        if (
+            !currentPassword ||
+            !newPassword ||
+            !confirmPassword
+        ) {
 
             msgEl.textContent =
                 "Please fill in all password fields.";
@@ -390,8 +410,6 @@ document
     });
 
 
-/* Password visibility toggles */
-
 document
     .querySelectorAll(".jp_toggle-pw")
     .forEach(btn => {
@@ -432,8 +450,6 @@ document
     });
 
 
-/* Order details */
-
 document
     .querySelectorAll(".jp_order-detail-btn")
     .forEach(btn => {
@@ -447,6 +463,7 @@ document
                 return;
             }
 
+
             window.location.href =
                 "/order-success?orderId=" +
                 encodeURIComponent(orderId);
@@ -456,61 +473,60 @@ document
     });
 
 
-/* Delete account confirmation */
-
 document
     .getElementById("jp_delete-btn")
-    .addEventListener("click", async () => {
+    .addEventListener("click", () => {
 
-        const confirmed =
-            confirm(
-                "Are you sure you want to delete your account? This cannot be undone."
-            );
+        showConfirmModal(
+            "Delete Account?",
+            "Are you sure you want to delete your account? This cannot be undone.",
+            "Delete",
+            async () => {
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/account/delete",
+                            {
+                                method: "POST"
+                            }
+                        );
 
 
-        if (!confirmed) {
-            return;
-        }
+                    const result =
+                        await response.json();
 
 
-        try {
+                    if (!result.success) {
 
-            const response =
-                await fetch(
-                    "/account/delete",
-                    {
-                        method: "POST"
+                        showToast(
+                            result.message
+                        );
+
+                        return;
                     }
-                );
 
 
-            const result =
-                await response.json();
+                    window.location.href =
+                        "/";
 
+                } catch (error) {
 
-            if (!result.success) {
+                    showToast(
+                        "Unable to delete account."
+                    );
 
-                showToast(result.message);
-                return;
+                }
+
             }
-
-
-            window.location.href = "/";
-
-        } catch (error) {
-
-            showToast(
-                "Unable to delete account."
-            );
-
-        }
+        );
 
     });
 
 
-/* Toast */
-
 let toastTimer = null;
+
 
 function showToast(message) {
 
@@ -521,7 +537,8 @@ function showToast(message) {
         document.getElementById("jp_toast-msg");
 
 
-    toastMsg.textContent = message;
+    toastMsg.textContent =
+        message;
 
     toast.classList.add(
         "jp_toast-show"

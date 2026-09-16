@@ -19,15 +19,16 @@
   <link rel="stylesheet"
         th:href="@{/css/accounts.css}">
 
+  <link rel="stylesheet"
+        th:href="@{/css/confirm-modal.css}">
+
 </head>
 
 <body>
 
-<!-- Header -->
 <div id="jp_header-mount"></div>
 
 
-<!-- Account hero -->
 <div class="jp_acct-hero">
 
   <div class="jp_acct-hero-inner">
@@ -85,26 +86,8 @@
 </div>
 
 
-<!-- Section jump links -->
-<div class="jp_jump-bar">
-
-  <div class="jp_jump-inner">
-
-    <a href="#jp_profile" class="jp_jump-link jp_jump-active">Profile</a>
-    <a href="#jp_orders" class="jp_jump-link">Orders</a>
-    <a href="#jp_settings" class="jp_jump-link">Settings</a>
-
-  </div>
-
-</div>
-
-
-<!-- Main content -->
-
 <main class="jp_account-page">
 
-
-  <!-- PROFILE -->
 
   <section class="jp_section"
            id="jp_profile">
@@ -128,8 +111,6 @@
 
     </div>
 
-
-    <!-- View mode -->
 
     <div class="jp_profile-view"
          id="jp_profile-view">
@@ -218,8 +199,6 @@
 
     </div>
 
-
-    <!-- Edit mode -->
 
     <div class="jp_profile-edit"
          id="jp_profile-edit"
@@ -334,8 +313,6 @@
   </section>
 
 
-  <!-- ORDER HISTORY -->
-
   <section class="jp_section"
            id="jp_orders">
 
@@ -356,9 +333,6 @@
 
     <div class="jp_orders-list">
 
-
-      <!-- No orders -->
-
       <div class="jp_order-card"
            th:if="${orders.isEmpty()}">
 
@@ -372,8 +346,6 @@
 
       </div>
 
-
-      <!-- Real orders -->
 
       <div class="jp_order-card"
            th:each="order : ${orders}">
@@ -415,8 +387,6 @@
         </div>
 
 
-        <!-- Real order items -->
-
         <div class="jp_order-items-preview">
 
           <span th:if="${orderItemsByOrder[order.orderId] == null
@@ -441,28 +411,11 @@
           </span>
 
 
-          <div class="jp_order-buttons">
-
-            <button class="jp_order-detail-btn"
-                    type="button"
-                    th:attr="data-order=${order.orderId}">
-              View Details
-            </button>
-
-
-            <form method="post"
-                  th:if="${order.status == 'Pending' or order.status == 'Processing'}"
-                  th:action="@{/account/orders/{id}/cancel(id=${order.orderId})}"
-                  onsubmit="return confirm('Are you sure you want to cancel this order?');">
-
-              <button class="jp_order-detail-btn jp_order-cancel-btn"
-                      type="submit">
-                Cancel Order
-              </button>
-
-            </form>
-
-          </div>
+          <button class="jp_order-detail-btn"
+                  type="button"
+                  th:attr="data-order=${order.orderId}">
+            View Details
+          </button>
 
         </div>
 
@@ -472,8 +425,6 @@
 
   </section>
 
-
-  <!-- MY REVIEWS -->
 
   <section class="jp_section"
            id="jp_reviews">
@@ -521,8 +472,6 @@
   </section>
 
 
-  <!-- SETTINGS -->
-
   <section class="jp_section"
            id="jp_settings">
 
@@ -534,8 +483,6 @@
 
     </div>
 
-
-    <!-- Change password -->
 
     <div class="jp_settings-block">
 
@@ -666,8 +613,6 @@
 
     </div>
 
-
-    <!-- Notifications -->
 
     <div class="jp_settings-block">
 
@@ -805,8 +750,6 @@
     </div>
 
 
-    <!-- Danger zone -->
-
     <div class="jp_settings-block jp_danger-block">
 
       <div class="jp_settings-block-header">
@@ -882,8 +825,6 @@
 </main>
 
 
-<!-- Toast -->
-
 <div class="jp_toast"
      id="jp_toast">
 
@@ -896,12 +837,11 @@
 </div>
 
 
-<!-- Footer -->
-
 <div id="jp_footer-mount"></div>
 
 
 <script th:src="@{/js/components.js}"></script>
+<script th:src="@{/js/confirm-modal.js}"></script>
 <script th:src="@{/js/accounts.js}"></script>
 
 </body>

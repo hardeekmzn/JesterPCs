@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>JesterPCs — Manage Products</title>
+    <title>JesterPCs — Products</title>
 
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap"
           rel="stylesheet">
@@ -24,6 +24,9 @@
 
     <link rel="stylesheet"
           th:href="@{/css/admin-products.css}">
+
+    <link rel="stylesheet"
+          th:href="@{/css/confirm-modal.css}">
 
 </head>
 
@@ -61,6 +64,7 @@
 
         </div>
 
+
         <div class="jp_nav-actions">
 
             <a href="/" class="jp_nav-login">
@@ -79,8 +83,6 @@
 
 
 <main class="jp_admin-products-page">
-
-    <!-- Page Header -->
 
     <section class="jp_admin-products-header">
 
@@ -112,8 +114,6 @@
 
     </section>
 
-
-    <!-- Product Table -->
 
     <section class="jp_admin-products-panel">
 
@@ -245,9 +245,11 @@
 
 
                             <a th:href="@{'/admin/products/delete/' + ${product.productId}}"
-                               class="jp_action-btn jp_action-delete"
+                               class="jp_action-btn jp_action-delete jp_confirm-delete"
                                title="Delete"
-                               onclick="return confirm('Are you sure you want to delete this product?');">
+                               data-confirm-title="Delete Product?"
+                               data-confirm-message="Are you sure you want to delete this product?"
+                               data-confirm-action="Delete">
 
                                 <i class="fa-solid fa-trash"></i>
 
@@ -295,6 +297,7 @@
 </footer>
 
 
+<script src="/js/confirm-modal.js"></script>
 <script src="/js/admin-products.js"></script>
 
 </body>

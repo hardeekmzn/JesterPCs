@@ -56,7 +56,7 @@ public class AdminController {
         this.prebuiltDAO = prebuiltDAO;
     }
 
-    // Check whether logged-in user is an admin
+    // Check admin user
     private User getAdminUser(HttpSession session) {
 
         User user = (User) session.getAttribute("user");
@@ -138,7 +138,7 @@ public class AdminController {
         model.addAttribute("selectedProductIds", selectedProductIds);
     }
 
-    // Check whether pre-built key already exists
+    // Check pre-built key
     private boolean prebuiltKeyExists(String key, int prebuiltId) {
 
         List<PreBuilts> prebuilts = prebuiltDAO.getAllPrebuilts();
@@ -319,6 +319,12 @@ public class AdminController {
         }
 
         return null;
+    }
+
+    // Confirmation modal
+    @GetMapping("/components/confirm-modal")
+    public String confirmModal() {
+        return "confirm-modal";
     }
 
     // Admin dashboard

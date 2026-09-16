@@ -25,6 +25,9 @@
     <link rel="stylesheet"
           th:href="@{/css/admin-users.css}">
 
+    <link rel="stylesheet"
+          th:href="@{/css/confirm-modal.css}">
+
 </head>
 
 <body>
@@ -233,9 +236,11 @@
 
                         <a th:if="${u.role != null and !u.role.equalsIgnoreCase('ADMIN')}"
                            th:href="@{'/admin/users/delete/' + ${u.userId}}"
-                           class="jp_user-delete"
+                           class="jp_user-delete jp_confirm-delete"
                            th:attr="data-username=${u.username}"
-                           onclick="return confirmDelete(this);">
+                           data-confirm-title="Delete User?"
+                           data-confirm-message="Are you sure you want to delete this user?"
+                           data-confirm-action="Delete">
 
                             <i class="fa-solid fa-trash"></i>
 
@@ -375,20 +380,10 @@
         }
     );
 
-
-    function confirmDelete(link) {
-
-        const username =
-            link.dataset.username || "this user";
-
-        return confirm(
-            "Are you sure you want to delete " +
-            username +
-            "?\n\nThis action cannot be undone."
-        );
-    }
-
 </script>
+
+
+<script th:src="@{/js/confirm-modal.js}"></script>
 
 </body>
 </html>
