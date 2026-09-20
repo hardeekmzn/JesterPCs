@@ -1,12 +1,17 @@
 USE jesterpcs;
 
-
 -- Database overview
 
 SHOW TABLES;
 
 
 -- Describe
+
+DESCRIBE users;
+
+DESCRIBE email_verification;
+
+DESCRIBE login_verification;
 
 DESCRIBE categories;
 
@@ -15,6 +20,24 @@ DESCRIBE products;
 DESCRIBE cart;
 
 DESCRIBE cart_items;
+
+DESCRIBE orders;
+
+DESCRIBE order_items;
+
+DESCRIBE password_reset;
+
+DESCRIBE prebuilt_pcs;
+
+DESCRIBE prebuilt_products;
+
+DESCRIBE reviews;
+
+DESCRIBE review_comments;
+
+DESCRIBE review_upvotes;
+
+DESCRIBE wishlist;
 
 
 -- Selects
@@ -34,6 +57,10 @@ FROM users;
 
 SELECT *
 FROM email_verification;
+
+
+SELECT *
+FROM login_verification;
 
 
 SELECT *
@@ -80,6 +107,34 @@ ORDER BY order_id DESC;
 
 SELECT *
 FROM order_items;
+
+
+SELECT *
+FROM password_reset;
+
+
+SELECT *
+FROM prebuilt_pcs;
+
+
+SELECT *
+FROM prebuilt_products;
+
+
+SELECT *
+FROM reviews;
+
+
+SELECT *
+FROM review_comments;
+
+
+SELECT *
+FROM review_upvotes;
+
+
+SELECT *
+FROM wishlist;
 
 
 -- Check product count

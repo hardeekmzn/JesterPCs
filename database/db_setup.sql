@@ -1,5 +1,3 @@
-CREATE DATABASE jesterpcs;
-
 USE jesterpcs;
 
 
@@ -12,8 +10,11 @@ CREATE TABLE users (
                        email VARCHAR(100) NOT NULL UNIQUE,
                        password VARCHAR(255) NOT NULL,
                        email_verified BOOLEAN DEFAULT FALSE,
-                       role VARCHAR(20) NOT NULL DEFAULT 'USER'
-);
+                       role VARCHAR(20) NOT NULL DEFAULT 'USER',
+                       phone VARCHAR(20),
+                       address VARCHAR(255),
+                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) AUTO_ID_CACHE 1;
 
 
 -- Email verification
@@ -21,7 +22,11 @@ CREATE TABLE users (
 CREATE TABLE email_verification (
                                     verification_id INT PRIMARY KEY AUTO_INCREMENT,
                                     user_id INT NOT NULL,
-                                    token VARCHAR(255) NOT NULL UNIQUE
+                                    token VARCHAR(255) NOT NULL UNIQUE,
+
+                                    FOREIGN KEY (user_id)
+                                        REFERENCES users(user_id)
+                                        ON DELETE CASCADE
 );
 
 
@@ -30,7 +35,11 @@ CREATE TABLE email_verification (
 CREATE TABLE login_verification (
                                     verification_id INT PRIMARY KEY AUTO_INCREMENT,
                                     user_id INT NOT NULL,
-                                    token VARCHAR(255) NOT NULL UNIQUE
+                                    token VARCHAR(255) NOT NULL UNIQUE,
+
+                                    FOREIGN KEY (user_id)
+                                        REFERENCES users(user_id)
+                                        ON DELETE CASCADE
 );
 
 
@@ -250,7 +259,7 @@ CREATE TABLE review_upvotes (
 -- Wishlist
 
 CREATE TABLE wishlist (
-                          wishlist_id INT AUTO_INCREMENT PRIMARY KEY,
+                          wishlist_id INT PRIMARY KEY AUTO_INCREMENT,
                           user_id INT NOT NULL,
                           product_id INT NOT NULL,
                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,

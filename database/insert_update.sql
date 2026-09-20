@@ -1,15 +1,7 @@
 USE jesterpcs;
 
 
--- Add account profile fields and registration date
-
-ALTER TABLE users
-    ADD COLUMN phone VARCHAR(20),
-ADD COLUMN address VARCHAR(255),
-ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
-
-
--- Updates
+-- Admin account
 
 UPDATE users
 SET role = 'ADMIN'

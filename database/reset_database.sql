@@ -1,0 +1,4 @@
+
+DROP DATABASE IF EXISTS jesterpcs;
+
+CREATE DATABASE jesterpcs;
