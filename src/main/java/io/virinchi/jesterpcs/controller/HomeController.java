@@ -371,38 +371,6 @@ public class HomeController {
         return "accounts";
     }
 
-    @PostMapping("/account/orders/{id}/cancel")
-    public String cancelOrder(
-            @PathVariable("id") int id,
-            HttpSession session) {
-
-        Integer userId =
-                getUserId(session);
-
-        if (userId == null) {
-            return "redirect:/login";
-        }
-
-        User user =
-                getUser(session);
-
-        if (user == null) {
-            return "redirect:/login";
-        }
-
-        if ("ADMIN".equalsIgnoreCase(
-                user.getRole())) {
-
-            return "redirect:/admin";
-        }
-
-        orderDAO.cancelOrder(
-                id,
-                userId);
-
-        return "redirect:/account";
-    }
-
     @GetMapping("/account/reviews")
     public String accountReviews(
             HttpSession session,

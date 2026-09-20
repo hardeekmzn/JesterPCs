@@ -411,11 +411,27 @@
           </span>
 
 
-          <button class="jp_order-detail-btn"
-                  type="button"
-                  th:attr="data-order=${order.orderId}">
-            View Details
-          </button>
+          <div class="jp_order-buttons">
+
+            <button class="jp_order-detail-btn"
+                    type="button"
+                    th:attr="data-order=${order.orderId}">
+              View Details
+            </button>
+
+
+            <button class="jp_order-cancel-btn"
+                    type="button"
+                    th:if="${#strings.equalsIgnoreCase(order.status, 'Pending')
+                            or #strings.equalsIgnoreCase(order.status, 'Processing')}"
+                    th:attr="data-order=${order.orderId}"
+                    data-confirm-title="Cancel Order?"
+                    data-confirm-message="Are you sure you want to cancel this order?"
+                    data-confirm-action="Cancel Order">
+              Cancel Order
+            </button>
+
+          </div>
 
         </div>
 

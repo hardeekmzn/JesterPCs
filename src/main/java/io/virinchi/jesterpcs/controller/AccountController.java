@@ -2,6 +2,7 @@ package io.virinchi.jesterpcs.controller;
 
 import io.virinchi.jesterpcs.dao.EmailVerificationDAO;
 import io.virinchi.jesterpcs.dao.LoginVerificationDAO;
+import io.virinchi.jesterpcs.dao.OrderDAO;
 import io.virinchi.jesterpcs.dao.UserDAO;
 import io.virinchi.jesterpcs.model.User;
 import io.virinchi.jesterpcs.util.EmailService;
@@ -23,6 +24,7 @@ public class AccountController {
     private final UserDAO userDAO;
     private final EmailVerificationDAO emailVerificationDAO;
     private final LoginVerificationDAO loginVerificationDAO;
+    private final OrderDAO orderDAO;
     private final EmailService emailService;
 
     private static final Pattern NAME_PATTERN =
@@ -41,11 +43,13 @@ public class AccountController {
             UserDAO userDAO,
             EmailVerificationDAO emailVerificationDAO,
             LoginVerificationDAO loginVerificationDAO,
+            OrderDAO orderDAO,
             EmailService emailService) {
 
         this.userDAO = userDAO;
         this.emailVerificationDAO = emailVerificationDAO;
         this.loginVerificationDAO = loginVerificationDAO;
+        this.orderDAO = orderDAO;
         this.emailService = emailService;
     }
 
@@ -335,6 +339,48 @@ public class AccountController {
                 "message",
                 "Password updated successfully."
         );
+    }
+
+    // Cancel order
+    @PostMapping("/orders/{orderId}/cancel")
+    public Map<String, Object> cancelOrder(
+            @org.springframework.web.bind.annotation.PathVariable int orderId,
+            HttpSession session) {
+
+        Integer userId =
+                (Integer) session.getAttribute(
+                        "loggedInUserId");
+
+        if (userId == null) {
+            return Map.of(
+                    "success", false,
+                    "message",
+                    "Please log in first."
+            );
+        }
+
+        try {
+
+            orderDAO.cancelOrder(
+                    orderId,
+                    userId
+            );
+
+            return Map.of(
+                    "success", true,
+                    "message",
+                    "Order cancelled successfully."
+            );
+
+        } catch (IllegalArgumentException
+                 | IllegalStateException error) {
+
+            return Map.of(
+                    "success", false,
+                    "message",
+                    error.getMessage()
+            );
+        }
     }
 
     // Delete account

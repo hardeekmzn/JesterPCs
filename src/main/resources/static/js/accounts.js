@@ -474,6 +474,71 @@ document
 
 
 document
+    .querySelectorAll(".jp_order-cancel-btn")
+    .forEach(btn => {
+
+        btn.addEventListener("click", () => {
+
+            const orderId =
+                btn.dataset.order;
+
+            if (!orderId) {
+                return;
+            }
+
+
+            showConfirmModal(
+                "Cancel Order?",
+                "Are you sure you want to cancel this order?",
+                "Cancel Order",
+                async () => {
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                "/account/orders/" +
+                                encodeURIComponent(orderId) +
+                                "/cancel",
+                                {
+                                    method: "POST"
+                                }
+                            );
+
+
+                        const result =
+                            await response.json();
+
+
+                        if (!result.success) {
+
+                            showToast(
+                                result.message
+                            );
+
+                            return;
+                        }
+
+
+                        window.location.reload();
+
+                    } catch (error) {
+
+                        showToast(
+                            "Unable to cancel order."
+                        );
+
+                    }
+
+                }
+            );
+
+        });
+
+    });
+
+
+document
     .getElementById("jp_delete-btn")
     .addEventListener("click", () => {
 

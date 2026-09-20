@@ -294,7 +294,7 @@
 
 
                     <a class="jp_btn jp_btn-ghost"
-                       th:href="@{/product/{id}(id=${review.productId})#reviews}">
+                       th:href="@{/product/{id}(id=${review.productId})} + '#reviews'">
 
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
 
@@ -304,7 +304,7 @@
 
 
                     <a class="jp_btn jp_btn-primary"
-                       th:href="@{/product/{id}(id=${review.productId})#reviews}">
+                       th:href="@{/product/{id}(id=${review.productId})} + '#reviews'">
 
                         <i class="fa-solid fa-pen"></i>
 
