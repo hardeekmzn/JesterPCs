@@ -737,20 +737,34 @@ img { display: block; max-width: 100%; }
 
   .jp_nav {
     position: fixed;
-    top: 60px;
+    top: 72px;
     left: 0;
     right: 0;
-    background: rgba(10,10,10,0.98);
+    background: rgba(11,11,11,0.98);
     border-bottom: 1px solid var(--clr-border);
     flex-direction: column;
     align-items: flex-start;
     padding: 24px 20px;
     gap: 24px;
-    transform: translateY(-110%);
-    transition: transform 0.26s ease;
+
+    transform: translateY(calc(-100% - 72px));
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: transform 0.26s ease,
+    visibility 0s linear 0.26s;
+
     z-index: 899;
   }
-  .jp_nav-open    { transform: translateY(0); }
+
+  .jp_nav-open {
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+
+    transition: transform 0.26s ease;
+  }
+
   .jp_nav-list    { flex-direction: column; gap: 16px; width: 100%; }
   .jp_nav-link    { font-size: 14px; }
   .jp_nav-actions { width: 100%; }

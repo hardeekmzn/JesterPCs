@@ -939,13 +939,23 @@ button {
     align-items: flex-start;
     padding: 24px 20px;
     gap: 24px;
-    transform: translateY(-110%);
-    transition: transform 0.26s ease;
+
+    transform: translateY(calc(-100% - 72px));
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: transform 0.26s ease,
+    visibility 0s linear 0.26s;
+
     z-index: 899;
   }
 
   .jp_nav-open {
     transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+
+    transition: transform 0.26s ease;
   }
 
   .jp_nav-list {

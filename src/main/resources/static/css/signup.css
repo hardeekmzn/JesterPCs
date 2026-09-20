@@ -39,9 +39,7 @@ img    { display: block; max-width: 100%; }
 button { cursor: pointer; border: none; background: none; font: inherit; }
 
 
-/* ============================================================
-   Header
-   ============================================================ */
+/* Header */
 
 .jp_header {
   height: 72px;
@@ -52,7 +50,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   background: rgba(11,11,11,0.97);
   border-bottom: 1px solid var(--clr-border);
   flex-shrink: 0;
-  z-index: 100;
+  z-index: 900;
   position: relative;
 }
 
@@ -550,11 +548,25 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
     align-items: flex-start;
     padding: 24px 20px;
     gap: 24px;
-    transform: translateY(-110%);
-    transition: transform 0.26s ease;
+
+    transform: translateY(calc(-100% - 72px));
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: transform 0.26s ease,
+    visibility 0s linear 0.26s;
+
     z-index: 899;
   }
-  .jp_nav-open      { transform: translateY(0); }
+
+  .jp_nav-open {
+    transform: translateY(0);
+    visibility: visible;
+    pointer-events: auto;
+
+    transition: transform 0.26s ease;
+  }
+
   .jp_nav-list      { flex-direction: column; gap: 16px; width: 100%; }
   .jp_nav-actions   { width: 100%; }
 
