@@ -214,30 +214,56 @@ function initCustomPage() {
         countEl.textContent = filled + " / 8";
 
         /* Score display */
+        /* Score display */
         if (score === null) {
-            scoreEl.textContent  = "—";
-            scoreEl.className    = "jp_score-num";
-            barEl.style.width    = "0%";
-            barEl.className      = "jp_score-bar";
-            descEl.textContent   = "Select at least a CPU and GPU to see your build score.";
+
+            scoreEl.textContent = "—";
+            scoreEl.className = "jp_score-num";
+
+            barEl.style.width = "0%";
+            barEl.className = "jp_score-fill";
+
+            barEl.style.setProperty(
+                "--score-opacity",
+                "0.15"
+            );
+
+            descEl.textContent =
+                "Select at least a CPU and GPU to see your build score.";
+
         } else {
+
             scoreEl.textContent = score + "/100";
-            barEl.style.width   = score + "%";
+            scoreEl.className = "jp_score-num";
+
+            barEl.style.width = score + "%";
+            barEl.className = "jp_score-fill";
+
+            const opacity =
+                0.15 + (score / 100) * 0.85;
+
+            barEl.style.setProperty(
+                "--score-opacity",
+                opacity.toFixed(2)
+            );
 
             if (score >= 80) {
-                scoreEl.className = "jp_score-num jp_score-green";
-                barEl.className   = "jp_score-bar jp_bar-green";
-                descEl.textContent = "Great build. No major compatibility issues detected.";
+
+                descEl.textContent =
+                    "Great build. No major compatibility issues detected.";
+
             } else if (score >= 50) {
-                scoreEl.className = "jp_score-num jp_score-amber";
-                barEl.className   = "jp_score-bar jp_bar-amber";
-                descEl.textContent = "Good start. Some issues need attention before ordering.";
+
+                descEl.textContent =
+                    "Good start. Some issues need attention before ordering.";
+
             } else {
-                scoreEl.className = "jp_score-num jp_score-red";
-                barEl.className   = "jp_score-bar jp_bar-red";
-                descEl.textContent = "Critical issues detected. This build may not function correctly.";
+
+                descEl.textContent =
+                    "Critical issues detected. This build may not function correctly.";
             }
         }
+
 
         /* Quick stats */
         const cpu = state.cpu;
@@ -319,6 +345,7 @@ function initCustomPage() {
         document.getElementById("jp_modal-sub").textContent   = parts.length + " options available";
 
         const listEl = document.getElementById("jp_modal-list");
+
         listEl.innerHTML = parts.map((p, i) => `
         <div class="jp_modal-option" data-index="${i}">
           <img src="${p.img}" alt="${p.name}" class="jp_modal-img" />
@@ -339,13 +366,22 @@ function initCustomPage() {
 
     document.getElementById("jp_modal-list").addEventListener("click", (e) => {
         const btn = e.target.closest(".jp_modal-select");
-        if (!btn) return;
+
+        if (!btn) {
+            return;
+        }
 
         const idx = parseInt(btn.dataset.index);
-        state[activeSlot] = PRODUCTS[activeSlot][idx];
+
+        state[activeSlot] =
+            PRODUCTS[activeSlot][idx];
+
         closeModal();
         render();
-        showToast(state[activeSlot].name + " added");
+
+        showToast(
+            state[activeSlot].name + " added"
+        );
     });
 
     function closeModal() {
@@ -353,24 +389,35 @@ function initCustomPage() {
         document.body.style.overflow = "";
     }
 
-    document.getElementById("jp_modal-close").addEventListener("click", closeModal);
+    document.getElementById("jp_modal-close").addEventListener(
+        "click",
+        closeModal
+    );
 
     modalOverlay.addEventListener("click", e => {
-        if (e.target === modalOverlay) closeModal();
+        if (e.target === modalOverlay) {
+            closeModal();
+        }
     });
 
     document.addEventListener("keydown", e => {
-        if (e.key === "Escape") closeModal();
+        if (e.key === "Escape") {
+            closeModal();
+        }
     });
 
 
     /* PRESET BUILDS */
     document.querySelectorAll(".jp_preset-btn").forEach(btn => {
+
         btn.addEventListener("click", () => {
-            const preset = PRESETS[btn.dataset.preset];
+
+            const preset =
+                PRESETS[btn.dataset.preset];
 
             Object.keys(preset).forEach(slot => {
-                state[slot] = PRODUCTS[slot][preset[slot]] || null;
+                state[slot] =
+                    PRODUCTS[slot][preset[slot]] || null;
             });
 
             render();
@@ -385,54 +432,75 @@ function initCustomPage() {
 
 
     /* RESET */
-    document.getElementById("jp_reset-btn").addEventListener("click", () => {
-        Object.keys(state).forEach(k => state[k] = null);
-        render();
-        showToast("Build reset");
-    });
+    document.getElementById("jp_reset-btn").addEventListener(
+        "click",
+        () => {
+
+            Object.keys(state).forEach(
+                k => state[k] = null
+            );
+
+            render();
+            showToast("Build reset");
+        }
+    );
 
 
     /* ADD BUILD TO CART */
-    document.getElementById("jp_add-build-btn").addEventListener("click", () => {
+    document.getElementById("jp_add-build-btn").addEventListener(
+        "click",
+        () => {
 
-        const productIds = Object.values(state)
-            .filter(Boolean)
-            .map(part => part.id);
+            const productIds =
+                Object.values(state)
+                    .filter(Boolean)
+                    .map(part => part.id);
 
-        if (productIds.length === 0) {
-            showToast("Select at least one part first");
-            return;
+            if (productIds.length === 0) {
+                showToast("Select at least one part first");
+                return;
+            }
+
+            const form =
+                document.createElement("form");
+
+            form.method = "POST";
+            form.action = "/cart/add-build";
+
+            productIds.forEach(productId => {
+
+                const input =
+                    document.createElement("input");
+
+                input.type = "hidden";
+                input.name = "productIds";
+                input.value = productId;
+
+                form.appendChild(input);
+            });
+
+            document.body.appendChild(form);
+            form.submit();
         }
-
-        const form = document.createElement("form");
-
-        form.method = "POST";
-        form.action = "/cart/add-build";
-
-        productIds.forEach(productId => {
-
-            const input = document.createElement("input");
-
-            input.type = "hidden";
-            input.name = "productIds";
-            input.value = productId;
-
-            form.appendChild(input);
-        });
-
-        document.body.appendChild(form);
-        form.submit();
-    });
+    );
 
 
     /* TOAST */
     function showToast(msg) {
-        document.getElementById("jp_toast-msg").textContent = msg;
-        document.getElementById("jp_toast").classList.add("jp_toast-show");
+
+        document.getElementById("jp_toast-msg").textContent =
+            msg;
+
+        document.getElementById("jp_toast")
+            .classList.add("jp_toast-show");
+
         clearTimeout(toastTimer);
 
         toastTimer = setTimeout(() => {
-            document.getElementById("jp_toast").classList.remove("jp_toast-show");
+
+            document.getElementById("jp_toast")
+                .classList.remove("jp_toast-show");
+
         }, 2500);
     }
 

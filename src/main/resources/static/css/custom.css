@@ -494,9 +494,11 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .jp_score-fill {
   height: 100%;
   width: 0;
-  background: var(--clr-accent);
+  background: rgba(192, 57, 43, var(--score-opacity, 1));
   border-radius: 3px;
-  transition: width 0.4s ease;
+  transition:
+          width 0.4s ease,
+          background 0.4s ease;
 }
 
 .jp_score-status {
@@ -504,6 +506,26 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-size: 11px;
   color: var(--clr-muted);
   margin-top: 10px;
+}
+
+.jp_score-num {
+  font-family: var(--ff-heading);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--clr-white);
+  letter-spacing: -0.3px;
+}
+
+.jp_score-green {
+  color: var(--clr-green);
+}
+
+.jp_score-amber {
+  color: var(--clr-amber);
+}
+
+.jp_score-red {
+  color: var(--clr-accent);
 }
 
 
